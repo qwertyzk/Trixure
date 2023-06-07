@@ -15,20 +15,36 @@ public class Player extends Entity
         // defaultowy equipment (to do)
     }
 
-    public boolean addItem(Item item)
+    public boolean takeItem(Item item)
     {
-        // (to do)
-        return true;
+        for(int i=0; i<INVENTORY_SIZE; i++)
+        {
+            if(this.inventory[i] == null)
+            {
+                this.inventory[i] = item;
+                return true;
+            }
+        }
+        return false;
     }
 
     public void removeItem(int id)
     {
-        // (to do)
+        //tu trzeba usiasc i pomyslec
+        try
+        {
+            this.inventory[id] = null;
+        }
+        catch(ArrayIndexOutOfBoundsException e)
+        {
+            return;
+        }
     }
 
     public void increaseHealth(int amount)
     {
-
+        this.totalHealth += amount;
+        this.health += amount;
     }
 
     public int getStrength()
@@ -37,12 +53,29 @@ public class Player extends Entity
         return 1;
     }
 
-    // analogicznie getter defenca
-
-    public boolean damageArmor()
+    public int getDefence()
     {
-        //(to do)
-        return true;
+        return 1;
+    }
+
+
+    public void equipWeapon(Weapon weapon)
+    {
+        this.equippedWeapon = new Weapon(weapon.getName(), weapon.getDisplayName(), weapon.getDamage());
+    }
+
+    public void equipArmor(Armor armor) {
+        this.equippedArmor = new Armor(armor.getName(), armor.getDisplayName(), armor.getDefence());
+    }
+
+    public Weapon getWeapon()
+    {
+        return this.equippedWeapon;
+    }
+
+    public Armor getArmor()
+    {
+        return this.equippedArmor;
     }
 
     // analogicznie damageWeapon

@@ -12,7 +12,9 @@ public abstract class Equipment extends Item
 
     public void reduceDurability()
     {
-
+        this.durability--;
+        //no i chuj
+        this.description = "DMG: "+defence+" DCY: "+durability+"/"+totalDcy;
     }
 
     // getteri

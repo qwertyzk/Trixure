@@ -1,4 +1,4 @@
-public class Entity extends MapObject
+public abstract class Entity extends MapObject
 {
     protected int health;
     protected int totalHealth;

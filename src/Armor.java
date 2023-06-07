@@ -7,6 +7,10 @@ public class Armor extends Equipment
         super(name, displayName, "Defence: "+defence+"   Durability: "+durability+"/"+durability, durability);
         this.defence = defence;
     }
+    public int getDefence()
+    {
+        return defence;
+    }
 
     // getteri
 }

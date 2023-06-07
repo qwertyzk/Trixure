@@ -11,5 +11,18 @@ public class Item
         this.description = description;
     }
 
-    // getteri
+    public String getName()
+    {
+        return name;
+    }
+
+    public String getDisplayName()
+    {
+        return displayName;
+    }
+
+    public String getDescription()
+    {
+        return description;
+    }
 }

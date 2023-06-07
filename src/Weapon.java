@@ -8,5 +8,9 @@ public class Weapon extends Equipment
         this.damage = damage;
     }
 
+    public int getDamage()
+    {
+        return damage;
+    }
     // getteri
 }
