@@ -3,11 +3,14 @@ import java.awt.*;
 
 public class Screen extends JPanel
 {
+    private Renderer renderer;
+
     public Screen()
     {
         super();
-        this.setFocusable(true);
+        //this.setFocusable(true);
         this.addKeyListener(new Keyboard());
+        this.addMouseListener(new Mouse());
     }
 
     @Override
@@ -20,9 +23,28 @@ public class Screen extends JPanel
         g.fillRect(0,0, Window.WIDTH, Window.HEIGHT);
 
 
+        if(GameLogic.isOnTitleScreen())
+        {
+            renderer.renderTitleScreen(graphics);
+        }
+        else
+        {
+            renderer.renderRoom(GameLogic.getCurrentRoom(), GameLogic.getPlayer(), g);
+            renderer.renderPlayer(GameLogic.getPlayer(), g);
+            renderer.renderMonsters(GameLogic.getMobs(), GameLogic.getPlayer(), g);
+          //  renderer.renderLight(GameLogic.getCurrentFloor(), GameLogic.getPlayer(), (Graphics2D) g);
+            renderer.renderUI(GameLogic.getPlayer(), GameLogic.getCurrentRoom(), (Graphics2D) g, this.getMouseLocation());
+            renderer.renderMessageBox(GameLogic.getMessageBox(), g);
+        }
 
-        Renderer.renderEntity(GameLogic.getPlayer(), g);
+        repaint();
+    }
 
-       repaint();
+    public Point getMouseLocation()
+    {
+        if(getMousePosition() != null)
+            return getMousePosition();
+        else
+            return new Point(-1, -1);
     }
 }

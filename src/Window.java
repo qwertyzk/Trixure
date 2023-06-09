@@ -14,7 +14,6 @@ public class Window
     {
         window = new JFrame("szubi dubi");
 
-        window.setIgnoreRepaint( true );
         window.setBounds(50, 50, WIDTH, HEIGHT);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
