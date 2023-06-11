@@ -9,7 +9,6 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import logic.entities.Entity;
 import logic.entities.Monster;
 import logic.entities.Player;
 import logic.level.Room;
@@ -19,24 +18,24 @@ import resources.Textures;
 
 public class Renderer {
 
-	private int zoomLevel;
+	private final int zoomLevel;
 
-	public static final Rectangle shop = new Rectangle(150, 50, 700, 500);
+	public static final Rectangle shop = new Rectangle(150, 50, 1200, 500);
 
-	public static final Rectangle shopSlot1 = new Rectangle(510, 150, 330, 60);
-	public static final Rectangle shopSlot2 = new Rectangle(510, 220, 330, 60);
-	public static final Rectangle shopSlot3 = new Rectangle(510, 290, 330, 60);
+	public static final Rectangle shopSlot1 = new Rectangle(760, 150, 580, 60);
+	public static final Rectangle shopSlot2 = new Rectangle(760, 220, 580, 60);
+	public static final Rectangle shopSlot3 = new Rectangle(760, 290, 580, 60);
 
-	public static final Rectangle inventory = new Rectangle(150, 50, 700, 500);
+	public static final Rectangle inventory = new Rectangle(150, 50, 1200, 500);
 	
-	public static final Rectangle inventorySlot1 = new Rectangle(510, 150, 330, 60);
-	public static final Rectangle inventorySlot2 = new Rectangle(510, 220, 330, 60);
-	public static final Rectangle inventorySlot3 = new Rectangle(510, 290, 330, 60);
+	public static final Rectangle inventorySlot1 = new Rectangle(760, 150, 580, 60);
+	public static final Rectangle inventorySlot2 = new Rectangle(760, 220, 580, 60);
+	public static final Rectangle inventorySlot3 = new Rectangle(760, 290, 580, 60);
 
-	public static final Rectangle weaponSlot = new Rectangle(160, 150, 330, 60);
-	public static final Rectangle armorSlot = new Rectangle(160, 220, 330, 60);
+	public static final Rectangle weaponSlot = new Rectangle(160, 150, 580, 60);
+	public static final Rectangle armorSlot = new Rectangle(160, 220, 580, 60);
 
-	public static final Rectangle messageBox = new Rectangle(200, 480, 600, 50);
+	public static final Rectangle messageBox = new Rectangle(500, 600, 600, 50);
 	
 	public Renderer() {
 		this.zoomLevel = 2;
@@ -45,7 +44,7 @@ public class Renderer {
 	/**Renders player at fixed position on the screen
 	 * @param graphics - Grahpics object
 	 */
-	public void renderPlayer(Entity playerData, Graphics graphics) {
+	public void renderPlayer(Graphics graphics) {
 		BufferedImage sprite = Textures.getSprite("player");
 		
 		int drawPosX = (Window.WIDTH/2)-(sprite.getWidth()/2)*zoomLevel;
