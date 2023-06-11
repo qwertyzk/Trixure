@@ -46,7 +46,7 @@ public class GameLogic {
 
 		tower = new Tower(randomizer);
 		currentRoom = tower.getRoom(0);
-		player = new Player("player", 2, 6);
+		player = new Player("player", 2, 8);
 		activeMonsters = currentRoom.getMonsters();
 		messageBox = new MessageBox();
 		

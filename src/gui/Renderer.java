@@ -21,16 +21,16 @@ public class Renderer {
 
 	private int zoomLevel;
 
-	public static final Rectangle inventory = new Rectangle(150, 50, 700, 500);
+	public static final Rectangle inventory = new Rectangle(150, 50, 1200, 500);
 	
-	public static final Rectangle inventorySlot1 = new Rectangle(510, 150, 330, 60);
-	public static final Rectangle inventorySlot2 = new Rectangle(510, 220, 330, 60);
-	public static final Rectangle inventorySlot3 = new Rectangle(510, 290, 330, 60);
+	public static final Rectangle inventorySlot1 = new Rectangle(760, 150, 580, 60);
+	public static final Rectangle inventorySlot2 = new Rectangle(760, 220, 580, 60);
+	public static final Rectangle inventorySlot3 = new Rectangle(760, 290, 580, 60);
 
-	public static final Rectangle weaponSlot = new Rectangle(160, 150, 330, 60);
-	public static final Rectangle armorSlot = new Rectangle(160, 220, 330, 60);
+	public static final Rectangle weaponSlot = new Rectangle(160, 150, 580, 60);
+	public static final Rectangle armorSlot = new Rectangle(160, 220, 580, 60);
 
-	public static final Rectangle messageBox = new Rectangle(200, 480, 600, 50);
+	public static final Rectangle messageBox = new Rectangle(500, 600, 600, 50);
 	
 	public Renderer() {
 		this.zoomLevel = 2;
