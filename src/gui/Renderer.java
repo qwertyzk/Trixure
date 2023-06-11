@@ -21,6 +21,12 @@ public class Renderer {
 
 	private int zoomLevel;
 
+	public static final Rectangle shop = new Rectangle(150, 50, 700, 500);
+
+	public static final Rectangle shopSlot1 = new Rectangle(510, 150, 330, 60);
+	public static final Rectangle shopSlot2 = new Rectangle(510, 220, 330, 60);
+	public static final Rectangle shopSlot3 = new Rectangle(510, 290, 330, 60);
+
 	public static final Rectangle inventory = new Rectangle(150, 50, 700, 500);
 	
 	public static final Rectangle inventorySlot1 = new Rectangle(510, 150, 330, 60);
@@ -94,6 +100,7 @@ public class Renderer {
 	 * @param graphics - Graphics object
 	 */
 	public void renderUI(Player player, Room roomData, Graphics2D graphics, Point mousePosition) {
+
 		graphics.setColor(Color.BLACK);
 		graphics.fillRoundRect(5, 5, 100, 150, 10, 10);
 		graphics.setColor(Color.WHITE);
@@ -110,16 +117,49 @@ public class Renderer {
 		
 		for(int y = 0; y< roomData.getSizeY(); y++) {
 			for(int x = 0; x< roomData.getSizeX(); x++) {
-				if(roomData.getTileAt(x, y).isCollectible()) {
+				if(roomData.getTileAt(x, y).isCollectible() || roomData.getTileAt(x, y).getName() == "wiesniak") {
 					int drawPosX = roomData.getTileAt(x, y).getPosX()*32*zoomLevel + ((Window.WIDTH/2)-player.getPosX()*32*zoomLevel-(32/2)*zoomLevel);
 					int drawPosY = roomData.getTileAt(x, y).getPosY()*32*zoomLevel + ((Window.HEIGHT/2)-player.getPosY()*32*zoomLevel-(32/2)*zoomLevel);
 					
 					if((player.getPosX() == x-1 && player.getPosY() == y) || (player.getPosX() == x+1 && player.getPosY() == y) || (player.getPosX() == x && player.getPosY() == y-1) || (player.getPosX() == x && player.getPosY() == y+1)) {
-						BufferedImage sprite = Textures.getSprite("E");
+						String letter =  (roomData.getTileAt(x, y).getName() == "wiesniak") ? "M" : "E";
+						BufferedImage sprite = Textures.getSprite(letter);
 						graphics.drawImage(sprite, drawPosX+8*zoomLevel, drawPosY-8*zoomLevel, sprite.getWidth()*zoomLevel, sprite.getHeight()*zoomLevel, null);
 					}
 				}
 			}
+		}
+		if(player.isShopOpen()) {
+			//Inventory
+			graphics.setColor(Color.BLACK);
+			graphics.fillRoundRect(shop.x, shop.y, shop.width, shop.height, 10, 10);
+			graphics.setColor(Color.WHITE);
+			graphics.drawRoundRect(shop.x, shop.y, shop.width, shop.height, 10, 10);
+
+			graphics.setFont(new Font("Dialog", Font.PLAIN, 40));
+			graphics.drawString("- Shop -", 160, 90);
+			graphics.setFont(new Font("Dialog", Font.PLAIN, 20));
+			graphics.drawString("GOLD: " + player.getGold() , 160, 120);
+
+			if(shopSlot1.contains(mousePosition))
+				graphics.setStroke(new BasicStroke(3));
+			graphics.drawRoundRect(shopSlot1.x, shopSlot1.y, shopSlot1.width, shopSlot1.height, 10, 10);
+			graphics.drawRoundRect(shopSlot1.x, shopSlot1.y, 60, shopSlot1.height, 10, 10);
+
+			graphics.setStroke(new BasicStroke(1));
+
+			if(shopSlot2.contains(mousePosition))
+				graphics.setStroke(new BasicStroke(3));
+			graphics.drawRoundRect(shopSlot2.x, shopSlot2.y, shopSlot2.width, shopSlot2.height, 10, 10);
+			graphics.drawRoundRect(shopSlot2.x, shopSlot2.y, 60, shopSlot2.height, 10, 10);
+
+			graphics.setStroke(new BasicStroke(1));
+
+			if(shopSlot3.contains(mousePosition))
+				graphics.setStroke(new BasicStroke(3));
+			graphics.drawRoundRect(shopSlot3.x, shopSlot3.y, shopSlot3.width, shopSlot3.height, 10, 10);
+			graphics.drawRoundRect(shopSlot3.x, shopSlot3.y, 60, shopSlot3.height, 10, 10);
+
 		}
 		
 		if(player.isInventoryOpen()) {

@@ -61,7 +61,7 @@ public class GameLogic {
 	public static void movePlayer(int dirX, int dirY) {
 		onTitleScreen = false;
 		
-		if(player.isInventoryOpen())
+		if(player.isInventoryOpen() || player.isShopOpen())
 			return;
 		
 		if(checkIfPlayerDied())
@@ -110,6 +110,17 @@ public class GameLogic {
 	public static void openPlayerInventory() {
 		if(player.getHealth() > 0)
 			player.setInventoryOpen(!player.isInventoryOpen());
+	}
+
+	public static void openShop() {
+		if(player.getHealth() > 0)
+		{
+			if( currentRoom.getTileAt(player.getPosX()+1, player.getPosY()).getName() == "wiesniak" ||
+				currentRoom.getTileAt(player.getPosX()-1, player.getPosY()).getName() == "wiesniak" ||
+				currentRoom.getTileAt(player.getPosX(), player.getPosY()+1).getName() == "wiesniak" ||
+				currentRoom.getTileAt(player.getPosX(), player.getPosY()-1).getName() == "wiesniak")
+				player.setShopOpen(!player.isShopOpen());
+		}
 	}
 	
 	/**Called when 'E' key is pressed<br>

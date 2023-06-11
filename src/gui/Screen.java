@@ -54,8 +54,10 @@ public class Screen extends JPanel {
 	}
 	
 	public Point getMouseLocation() {
-		if(getMousePosition() != null)
-			return getMousePosition();
+		Point d =  this.getMousePosition();
+
+		if(d != null)
+			return d;
 		else
 			return new Point(-1, -1);
 	}

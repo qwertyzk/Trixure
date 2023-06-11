@@ -61,6 +61,9 @@ public class Room {
 					// tu będzie kiedyś chest.
 					room[y][x] = new MapObject("red_potion", x, y);
 					break;
+				case 'W':
+					room[y][x] = new MapObject("wiesniak", x, y);
+					break;
 
 				}
 			}

@@ -11,7 +11,8 @@ public class Player extends Entity {
 	
 	private Item[] inventory;
 	private boolean inventoryOpen;
-	
+	private boolean shopOpen;
+
 	private Weapon weaponEquipped;
 	private Armor armorEquipped;
 
@@ -22,6 +23,7 @@ public class Player extends Entity {
 		super(name, posX, posY, 20);
 		this.inventory = new Item[INVENTORY_SIZE];
 		this.inventoryOpen = false;
+		this.shopOpen = false;
 		this.weaponEquipped = Items.SHORT_SWORD;
 		this.armorEquipped = Items.LIGHT_ARMOR;
 		this.strength = 1;
@@ -69,6 +71,13 @@ public class Player extends Entity {
 	
 	public boolean isInventoryOpen() {
 		return inventoryOpen;
+	}
+
+	public void setShopOpen(boolean shopOpen) {
+		this.shopOpen = shopOpen;
+	}
+	public boolean isShopOpen() {
+		return shopOpen;
 	}
 	
 	public void giveGold(int amount) {
