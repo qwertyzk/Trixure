@@ -1,4 +1,4 @@
-package roguelike.logic.level;
+package logic.level;
 
 public class MapObject
 {

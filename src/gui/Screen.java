@@ -1,4 +1,4 @@
-package roguelike.gui;
+package gui;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -7,7 +7,7 @@ import java.awt.Point;
 
 import javax.swing.JPanel;
 
-import roguelike.logic.GameLogic;
+import logic.GameLogic;
 
 public class Screen extends JPanel {
 

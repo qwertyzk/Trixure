@@ -1,20 +1,20 @@
-package roguelike.logic;
+package logic;
 
 import java.util.Random;
 
 import javax.swing.Timer;
 
-import roguelike.gui.Renderer;
-import roguelike.logic.entities.Entity;
-import roguelike.logic.entities.Monster;
-import roguelike.logic.entities.Player;
-import roguelike.logic.items.Item;
-import roguelike.logic.level.Room;
-import roguelike.logic.level.MapObject;
-import roguelike.logic.level.Tower;
-import roguelike.logic.text.MessageBox;
-import roguelike.resources.Items;
-import roguelike.resources.Textures;
+import gui.Renderer;
+import logic.entities.Entity;
+import logic.entities.Monster;
+import logic.entities.Player;
+import logic.items.Item;
+import logic.level.Room;
+import logic.level.MapObject;
+import logic.level.Tower;
+import logic.text.MessageBox;
+import resources.Items;
+import resources.Textures;
 
 public class GameLogic {
 

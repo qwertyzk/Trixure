@@ -1,9 +1,9 @@
-package roguelike.gui;
+package gui;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import roguelike.logic.GameLogic;
+import logic.GameLogic;
 
 public class Mouse implements MouseListener {
 

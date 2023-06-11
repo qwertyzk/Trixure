@@ -1,6 +1,6 @@
-package roguelike.logic.entities;
+package logic.entities;
 
-import roguelike.resources.Layouts;
+import resources.Layouts;
 
 public class Monster extends Entity {
 

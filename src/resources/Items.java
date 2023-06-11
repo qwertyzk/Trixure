@@ -1,8 +1,8 @@
-package roguelike.resources;
+package resources;
 
-import roguelike.logic.items.Armor;
-import roguelike.logic.items.Item;
-import roguelike.logic.items.Weapon;
+import logic.items.Armor;
+import logic.items.Item;
+import logic.items.Weapon;
 
 public class Items {
 

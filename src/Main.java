@@ -1,7 +1,7 @@
-package roguelike;
 
-import roguelike.gui.Window;
-import roguelike.logic.GameLogic;
+
+import gui.Window;
+import logic.GameLogic;
 
 public class Main {
 

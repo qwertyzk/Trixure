@@ -1,7 +1,7 @@
-package roguelike.resources;
+package resources;
 
-import roguelike.logic.entities.Monster;
-import roguelike.logic.level.Room;
+import logic.entities.Monster;
+import logic.level.Room;
 
 import java.util.Random;
 import java.util.Stack;

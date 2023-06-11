@@ -1,9 +1,9 @@
-package roguelike.logic.entities;
+package logic.entities;
 
-import roguelike.logic.items.Armor;
-import roguelike.logic.items.Item;
-import roguelike.logic.items.Weapon;
-import roguelike.resources.Items;
+import logic.items.Armor;
+import logic.items.Item;
+import logic.items.Weapon;
+import resources.Items;
 
 public class Player extends Entity {
 

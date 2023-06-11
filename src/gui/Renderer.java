@@ -1,4 +1,4 @@
-package roguelike.gui;
+package gui;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -9,13 +9,13 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import roguelike.logic.entities.Entity;
-import roguelike.logic.entities.Monster;
-import roguelike.logic.entities.Player;
-import roguelike.logic.level.Room;
-import roguelike.logic.level.MapObject;
-import roguelike.logic.text.MessageBox;
-import roguelike.resources.Textures;
+import logic.entities.Entity;
+import logic.entities.Monster;
+import logic.entities.Player;
+import logic.level.Room;
+import logic.level.MapObject;
+import logic.text.MessageBox;
+import resources.Textures;
 
 public class Renderer {
 

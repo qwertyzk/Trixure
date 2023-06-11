@@ -1,4 +1,4 @@
-package roguelike.logic.items;
+package logic.items;
 
 public class Item {
 

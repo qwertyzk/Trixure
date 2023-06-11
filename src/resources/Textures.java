@@ -1,4 +1,4 @@
-package roguelike.resources;
+package resources;
 
 import java.awt.image.BufferedImage;
 

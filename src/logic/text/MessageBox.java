@@ -1,4 +1,4 @@
-package roguelike.logic.text;
+package logic.text;
 
 import java.util.ArrayList;
 import java.util.List;

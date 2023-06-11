@@ -1,10 +1,10 @@
-package roguelike.logic.level;
+package logic.level;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import roguelike.resources.Layouts;
+import resources.Layouts;
 
 public class Tower {
 

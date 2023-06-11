@@ -1,4 +1,4 @@
-package roguelike.gui;
+package gui;
 
 import javax.swing.JFrame;
 

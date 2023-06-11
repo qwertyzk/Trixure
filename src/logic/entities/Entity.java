@@ -1,6 +1,6 @@
-package roguelike.logic.entities;
+package logic.entities;
 
-import roguelike.logic.level.MapObject;
+import logic.level.MapObject;
 
 public abstract class Entity extends MapObject
 {

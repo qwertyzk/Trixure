@@ -1,4 +1,4 @@
-package roguelike.logic.items;
+package logic.items;
 
 public abstract class Equipment extends Item
 {
