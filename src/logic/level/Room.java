@@ -19,7 +19,7 @@ public class Room {
 
 	public Room(String[] levelData, int startPosX, int startPosY, Random randomizer) {
 		room = new MapObject[levelData.length][];
-		this.monsters = new ArrayList<Monster>();
+		this.monsters = new ArrayList<>();
 
 		this.startPosX = startPosX;
 		this.startPosY = startPosY;
@@ -55,7 +55,7 @@ public class Room {
 					break;
 				case 'M':
 					room[y][x] = new MapObject("floor", x, y);
-					this.monsters.add(Monster.Type.ToMonster(Monster.Type.randomType(randomizer.nextInt()), x, y));
+					this.monsters.add(Monster.Type.randomType(randomizer.nextInt(), x, y));
 					break;
 				case 'T':
 					// tu będzie kiedyś chest.
@@ -110,12 +110,6 @@ public class Room {
 		return null;
 	}
 
-	
-	/**Turns a trap tile into a room tile
-	 * @param x - X coordinate of trap
-	 * @param y - Y coordinate of trap
-	 * @return True if a trap at (x;y) was disarmed, false if there was no trap there
-	 */
 	public boolean disarmTrap(int x, int y) {
 		if(room[y][x].getName() == "trap") {
 			room[y][x] = new MapObject("floor", x, y);
@@ -123,12 +117,7 @@ public class Room {
 		}
 		return false;
 	}
-	
-	/**Turns a collectible tile into a normal tile
-	 * @param x - X coordinate of collectible
-	 * @param y - Y coordinate of collectible
-	 * @return True if a collectible at (x;y) was removed, false if there was no collectible there
-	 */
+
 	public boolean removeCollectible(int x, int y) {
 		switch(room[y][x].getName()) {
 		case "red_potion":
@@ -139,12 +128,7 @@ public class Room {
 		}
 		return false;
 	}
-	
-	/**Turns a door tile into a room tile
-	 * @param x - X coordinate of door
-	 * @param y - Y coordinate of door
-	 * @return True if a door at (x;y) was opened, false if there was no door there
-	 */
+
 	public boolean openDoor(int x, int y) {
 		if(room[y][x].getName() == "locked_door") {
 			room[y][x] = new MapObject("floor", x, y);
@@ -152,12 +136,7 @@ public class Room {
 		}
 		return false;
 	}
-	
-	/**Deletes a monster
-	 * @param x - X coordinate of monster
-	 * @param y - Y coordinate of monster
-	 * @return True if a monster at (x;y) was killed, false if there was no monster there
-	 */
+
 	public boolean killMonster(int x, int y) {
 		for(int i=0;i<monsters.size();i++) {
 			if(monsters.get(i).getPosX() == x && monsters.get(i).getPosY() == y) {
