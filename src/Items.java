@@ -1,3 +1,3 @@
 public class Items {
-    // pula itemków
+    public static final Item HP_POTION = new Item("picasso", "Health potion", "Restores 10 HP");
 }

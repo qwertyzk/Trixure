@@ -6,12 +6,15 @@ public class Player extends Entity
     private Weapon equippedWeapon;
     private Armor equippedArmor;
 
+    private int gold;
 
-    public Player(String name, int posX, int posY)
+
+    public Player(int posX, int posY)
     {
-        super(name, posX, posY, 20, 1, 0);
+        super("player", posX, posY, 20, 1, 0);
         this.inventoryOpen = false;
         this.inventory = new Item[INVENTORY_SIZE];
+        this.gold = 0;
         // defaultowy equipment (to do)
     }
 
@@ -26,6 +29,19 @@ public class Player extends Entity
             }
         }
         return false;
+    }
+
+    public Item getInventoryItem(int index) {
+        try {
+            return inventory[index];
+        } catch(ArrayIndexOutOfBoundsException e) {
+            return null;
+        }
+    }
+
+    public void takeGold(int g)
+    {
+       this.gold += g;
     }
 
     public void removeItem(int id)
@@ -58,6 +74,12 @@ public class Player extends Entity
         return 1;
     }
 
+    public void heal(int amount)
+    {
+        this.health += amount;
+        if(health>this.totalHealth)
+            this.health = this.totalHealth;
+    }
 
     public void equipWeapon(Weapon weapon)
     {
@@ -78,6 +100,15 @@ public class Player extends Entity
         return this.equippedArmor;
     }
 
+    public boolean isInventoryOpen()
+    {
+        return inventoryOpen;
+    }
+
+    public void setInventoryOpen(boolean inventoryOpen)
+    {
+        this.inventoryOpen = inventoryOpen;
+    }
     // analogicznie damageWeapon
 
     // inne getteri i setteri

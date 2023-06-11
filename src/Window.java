@@ -1,11 +1,9 @@
-
 import javax.swing.JFrame;
-import java.awt.*;
 
 public class Window
 {
-    public static final int WIDTH = 1000;
-    public static final int HEIGHT = 500;
+    public static final int WIDTH = 900;
+    public static final int HEIGHT = 600;
 
     private static JFrame window;
     private static Screen screen;
@@ -19,12 +17,15 @@ public class Window
 
         screen = new Screen();
         window.add(screen);
+
+        System.out.println("[Gui][Window]: okno sie zrobilo");
     }
 
     public static void setVisible()
     {
         if(window != null)
             window.setVisible(true);
+        System.out.println("[Gui][Window]: okno widze w tym tenczu");
     }
 
 

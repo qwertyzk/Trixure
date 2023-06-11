@@ -1,5 +1,8 @@
 import javax.swing.JPanel;
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Color;
+import java.awt.Point;
 
 public class Screen extends JPanel
 {
@@ -8,33 +11,44 @@ public class Screen extends JPanel
     public Screen()
     {
         super();
-        //this.setFocusable(true);
+        //this.setFocusable(true); chuj wie po co to
         this.addKeyListener(new Keyboard());
         this.addMouseListener(new Mouse());
+
+        this.renderer = new Renderer();
+        System.out.println("[Gui][GameScreen]: ekran sie zrobil");
     }
+
 
     @Override
     protected void paintComponent(Graphics g)
     {
+        //Graphics2D g = (Graphics2D) graphics;
         super.paintComponent(g);
-       // Graphics2D g2d = (Graphics2D) g;
 
-        g.setColor(Color.BLACK);
-        g.fillRect(0,0, Window.WIDTH, Window.HEIGHT);
+        try {
+            g.setColor(Color.BLACK);
+            g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
 
 
-        if(GameLogic.isOnTitleScreen())
-        {
-            renderer.renderTitleScreen(graphics);
+            if (GameLogic.isOnTitleScreen())
+            {
+                renderer.renderTitleScreen(g);
+            }
+            else
+            {
+                renderer.renderObjectsInRoom(GameLogic.getCurrentRoom(), g);
+                renderer.renderPlayer(GameLogic.getPlayer(), g);
+                renderer.renderMobs(GameLogic.getMobs(), g);
+                //  renderer.renderUI(GameLogic.getPlayer(), GameLogic.getCurrentRoom(), g, this.getMouseLocation());
+                renderer.renderMessageBox(GameLogic.getMessageBox(), g);
+            }
         }
-        else
+        catch (Exception e)
         {
-            renderer.renderRoom(GameLogic.getCurrentRoom(), GameLogic.getPlayer(), g);
-            renderer.renderPlayer(GameLogic.getPlayer(), g);
-            renderer.renderMonsters(GameLogic.getMobs(), GameLogic.getPlayer(), g);
-          //  renderer.renderLight(GameLogic.getCurrentFloor(), GameLogic.getPlayer(), (Graphics2D) g);
-            renderer.renderUI(GameLogic.getPlayer(), GameLogic.getCurrentRoom(), (Graphics2D) g, this.getMouseLocation());
-            renderer.renderMessageBox(GameLogic.getMessageBox(), g);
+            System.err.println("\n[Logic][GameLoop]: zesralo sie\n");
+            e.printStackTrace();
+            System.exit(-1);
         }
 
         repaint();

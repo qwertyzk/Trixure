@@ -2,9 +2,9 @@ public class Weapon extends Equipment
 {
     private int damage;
 
-    public Weapon(String name, String displayName, int damage, int durability)
+    public Weapon(String name, String displayName, int damage)
     {
-        super(name, displayName, "Damage: "+damage+"   Durability: "+durability+"/"+durability, durability);
+        super(name, displayName, "Damage: "+damage);
         this.damage = damage;
     }
 

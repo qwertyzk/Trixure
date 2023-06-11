@@ -19,5 +19,17 @@ public abstract class Entity extends MapObject
 
     }
 
-    // getteri i setteri
+    public int getHealth()
+    {
+        return health;
+    }
+
+    public int getDefence()
+    {
+        return defence;
+    }
+    public int getStrength()
+    {
+        return strength;
+    }
 }
