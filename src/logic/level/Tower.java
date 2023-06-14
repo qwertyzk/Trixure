@@ -15,7 +15,7 @@ public class Tower {
 	public Tower(Random randomizer) {
 		this.rooms = new ArrayList<>();
 		this.roomAt = 0;
-		this.rooms.add(Layouts.Layouts2.ToRoom(Layouts.Layouts2.layout0, randomizer));
+		this.rooms.add(Layouts.Layouts2.layout0.ToRoom(randomizer));
 
 		while(rooms.size() < TOWER_SIZE) {
 			this.rooms.add(Layouts.Layouts2.randomType(randomizer));
@@ -33,5 +33,4 @@ public class Tower {
 		
 		return rooms.get(roomAt);
 	}
-
 }

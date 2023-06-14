@@ -7,20 +7,14 @@ public class MapObject
 	
 	protected int worldPosX;
 	protected int worldPosY;
-	
 	private boolean collectible;
-	
-	/**Creates a Tile
-	 * @param name - The registry name of the tile
-	 * @param posX - X coordinate in the floor
-	 * @param posY - Y coordinate in the floor
-	 */
+
 	public MapObject(String name, int posX, int posY) {
 		this.name = name;
 		this.worldPosX = posX;
 		this.worldPosY = posY;
 		
-		if(name == "red_potion" || name == "gold_bag" || name == "key")
+		if(name == "red_potion" || name == "gold_bag" || name == "key" || name == "chest")
 			this.collectible = true;
 	}
 	

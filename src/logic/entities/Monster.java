@@ -1,7 +1,5 @@
 package logic.entities;
 
-import resources.Layouts;
-
 public class Monster extends Entity {
 
 	private Type type;
@@ -26,12 +24,12 @@ public class Monster extends Entity {
 
 	public enum Type {
 		BAT("bat", 9, 3, 2, false),
-		RAT("rat", 5, 7, 0, false),
-		GHOST("ghost", 8, 4, 1, true),
-		ORK("table", 15, 1, 8, false),
+		RAT("rat", 5, 4, 0, false),
+		GHOST("ghost", 8, 2, 1, true),
+		ORK("table", 12, 1, 4, false),
 		SLIME("torch", 8, 3, 5, false),
-		ZOMBIE("stick", 13, 3, 3, true),
-		ANGRY_CHICKEN("chest" , 6, 6, 6, true);
+		ZOMBIE("lime_potion", 10, 1, 3, true),
+		ANGRY_CHICKEN("chest" , 6, 4, 4, false);
 		
 		private String name;
 		private int hp;

@@ -40,10 +40,7 @@ public class Renderer {
 	public Renderer() {
 		this.zoomLevel = 2;
 	}
-	
-	/**Renders player at fixed position on the screen
-	 * @param graphics - Grahpics object
-	 */
+
 	public void renderPlayer(Graphics graphics) {
 		BufferedImage sprite = Textures.getSprite("player");
 		
@@ -51,12 +48,7 @@ public class Renderer {
 		int drawPosY = (Window.HEIGHT/2)-(sprite.getHeight()/2)*zoomLevel;
 		graphics.drawImage(sprite, drawPosX, drawPosY, sprite.getWidth()*zoomLevel, sprite.getHeight()*zoomLevel, null);
 	}
-	
-	/**Renders a floor at correct position
-	 * @param roomData - The floor to render
-	 * @param player - Needed to calculate camera offset
-	 * @param graphics - Graphics object
-	 */
+
 	public void renderLevel(Room roomData, Player player, Graphics graphics) {
 		for(int y = 0; y< roomData.getSizeY(); y++) {
 			for(int x = 0; x< roomData.getSizeX(); x++) {
@@ -68,12 +60,7 @@ public class Renderer {
 			}
 		}
 	}
-	
-	/**Renders all given monsters on the floor
-	 * @param monsters - Monsters to render
-	 * @param player - Needed to calculate the camera offset
-	 * @param graphics - Graphics object
-	 */
+
 	public void renderMonsters(Monster[] monsters, Player player, Graphics graphics) {
 		if(monsters == null) return;
 		
@@ -93,11 +80,7 @@ public class Renderer {
 	private int calculateOffsetY(BufferedImage sprite, MapObject mapObject, Player player) {
 		return mapObject.getPosY()*sprite.getHeight()*zoomLevel + ((Window.HEIGHT/2)-player.getPosY()*sprite.getHeight()*zoomLevel-(sprite.getHeight()/2)*zoomLevel);
 	}
-	
-	/**Renders the UI
-	 * @param player - Used to know hp and inventory
-	 * @param graphics - Graphics object
-	 */
+
 	public void renderUI(Player player, Room roomData, Graphics2D graphics, Point mousePosition) {
 
 		graphics.setColor(Color.BLACK);
@@ -107,7 +90,7 @@ public class Renderer {
 		
 		graphics.setFont(new Font("Dialog", Font.PLAIN, 20));
 		graphics.drawString("- Player -", 10, 25);
-		graphics.setFont(new Font("Dialog", Font.PLAIN, 12));
+		graphics.setFont(new Font("Dialog", Font.PLAIN, 16));
 		graphics.drawString("HP: "+player.getHealth()+"/"+player.getMaxHealth(), 10, 45);
 		graphics.drawString("STR: "+player.getStrength(), 10, 65);
 		graphics.drawString("DEF: "+player.getDefence(), 10, 80);

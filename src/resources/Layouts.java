@@ -26,7 +26,7 @@ public class Layouts {
 
 		layout0(new String[]
 					   {"##########",
-						"#........#",
+						"#TTTTTTTT#",
 						"#........#",
 						"#...##...#",
 						"#...##...#",
@@ -362,11 +362,11 @@ public class Layouts {
 		{
 			Layouts2[] layouts2 = values();
 			Layouts2 temp = layouts2[Math.abs(randomizer.nextInt()) % NUMBER_OF_LAYOUTS + 1];
-			return ToRoom(temp, randomizer);
+			return new Room(temp.layout, temp.startingPosX, temp.startingPosY, randomizer);
 		}
-		public static Room ToRoom(Layouts2 l, Random randomiser)
+		public Room ToRoom(Random randomizer)
 		{
-			return new Room(l.layout, l.startingPosX, l.startingPosY, randomiser);
+			return new Room(layout, startingPosX, startingPosY, randomizer);
 		}
 
 		public String[] getLayout() {

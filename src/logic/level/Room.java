@@ -58,8 +58,7 @@ public class Room {
 					this.monsters.add(Monster.Type.randomType(randomizer.nextInt(), x, y));
 					break;
 				case 'T':
-					// tu będzie kiedyś chest.
-					room[y][x] = new MapObject("red_potion", x, y);
+					room[y][x] = new MapObject("chest", x, y);
 					break;
 				case 'W':
 					room[y][x] = new MapObject("wiesniak", x, y);
@@ -123,6 +122,7 @@ public class Room {
 		case "red_potion":
 		case "key":
 		case "gold_bag":
+		case "chest":
 			room[y][x] = new MapObject("floor", x, y);
 			return true;
 		}

@@ -24,18 +24,14 @@ public class Player extends Entity {
 		this.inventory = new Item[INVENTORY_SIZE];
 		this.inventoryOpen = false;
 		this.shopOpen = false;
-		this.weaponEquipped = Items.SHORT_SWORD;
-		this.armorEquipped = Items.LIGHT_ARMOR;
+		this.weaponEquipped = Items.Weapons.SHORT_SWORD.toWeapon();
+		this.armorEquipped = Items.Armors.LIGHT_ARMOR.toArmor();
 		this.strength = 1;
 		this.defence = 0;
 		this.gold = 0;
 		this.floors = 0;
 	}
-	
-	/**Adds an items to the first empty slot
-	 * @param item - The item to add
-	 * @return True if the item was added, false if inventory is full
-	 */
+
 	public boolean giveItem(Item item) {
 		for(int i=0;i<INVENTORY_SIZE;i++) {
 			if(this.inventory[i] == null) {
@@ -117,11 +113,12 @@ public class Player extends Entity {
 	}
 	
 	public void equipWeapon(Weapon weapon) {
-		this.weaponEquipped = new Weapon(weapon.getName(), weapon.getDisplayName(), weapon.getDamage());
+		this.weaponEquipped = new Weapon(weapon.getName(), weapon.getDisplayName(), weapon.getDamage(), weapon.getDurability());
 	}
 	
-	public void equipArmor(Armor armor) {
-		this.armorEquipped = new Armor(armor.getName(), armor.getDisplayName(), armor.getDefence());
+	public void equipArmor(Armor armor)
+	{
+		this.armorEquipped = new Armor(armor.getName(), armor.getDisplayName(), armor.getDefence(), armor.getDurability());
 	}
 
 	public Weapon getWeapon() {

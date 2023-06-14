@@ -39,7 +39,7 @@ public class Screen extends JPanel {
 				renderer.renderTitleScreen(graphics);
 			} else {
 				renderer.renderLevel(GameLogic.getCurrentFloor(), GameLogic.getPlayer(), graphics);
-				renderer.renderPlayer(GameLogic.getPlayer(), graphics);
+				renderer.renderPlayer(graphics);
 				renderer.renderMonsters(GameLogic.getMonsters(), GameLogic.getPlayer(), graphics);
 				renderer.renderUI(GameLogic.getPlayer(), GameLogic.getCurrentFloor(), (Graphics2D) graphics, this.getMouseLocation());
 				renderer.renderMessageBox(GameLogic.getMessageBox(), graphics);
