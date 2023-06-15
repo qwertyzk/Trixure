@@ -8,31 +8,39 @@ import java.util.Stack;
 
 public class Layouts {
 
-	public static final int NUMBER_OF_LAYOUTS = 20;
+	public static final int NUMBER_OF_EASY_LAYOUTS = 10;
+	public static final int NUMBER_OF_MEDIUM_LAYOUTS = 5;
+	public static final int NUMBER_OF_HARD_LAYOUTS = 5;
+
+	// # wall
+	// . empty
+	// ^ exit
+	// , trap
+	// p hp_potion
+	// m max_potion
+	// s strength_potion
+	// d defence_potion
+	// ? mysterious_potion
+	// G gold bag
+	// ! key
+	// / locked door
+	// T chest
+	// M mob
+	// W shop
 
 	public enum Layouts2
 	{
-		// # wall
-		// . empty
-		// s starting position
-		// ^ exit
-		// , trap
-		// p potion
-		// ! key
-		// / locked door
-		// T chest
-		// M mob
-		// $ shop (?)
+
 
 		layout0(new String[]
 					   {"##########",
-						"#TTTTTTTT#",
+						"#TTmsd?pG#",
 						"#........#",
-						"#...##...#",
-						"#...##...#",
-						"#...##...#",
-						"#...##...#",
-						"#W..##...#",
+						"#........#",
+						"#...TT...#",
+						"#...TT...#",
+						"#...TT...#",
+						"#W..TT...#",
 						"##.####^##",
 						"##########"}, 2, 8),
 
@@ -358,17 +366,28 @@ public class Layouts {
 			this.startingPosY = startingPosY;
 		}
 
-		public static Room randomType(Random randomizer)
+		public static Room randomType(Random randomizer, int difficulty)
 		{
-			Layouts2[] layouts2 = values();
-			Layouts2 temp = layouts2[Math.abs(randomizer.nextInt()) % NUMBER_OF_LAYOUTS + 1];
+			Layouts2[] layouts = values();
+			Layouts2 temp = layout0;
+			switch (difficulty) {
+				case 0:
+					break;
+				case 1:
+					temp = layouts[Math.abs(randomizer.nextInt()) % NUMBER_OF_EASY_LAYOUTS + 1];
+					break;
+				case 2:
+					temp = layouts[Math.abs(randomizer.nextInt()) % NUMBER_OF_MEDIUM_LAYOUTS + NUMBER_OF_EASY_LAYOUTS + 1];
+					break;
+				case 3:
+					temp = layouts[Math.abs(randomizer.nextInt()) % NUMBER_OF_HARD_LAYOUTS + NUMBER_OF_MEDIUM_LAYOUTS + NUMBER_OF_EASY_LAYOUTS + 1];
+					break;
+				case 4:
+					// final level
+					break;
+			}
 			return new Room(temp.layout, temp.startingPosX, temp.startingPosY, randomizer);
 		}
-		public Room ToRoom(Random randomizer)
-		{
-			return new Room(layout, startingPosX, startingPosY, randomizer);
-		}
-
 		public String[] getLayout() {
 			return layout;
 		}

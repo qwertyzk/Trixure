@@ -97,6 +97,14 @@ public class Player extends Entity {
 		this.health += amount;
 	}
 
+	public void increaseStrength(int amount) {
+		this.strength += amount;
+	}
+
+	public void increaseDefence(int amount) {
+		this.defence += amount;
+	}
+
 	
 	@Override
 	public int getStrength() {

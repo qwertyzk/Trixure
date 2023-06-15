@@ -9,13 +9,17 @@ import java.util.Random;
 
 public class Items {
 
-	private static final int NUMBER_OF_CONSUMABLES = 2;
-	private static final int NUMBER_OF_WEAPONS = 3;
-	private static final int NUMBER_OF_ARMORS = 3;
+	private static final int NUMBER_OF_CONSUMABLES = 6;
+	private static final int NUMBER_OF_WEAPONS = 5;
+	private static final int NUMBER_OF_ARMORS = 5;
 
 	public enum Consumable
 	{
 		HP_POTION("hp_potion", "Health potion", "Restores 10 HP"),
+		MAX_POTION("max_potion", "Max Potion", "Increases max HP by 5"),
+		STRENGTH_POTION("strength_potion", "Strength Potion", "Increases Strength by 3" ),
+		DEFENCE_POTION("defence_potion", "Defence Potion", "Increases Defence by 3"),
+		MYSTERIOUS_POTION("mysterious_potion", "Mysterious Potion", "The effect remains unknown..."),
 		KEY("small_key", "Small key", "Can be used once to open a locked door");
 
 		private String name;
@@ -46,7 +50,9 @@ public class Items {
 	{
 		SHORT_SWORD("short_sword", "Short Sword", 5, 10),
 		LONG_SWORD("long_sword", "Long Sword", 7, 20),
-		SCYTHE("scythe", "Scythe", 10, 10);
+		SCYTHE("scythe", "Scythe", 10, 10),
+		CHAKRAM("chakram", "Chakram", 8, 12),
+		AXE("axe", "Axe", 12, 8);
 		private String name;
 		private String displayName;
 		private int damage;
@@ -76,8 +82,10 @@ public class Items {
 	public enum Armors
 	{
 		LIGHT_ARMOR("light_armor", "Light Armor", 4, 10),
-		HEAVY_ARMOR("heavy_armor", "Heavy Armor", 8, 20),
-		THORNMAIL("thornmail", "Thornmail", 12, 10);
+		HEAVY_ARMOR("heavy_armor", "Heavy Armor", 7, 20),
+		THORNMAIL("thornmail", "Thornmail", 10, 10),
+		PLATED_ARMOR("plated_armor", "Plated Armor", 8, 15),
+		GLASS_ARMOR("glass_armor", "Glass Armor", 12, 7);
 		private String name;
 		private String displayName;
 		private int defence;

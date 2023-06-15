@@ -128,6 +128,42 @@ public class GameLogic {
 				messageBox.addMessage("Your inventory is full!", 1);
 			}
 			break;
+		case "yellow_potion":
+			if(player.giveItem(Items.Consumable.MAX_POTION.toItem())) {
+				currentRoom.removeCollectible(itemPosX, itemPosY);
+				messageBox.addMessage("You picked up a max potion!", 1);
+			}
+			else {
+				messageBox.addMessage("Your inventory is full!", 1);
+			}
+			break;
+		case "green_potion":
+			if(player.giveItem(Items.Consumable.STRENGTH_POTION.toItem())) {
+				currentRoom.removeCollectible(itemPosX, itemPosY);
+				messageBox.addMessage("You picked up a strength potion!", 1);
+			}
+			else {
+				messageBox.addMessage("Your inventory is full!", 1);
+			}
+			break;
+		case "purple_potion":
+			if(player.giveItem(Items.Consumable.DEFENCE_POTION.toItem())) {
+				currentRoom.removeCollectible(itemPosX, itemPosY);
+				messageBox.addMessage("You picked up a defence potion!", 1);
+			}
+			else {
+				messageBox.addMessage("Your inventory is full!", 1);
+			}
+			break;
+		case "orange_potion":
+			if(player.giveItem(Items.Consumable.MYSTERIOUS_POTION.toItem())) {
+				currentRoom.removeCollectible(itemPosX, itemPosY);
+				messageBox.addMessage("You picked up a mysterious potion!", 1);
+			}
+			else {
+				messageBox.addMessage("Your inventory is full!", 1);
+			}
+			break;
 		case "gold_bag":
 			int g = randomizer.nextInt(5)+3;
 			player.giveGold(g);
@@ -144,7 +180,7 @@ public class GameLogic {
 			}
 			break;
 		case "chest":
-			switch(randomizer.nextInt(12)) {
+			switch(randomizer.nextInt(5)) {
 				case 0: // nothing
 					messageBox.addMessage("You opened the chest, but it was empty...", 1);
 					currentRoom.removeCollectible(itemPosX, itemPosY);
@@ -219,6 +255,42 @@ public class GameLogic {
 			if(item.getName() == "hp_potion") {
 				player.heal(10);
 				messageBox.addMessage("You drank a red potion and you recovered health!", 1);
+			}
+			else if(item.getName() == "max_potion") {
+				player.increaseHealth(5);
+				messageBox.addMessage("You drank a max potion and increased max health!", 1);
+			}
+			else if(item.getName() == "strength_potion") {
+				player.increaseStrength(3);
+				messageBox.addMessage("You drank a strength potion and increased strength!", 1);
+			}
+			else if(item.getName() == "defence_potion") {
+				player.increaseDefence(3);
+				messageBox.addMessage("You drank a strength potion and increased strength!", 1);
+			}
+			else if(item.getName() == "mysterious_potion") {
+				switch (randomizer.nextInt(6)) {
+					case 0:
+						player.heal(12);
+						messageBox.addMessage("You drank a potion and you recovered health!", 1);
+						break;
+					case 1:
+						player.increaseHealth(7);
+						messageBox.addMessage("You drank a potion and increased max health!", 1);
+						break;
+					case 2:
+						player.increaseStrength(4);
+						messageBox.addMessage("You drank a potion and increased strength!", 1);
+						break;
+					case 3:
+						player.increaseDefence(4);
+						messageBox.addMessage("You drank a potion and increased strength!", 1);
+						break;
+					case 4:
+					case 5:
+						player.damage(5);
+						break;
+				}
 			}
 			else if(item.getName() == "small_key") {
 				if(currentRoom.getTileAt(player.getPosX()+1, player.getPosY()).getName() == "locked_door") {

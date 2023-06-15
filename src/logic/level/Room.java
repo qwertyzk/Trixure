@@ -44,6 +44,18 @@ public class Room {
 				case 'p':
 					room[y][x] = new MapObject("red_potion", x, y);
 					break;
+				case 'm':
+					room[y][x] = new MapObject("yellow_potion", x, y);
+					break;
+				case 's':
+					room[y][x] = new MapObject("green_potion", x, y);
+					break;
+				case 'd':
+					room[y][x] = new MapObject("purple_potion", x, y);
+					break;
+				case '?':
+					room[y][x] = new MapObject("orange_potion", x, y);
+					break;
 				case 'G':
 					room[y][x] = new MapObject("gold_bag", x, y);
 					break;
@@ -119,7 +131,11 @@ public class Room {
 
 	public boolean removeCollectible(int x, int y) {
 		switch(room[y][x].getName()) {
+		case "green_potion":
+		case "yellow_potion":
+		case "purple_potion":
 		case "red_potion":
+		case "orange_potion":
 		case "key":
 		case "gold_bag":
 		case "chest":
