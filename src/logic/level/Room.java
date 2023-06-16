@@ -26,7 +26,7 @@ public class Room {
 		
 		for(int y=0;y<levelData.length;y++) {
 			room[y] = new MapObject[levelData[y].length()];
-			
+
 			for(int x=0;x<levelData[y].length();x++) {
 				switch(levelData[y].charAt(x)) {
 				case '#':
@@ -42,19 +42,19 @@ public class Room {
 					room[y][x] = new MapObject("trap", x, y);
 					break;
 				case 'p':
-					room[y][x] = new MapObject("red_potion", x, y);
+					room[y][x] = new MapObject("hp_potion", x, y);
 					break;
 				case 'm':
-					room[y][x] = new MapObject("yellow_potion", x, y);
+					room[y][x] = new MapObject("max_potion", x, y);
 					break;
 				case 's':
-					room[y][x] = new MapObject("green_potion", x, y);
+					room[y][x] = new MapObject("strength_potion", x, y);
 					break;
 				case 'd':
-					room[y][x] = new MapObject("purple_potion", x, y);
+					room[y][x] = new MapObject("defence_potion", x, y);
 					break;
 				case '?':
-					room[y][x] = new MapObject("orange_potion", x, y);
+					room[y][x] = new MapObject("mysterious_potion", x, y);
 					break;
 				case 'G':
 					room[y][x] = new MapObject("gold_bag", x, y);
@@ -138,8 +138,10 @@ public class Room {
 		case "orange_potion":
 		case "key":
 		case "gold_bag":
-		case "chest":
 			room[y][x] = new MapObject("floor", x, y);
+			return true;
+		case "chest":
+			room[y][x] = new MapObject("open_chest", x, y);
 			return true;
 		}
 		return false;
@@ -147,7 +149,7 @@ public class Room {
 
 	public boolean openDoor(int x, int y) {
 		if(room[y][x].getName() == "locked_door") {
-			room[y][x] = new MapObject("floor", x, y);
+			room[y][x] = new MapObject("open_door", x, y);
 			return true;
 		}
 		return false;

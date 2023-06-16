@@ -14,8 +14,8 @@ public class MapObject
 		this.worldPosX = posX;
 		this.worldPosY = posY;
 		
-		if(name == "red_potion" || name == "gold_bag" || name == "key" || name == "chest"
-		|| name == "green_potion" || name == "yellow_potion" || name == "purple_potion" || name == "orange_potion")
+		if(name == "hp_potion" || name == "gold_bag" || name == "key" || name == "chest"
+		|| name == "max_potion" || name == "strength_potion" || name == "defence_potion" || name == "mysterious_potion")
 			this.collectible = true;
 	}
 	

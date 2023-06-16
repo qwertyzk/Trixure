@@ -20,7 +20,7 @@ public class Items {
 		STRENGTH_POTION("strength_potion", "Strength Potion", "Increases Strength by 3" ),
 		DEFENCE_POTION("defence_potion", "Defence Potion", "Increases Defence by 3"),
 		MYSTERIOUS_POTION("mysterious_potion", "Mysterious Potion", "The effect remains unknown..."),
-		KEY("small_key", "Small key", "Can be used once to open a locked door");
+		KEY("key", "Key", "Can be used once to open a locked door");
 
 		private String name;
 		private String displayName;
