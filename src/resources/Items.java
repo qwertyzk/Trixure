@@ -17,9 +17,9 @@ public class Items {
 	{
 		HP_POTION("hp_potion", "Health potion", "Restores 10 HP", 10),
 		MAX_POTION("max_potion", "Max Potion", "Increases max HP by 5", 10),
-		STRENGTH_POTION("strength_potion", "Strength Potion", "Increases Strength by 3", 10 ),
-		DEFENCE_POTION("defence_potion", "Defence Potion", "Increases Defence by 3", 10),
-		MYSTERIOUS_POTION("mysterious_potion", "Mysterious Potion", "The effect remains unknown...", 10),
+		STRENGTH_POTION("str_potion", "Strength Potion", "Increases Strength by 3", 10 ),
+		DEFENCE_POTION("def_potion", "Defence Potion", "Increases Defence by 3", 10),
+		MYSTERIOUS_POTION("myst_potion", "Mysterious Potion", "The effect remains unknown...", 10),
 		KEY("key", "Key", "Can be used once to open a locked door", 10);
 
 		private String name;

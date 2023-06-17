@@ -130,7 +130,7 @@ public class GameLogic {
 	
 	private static void pickupItem(int itemPosX, int itemPosY) {
 		switch(currentRoom.getTileAt(itemPosX, itemPosY).getName()) {
-		case "hp_potion":
+		case "hp_potion_tile":
 			if(player.giveItem(Items.Consumable.HP_POTION.toItem())) {
 				currentRoom.removeCollectible(itemPosX, itemPosY);
 				messageBox.addMessage("You picked up a health potion!", 1);
@@ -139,7 +139,7 @@ public class GameLogic {
 				messageBox.addMessage("Your inventory is full!", 1);
 			}
 			break;
-		case "max_potion":
+		case "max_potion_tile":
 			if(player.giveItem(Items.Consumable.MAX_POTION.toItem())) {
 				currentRoom.removeCollectible(itemPosX, itemPosY);
 				messageBox.addMessage("You picked up a max potion!", 1);
@@ -148,7 +148,7 @@ public class GameLogic {
 				messageBox.addMessage("Your inventory is full!", 1);
 			}
 			break;
-		case "strength_potion":
+		case "str_potion_tile":
 			if(player.giveItem(Items.Consumable.STRENGTH_POTION.toItem())) {
 				currentRoom.removeCollectible(itemPosX, itemPosY);
 				messageBox.addMessage("You picked up a strength potion!", 1);
@@ -157,7 +157,7 @@ public class GameLogic {
 				messageBox.addMessage("Your inventory is full!", 1);
 			}
 			break;
-		case "defence_potion":
+		case "def_potion_tile":
 			if(player.giveItem(Items.Consumable.DEFENCE_POTION.toItem())) {
 				currentRoom.removeCollectible(itemPosX, itemPosY);
 				messageBox.addMessage("You picked up a defence potion!", 1);
@@ -166,7 +166,7 @@ public class GameLogic {
 				messageBox.addMessage("Your inventory is full!", 1);
 			}
 			break;
-		case "mysterious_potion":
+		case "myst_potion_tile":
 			if(player.giveItem(Items.Consumable.MYSTERIOUS_POTION.toItem())) {
 				currentRoom.removeCollectible(itemPosX, itemPosY);
 				messageBox.addMessage("You picked up a mysterious potion!", 1);
@@ -181,7 +181,7 @@ public class GameLogic {
 			currentRoom.removeCollectible(itemPosX, itemPosY);
 			messageBox.addMessage("You picked up a bag containing "+g+" gold!", 1);
 			break;
-		case "key":
+		case "key_tile":
 			if(player.giveItem(Items.Consumable.KEY.toItem())) {
 				currentRoom.removeCollectible(itemPosX, itemPosY);
 				messageBox.addMessage("You picked up a key!", 1);

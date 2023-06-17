@@ -57,9 +57,10 @@ public class Renderer {
 		for(int y = 0; y< roomData.getSizeY(); y++) {
 			for(int x = 0; x< roomData.getSizeX(); x++) {
 				BufferedImage sprite = Textures.getSprite(roomData.getTileAt(x, y).getName());
-				
+
 				int drawPosX = calculateOffsetX(sprite, roomData.getTileAt(x, y), player);
 				int drawPosY = calculateOffsetY(sprite, roomData.getTileAt(x, y), player);
+
 				graphics.drawImage(sprite, drawPosX, drawPosY, sprite.getWidth()*zoomLevel, sprite.getHeight()*zoomLevel, null);
 			}
 		}
@@ -109,7 +110,7 @@ public class Renderer {
 					int drawPosY = roomData.getTileAt(x, y).getPosY()*32*zoomLevel + ((Window.HEIGHT/2)-player.getPosY()*32*zoomLevel-(32/2)*zoomLevel);
 					
 					if((player.getPosX() == x-1 && player.getPosY() == y) || (player.getPosX() == x+1 && player.getPosY() == y) || (player.getPosX() == x && player.getPosY() == y-1) || (player.getPosX() == x && player.getPosY() == y+1)) {
-						String letter =  (roomData.getTileAt(x, y).getName() == "wiesniak") ? "M" : "E";
+						String letter =  (roomData.getTileAt(x, y).getName() == "wiesniak") ? "T" : "E";
 						BufferedImage sprite = Textures.getSprite(letter);
 						graphics.drawImage(sprite, drawPosX+8*zoomLevel, drawPosY-8*zoomLevel, sprite.getWidth()*zoomLevel, sprite.getHeight()*zoomLevel, null);
 					}

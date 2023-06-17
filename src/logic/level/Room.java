@@ -42,28 +42,28 @@ public class Room {
 					room[y][x] = new MapObject("trap", x, y);
 					break;
 				case 'p':
-					room[y][x] = new MapObject("hp_potion", x, y);
+					room[y][x] = new MapObject("hp_potion_tile", x, y);
 					break;
 				case 'm':
-					room[y][x] = new MapObject("max_potion", x, y);
+					room[y][x] = new MapObject("max_potion_tile", x, y);
 					break;
 				case 's':
-					room[y][x] = new MapObject("strength_potion", x, y);
+					room[y][x] = new MapObject("str_potion_tile", x, y);
 					break;
 				case 'd':
-					room[y][x] = new MapObject("defence_potion", x, y);
+					room[y][x] = new MapObject("def_potion_tile", x, y);
 					break;
 				case '?':
-					room[y][x] = new MapObject("mysterious_potion", x, y);
+					room[y][x] = new MapObject("myst_potion_tile", x, y);
 					break;
 				case 'G':
 					room[y][x] = new MapObject("gold_bag", x, y);
 					break;
 				case '!':
-					room[y][x] = new MapObject("key", x, y);
+					room[y][x] = new MapObject("key_tile", x, y);
 					break;
 				case '/':
-					room[y][x] = new MapObject("locked_door", x, y);
+					room[y][x] = new MapObject("door", x, y);
 					break;
 				case 'M':
 					room[y][x] = new MapObject("floor", x, y);
@@ -131,12 +131,12 @@ public class Room {
 
 	public boolean removeCollectible(int x, int y) {
 		switch(room[y][x].getName()) {
-		case "hp_potion":
-		case "max_potion":
-		case "mysterious_potion":
-		case "defence_potion":
-		case "strength_potion":
-		case "key":
+		case "hp_potion_tile":
+		case "max_potion_tile":
+		case "myst_potion_tile":
+		case "def_potion_tile":
+		case "str_potion_tile":
+		case "key_tile":
 		case "gold_bag":
 			room[y][x] = new MapObject("floor", x, y);
 			return true;
@@ -148,8 +148,8 @@ public class Room {
 	}
 
 	public boolean openDoor(int x, int y) {
-		if(room[y][x].getName() == "locked_door") {
-			room[y][x] = new MapObject("open_door", x, y);
+		if(room[y][x].getName() == "door") {
+			room[y][x] = new MapObject("floor", x, y);
 			return true;
 		}
 		return false;
@@ -159,6 +159,7 @@ public class Room {
 		for(int i=0;i<monsters.size();i++) {
 			if(monsters.get(i).getPosX() == x && monsters.get(i).getPosY() == y) {
 				monsters.remove(i);
+				room[y][x] = new MapObject("blood", x, y);
 				System.out.println("[GameLogic][Room]: Monster killed");
 				return true;
 			}
