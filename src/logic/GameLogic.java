@@ -109,7 +109,7 @@ public class GameLogic {
 		}
 	}
 
-	public static void handleInteration() {
+	public static void handleInteraction() {
 		System.out.println("[Main][GameLogic]: Looking for an item to pickup");
 		pickupItem(player.getPosX()+1, player.getPosY());
 		pickupItem(player.getPosX()-1, player.getPosY());
@@ -269,9 +269,9 @@ public class GameLogic {
 				messageBox.addMessage("You drank a strength potion and increased strength!", 1);
 			}
 			else if(item.getName() == "mysterious_potion") {
-				switch (randomizer.nextInt(6)) {
+				switch (randomizer.nextInt(7)) {
 					case 0:
-						player.heal(12);
+						player.heal(15);
 						messageBox.addMessage("You drank a potion and you recovered health!", 1);
 						break;
 					case 1:
@@ -287,9 +287,16 @@ public class GameLogic {
 						messageBox.addMessage("You drank a potion and increased strength!", 1);
 						break;
 					case 4:
-					case 5:
 						player.damage(5);
+						messageBox.addMessage("You drank a potion, but it was stale...", 1);
 						break;
+					case 5:
+						player.damage(10);
+						messageBox.addMessage("You drank a potion, but it didn't taste well...", 1);
+						break;
+					case 6:
+						player.damage(15);
+						messageBox.addMessage("You drank a potion, but it was poisonous...", 1);
 				}
 			}
 			else if(item.getName() == "small_key") {
