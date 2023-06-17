@@ -5,9 +5,9 @@ public abstract class Equipment extends Item
     protected int totalDurability;
     protected int durability;
 
-    public Equipment(String name, String displayName, String description, int durability)
+    public Equipment(String name, String displayName, String description, int durability, int price)
     {
-        super(name, displayName, description);
+        super(name, displayName, description, price);
         this.durability = durability;
         this.totalDurability = durability;
     }

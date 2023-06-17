@@ -73,7 +73,7 @@ public class Room {
 					room[y][x] = new MapObject("chest", x, y);
 					break;
 				case 'W':
-					room[y][x] = new MapObject("wiesniak", x, y);
+					room[y][x] = new Shop("wiesniak", x, y, 10); // tu max napiwek
 					break;
 
 				}
@@ -131,11 +131,11 @@ public class Room {
 
 	public boolean removeCollectible(int x, int y) {
 		switch(room[y][x].getName()) {
-		case "green_potion":
-		case "yellow_potion":
-		case "purple_potion":
-		case "red_potion":
-		case "orange_potion":
+		case "hp_potion":
+		case "max_potion":
+		case "mysterious_potion":
+		case "defence_potion":
+		case "strength_potion":
 		case "key":
 		case "gold_bag":
 			room[y][x] = new MapObject("floor", x, y);
