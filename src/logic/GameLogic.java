@@ -68,6 +68,7 @@ public class GameLogic {
 		
 		switch(getTileInFrontOfEntity(player, dirX, dirY).getName()) {
 		case "floor":
+		case "blood":
 			player.setPosition(player.getPosX()+dirX, player.getPosY()+dirY);
 			break;
 		case "stairs":
