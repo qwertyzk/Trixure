@@ -3,6 +3,7 @@ package logic.entities;
 import logic.items.Armor;
 import logic.items.Item;
 import logic.items.Weapon;
+import logic.level.Shop;
 import resources.Items;
 
 public class Player extends Entity {
@@ -12,6 +13,7 @@ public class Player extends Entity {
 	private Item[] inventory;
 	private boolean inventoryOpen;
 	private boolean shopOpen;
+	private Shop currentShop;
 
 	private Weapon weaponEquipped;
 	private Armor armorEquipped;
@@ -19,8 +21,8 @@ public class Player extends Entity {
 	private int gold;
 	private int floors;
 	
-	public Player(String name, int posX, int posY) {
-		super(name, posX, posY, 20);
+	public Player(int posX, int posY) {
+		super("player", posX, posY, 20);
 		this.inventory = new Item[INVENTORY_SIZE];
 		this.inventoryOpen = false;
 		this.shopOpen = false;
@@ -30,8 +32,10 @@ public class Player extends Entity {
 		this.defence = 0;
 		this.gold = 0;
 		this.floors = 0;
+		this.currentShop = null;
 	}
 
+	//bierze item do inv
 	public boolean giveItem(Item item) {
 		for(int i=0;i<INVENTORY_SIZE;i++) {
 			if(this.inventory[i] == null) {
@@ -72,6 +76,15 @@ public class Player extends Entity {
 	public void setShopOpen(boolean shopOpen) {
 		this.shopOpen = shopOpen;
 	}
+
+	public Shop getCurrentShop() {
+		return currentShop;
+	}
+
+	public void chooseShop(Shop shop)
+	{
+		this.currentShop = shop;
+	}
 	public boolean isShopOpen() {
 		return shopOpen;
 	}
@@ -83,7 +96,11 @@ public class Player extends Entity {
 	public int getGold() {
 		return gold;
 	}
-	
+
+	public void takeGold(int gold) {
+		this.gold -= gold;
+	}
+
 	public void addFloorCleared() {
 		this.floors++;
 	}
@@ -121,12 +138,12 @@ public class Player extends Entity {
 	}
 	
 	public void equipWeapon(Weapon weapon) {
-		this.weaponEquipped = new Weapon(weapon.getName(), weapon.getDisplayName(), weapon.getDamage(), weapon.getDurability());
+		this.weaponEquipped = new Weapon(weapon.getName(), weapon.getDisplayName(), weapon.getDamage(), weapon.getDurability(), weapon.getPrice());
 	}
 	
 	public void equipArmor(Armor armor)
 	{
-		this.armorEquipped = new Armor(armor.getName(), armor.getDisplayName(), armor.getDefence(), armor.getDurability());
+		this.armorEquipped = new Armor(armor.getName(), armor.getDisplayName(), armor.getDefence(), armor.getDurability(), armor.getPrice());
 	}
 
 	public Weapon getWeapon() {

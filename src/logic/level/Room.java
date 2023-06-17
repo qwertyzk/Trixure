@@ -26,7 +26,7 @@ public class Room {
 		
 		for(int y=0;y<levelData.length;y++) {
 			room[y] = new MapObject[levelData[y].length()];
-			
+
 			for(int x=0;x<levelData[y].length();x++) {
 				switch(levelData[y].charAt(x)) {
 				case '#':
@@ -42,28 +42,28 @@ public class Room {
 					room[y][x] = new MapObject("trap", x, y);
 					break;
 				case 'p':
-					room[y][x] = new MapObject("red_potion", x, y);
+					room[y][x] = new MapObject("hp_potion_tile", x, y);
 					break;
 				case 'm':
-					room[y][x] = new MapObject("yellow_potion", x, y);
+					room[y][x] = new MapObject("max_potion_tile", x, y);
 					break;
 				case 's':
-					room[y][x] = new MapObject("green_potion", x, y);
+					room[y][x] = new MapObject("str_potion_tile", x, y);
 					break;
 				case 'd':
-					room[y][x] = new MapObject("purple_potion", x, y);
+					room[y][x] = new MapObject("def_potion_tile", x, y);
 					break;
 				case '?':
-					room[y][x] = new MapObject("orange_potion", x, y);
+					room[y][x] = new MapObject("myst_potion_tile", x, y);
 					break;
 				case 'G':
 					room[y][x] = new MapObject("gold_bag", x, y);
 					break;
 				case '!':
-					room[y][x] = new MapObject("key", x, y);
+					room[y][x] = new MapObject("key_tile", x, y);
 					break;
 				case '/':
-					room[y][x] = new MapObject("locked_door", x, y);
+					room[y][x] = new MapObject("door", x, y);
 					break;
 				case 'M':
 					room[y][x] = new MapObject("floor", x, y);
@@ -73,7 +73,7 @@ public class Room {
 					room[y][x] = new MapObject("chest", x, y);
 					break;
 				case 'W':
-					room[y][x] = new MapObject("wiesniak", x, y);
+					room[y][x] = new Shop("wiesniak", x, y, 10); // tu max napiwek
 					break;
 
 				}
@@ -131,22 +131,24 @@ public class Room {
 
 	public boolean removeCollectible(int x, int y) {
 		switch(room[y][x].getName()) {
-		case "green_potion":
-		case "yellow_potion":
-		case "purple_potion":
-		case "red_potion":
-		case "orange_potion":
-		case "key":
+		case "hp_potion_tile":
+		case "max_potion_tile":
+		case "myst_potion_tile":
+		case "def_potion_tile":
+		case "str_potion_tile":
+		case "key_tile":
 		case "gold_bag":
-		case "chest":
 			room[y][x] = new MapObject("floor", x, y);
+			return true;
+		case "chest":
+			room[y][x] = new MapObject("open_chest", x, y);
 			return true;
 		}
 		return false;
 	}
 
 	public boolean openDoor(int x, int y) {
-		if(room[y][x].getName() == "locked_door") {
+		if(room[y][x].getName() == "door") {
 			room[y][x] = new MapObject("floor", x, y);
 			return true;
 		}
@@ -157,6 +159,7 @@ public class Room {
 		for(int i=0;i<monsters.size();i++) {
 			if(monsters.get(i).getPosX() == x && monsters.get(i).getPosY() == y) {
 				monsters.remove(i);
+				room[y][x] = new MapObject("blood", x, y);
 				System.out.println("[GameLogic][Room]: Monster killed");
 				return true;
 			}

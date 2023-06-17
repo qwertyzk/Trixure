@@ -1,5 +1,6 @@
 package logic;
 
+import java.awt.*;
 import java.util.Random;
 
 import javax.swing.Timer;
@@ -17,6 +18,8 @@ import logic.level.Tower;
 import logic.text.MessageBox;
 import resources.Items;
 import resources.Textures;
+import logic.level.Shop;
+
 
 public class GameLogic {
 	private static Timer timer;
@@ -42,7 +45,7 @@ public class GameLogic {
 
 		tower = new Tower(randomizer);
 		currentRoom = tower.getRoom(0);
-		player = new Player("player", 2, 8);
+		player = new Player( 2, 8);
 		activeMonsters = currentRoom.getMonsters();
 		messageBox = new MessageBox();
 		
@@ -101,11 +104,19 @@ public class GameLogic {
 	public static void openShop() {
 		if(player.getHealth() > 0)
 		{
-			if( currentRoom.getTileAt(player.getPosX()+1, player.getPosY()).getName() == "wiesniak" ||
-				currentRoom.getTileAt(player.getPosX()-1, player.getPosY()).getName() == "wiesniak" ||
-				currentRoom.getTileAt(player.getPosX(), player.getPosY()+1).getName() == "wiesniak" ||
-				currentRoom.getTileAt(player.getPosX(), player.getPosY()-1).getName() == "wiesniak")
-				player.setShopOpen(!player.isShopOpen());
+			int[] dx = {1,-1,0,0};
+			int[] dy = {0, 0, 1, -1};
+
+			for(int i=0; i<4; ++i)
+			{
+				MapObject obiekt = currentRoom.getTileAt(player.getPosX()+dx[i], player.getPosY()+dy[i]);
+				if(currentRoom.getTileAt(player.getPosX()+dx[i], player.getPosY()+dy[i]).getName() =="wiesniak" ) {
+					player.setShopOpen(!player.isShopOpen());
+					player.chooseShop((Shop) obiekt);
+				}
+			}
+
+
 		}
 	}
 
@@ -119,16 +130,16 @@ public class GameLogic {
 	
 	private static void pickupItem(int itemPosX, int itemPosY) {
 		switch(currentRoom.getTileAt(itemPosX, itemPosY).getName()) {
-		case "red_potion":
+		case "hp_potion_tile":
 			if(player.giveItem(Items.Consumable.HP_POTION.toItem())) {
 				currentRoom.removeCollectible(itemPosX, itemPosY);
-				messageBox.addMessage("You picked up a red potion!", 1);
+				messageBox.addMessage("You picked up a health potion!", 1);
 			}
 			else {
 				messageBox.addMessage("Your inventory is full!", 1);
 			}
 			break;
-		case "yellow_potion":
+		case "max_potion_tile":
 			if(player.giveItem(Items.Consumable.MAX_POTION.toItem())) {
 				currentRoom.removeCollectible(itemPosX, itemPosY);
 				messageBox.addMessage("You picked up a max potion!", 1);
@@ -137,7 +148,7 @@ public class GameLogic {
 				messageBox.addMessage("Your inventory is full!", 1);
 			}
 			break;
-		case "green_potion":
+		case "str_potion_tile":
 			if(player.giveItem(Items.Consumable.STRENGTH_POTION.toItem())) {
 				currentRoom.removeCollectible(itemPosX, itemPosY);
 				messageBox.addMessage("You picked up a strength potion!", 1);
@@ -146,7 +157,7 @@ public class GameLogic {
 				messageBox.addMessage("Your inventory is full!", 1);
 			}
 			break;
-		case "purple_potion":
+		case "def_potion_tile":
 			if(player.giveItem(Items.Consumable.DEFENCE_POTION.toItem())) {
 				currentRoom.removeCollectible(itemPosX, itemPosY);
 				messageBox.addMessage("You picked up a defence potion!", 1);
@@ -155,7 +166,7 @@ public class GameLogic {
 				messageBox.addMessage("Your inventory is full!", 1);
 			}
 			break;
-		case "orange_potion":
+		case "myst_potion_tile":
 			if(player.giveItem(Items.Consumable.MYSTERIOUS_POTION.toItem())) {
 				currentRoom.removeCollectible(itemPosX, itemPosY);
 				messageBox.addMessage("You picked up a mysterious potion!", 1);
@@ -170,7 +181,7 @@ public class GameLogic {
 			currentRoom.removeCollectible(itemPosX, itemPosY);
 			messageBox.addMessage("You picked up a bag containing "+g+" gold!", 1);
 			break;
-		case "key":
+		case "key_tile":
 			if(player.giveItem(Items.Consumable.KEY.toItem())) {
 				currentRoom.removeCollectible(itemPosX, itemPosY);
 				messageBox.addMessage("You picked up a key!", 1);
@@ -231,13 +242,58 @@ public class GameLogic {
 			else if(Renderer.inventorySlot3.contains(mouseX, mouseY)) {
 				usePlayerItem(2);
 			}
+
+			else if(Renderer.inventoryBin1.contains(mouseX, mouseY)) {
+				player.removeItem(0);
+			}
+			else if(Renderer.inventoryBin2.contains(mouseX, mouseY)) {
+				player.removeItem(1);
+			}
+			else if(Renderer.inventoryBin3.contains(mouseX, mouseY)) {
+				player.removeItem(2);
+			}
 		}
+
+		if(player.isShopOpen()) {
+			if(Renderer.shopSlot1.contains(mouseX, mouseY)) {
+				buyItem(player.getCurrentShop(), 0);
+			}
+			else if(Renderer.shopSlot2.contains(mouseX, mouseY)) {
+				buyItem(player.getCurrentShop(), 1);
+			}
+			else if(Renderer.shopSlot3.contains(mouseX, mouseY)) {
+				buyItem(player.getCurrentShop(), 2);
+			}
 		
 		if(player.getHealth() <= 0) {
 			init();
 		}
 	}
-	
+	}
+
+	public static void buyItem(Shop sklep, int i)
+	{
+		Item item = sklep.getShopItem(i);
+
+		if(player.getGold() >= item.getPrice())
+		{
+			if(player.giveItem(item))
+			{
+				player.takeGold( item.getPrice());
+				sklep.removeItem(i);
+				messageBox.addMessage("You bought new item!", 1);
+			}
+			else
+			{
+				messageBox.addMessage("Your inventory is full!", 1);
+			}
+		}
+		else {
+			messageBox.addMessage("You don't have enough money.", 1);
+		}
+
+	}
+
 	private static void usePlayerItem(int index) {
 		Item item = player.getInventoryItem(index);
 
