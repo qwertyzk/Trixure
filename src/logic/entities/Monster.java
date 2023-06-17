@@ -4,7 +4,7 @@ public class Monster extends Entity {
 
 	private Type type;
 	private boolean chasePlayer;
-	public static final int NUMBER_OF_TYPES = 7;
+	public static final int NUMBER_OF_TYPES_AT_TIME = 3;
 	
 	public Monster(Type type, int posX, int posY) {
 		super(type.getName(), posX, posY, type.getHp());
@@ -23,13 +23,13 @@ public class Monster extends Entity {
 	}
 
 	public enum Type {
-		BAT("bat", 9, 3, 2, false),
-		RAT("rat", 5, 4, 0, false),
-		GHOST("ghost", 8, 2, 1, true),
-		ORK("table", 12, 1, 4, false),
-		SLIME("torch", 8, 3, 5, false),
-		ZOMBIE("lime_potion", 10, 1, 3, true),
-		ANGRY_CHICKEN("chest" , 6, 4, 4, false);
+		BAT("bat", 6, 3, 2, false),
+		RAT("rat", 5, 4, 3, false),
+		GHOST("ghost", 7, 2, 2, true),
+		ORK("ork", 12, 3, 4, false),
+		SLIME("slime", 10, 4, 6, false),
+		ZOMBIE("zombie", 20, 6, 5, true),
+		ANGRY_CHICKEN("chicken" , 10, 10, 10, false);
 		
 		private String name;
 		private int hp;
@@ -45,10 +45,10 @@ public class Monster extends Entity {
 			this.chase = chase;
 		}
 
-		public static Monster randomType(int i, int posX, int posY)
+		public static Monster randomType(int i, int posX, int posY, int difficulty)
 		{
 			Type[] type = values();
-			Type temp =  type[Math.abs(i) % NUMBER_OF_TYPES];
+			Type temp =  type[(Math.abs(i) % NUMBER_OF_TYPES_AT_TIME) + (difficulty * 2) - 2];
 			return new Monster(temp, posX, posY);
 		}
 

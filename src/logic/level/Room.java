@@ -17,7 +17,7 @@ public class Room {
 	
 	private List<Monster> monsters;
 
-	public Room(String[] levelData, int startPosX, int startPosY, Random randomizer) {
+	public Room(String[] levelData, int startPosX, int startPosY, Random randomizer, int difficulty) {
 		room = new MapObject[levelData.length][];
 		this.monsters = new ArrayList<>();
 
@@ -67,15 +67,20 @@ public class Room {
 					break;
 				case 'M':
 					room[y][x] = new MapObject("floor", x, y);
-					this.monsters.add(Monster.Type.randomType(randomizer.nextInt(), x, y));
+					this.monsters.add(Monster.Type.randomType(randomizer.nextInt(), x, y, difficulty));
 					break;
 				case 'T':
-					room[y][x] = new MapObject("chest", x, y);
+					room[y][x] = new Chest("chest", x, y, randomizer);
 					break;
 				case 'W':
 					room[y][x] = new Shop("wiesniak", x, y, 10); // tu max napiwek
 					break;
-
+				case 'K':
+					room[y][x] = new MapObject("princess", x, y);
+					break;
+				case 'D':
+					room[y][x] = new MapObject("dragon", x, y);
+					break;
 				}
 			}
 		}

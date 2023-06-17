@@ -12,13 +12,10 @@ import logic.entities.Player;
 import logic.items.Armor;
 import logic.items.Item;
 import logic.items.Weapon;
-import logic.level.Room;
-import logic.level.MapObject;
-import logic.level.Tower;
+import logic.level.*;
 import logic.text.MessageBox;
 import resources.Items;
 import resources.Textures;
-import logic.level.Shop;
 
 
 public class GameLogic {
@@ -191,42 +188,14 @@ public class GameLogic {
 			}
 			break;
 		case "chest":
-			switch(randomizer.nextInt(5)) {
-				case 0: // nothing
-					messageBox.addMessage("You opened the chest, but it was empty...", 1);
-					currentRoom.removeCollectible(itemPosX, itemPosY);
-					break;
-				case 1: // new weapon
-					if(player.giveItem(Items.Weapons.randomWeapon(randomizer.nextInt()))){
-						messageBox.addMessage("You opened the chest and found a new weapon!", 1);
-						currentRoom.removeCollectible(itemPosX, itemPosY);
-					}
-					else
-						messageBox.addMessage("Your inventory is full!", 1);
-					break;
-				case 2: // new armor
-					if(player.giveItem(Items.Armors.randomArmor(randomizer.nextInt()))){
-						messageBox.addMessage("You opened the chest and found a new armor!", 1);
-						currentRoom.removeCollectible(itemPosX, itemPosY);
-					}
-					else
-						messageBox.addMessage("Your inventory is full!", 1);
-					break;
-				case 3: // new consumable
-					if(player.giveItem(Items.Consumable.randomItem(randomizer.nextInt()))) {
-						messageBox.addMessage("You opened the chest and found something!", 1);
-						currentRoom.removeCollectible(itemPosX, itemPosY);
-					}
-					else
-						messageBox.addMessage("Your inventory is full!", 1);
-					break;
-				case 4: // gold
-					int gold = randomizer.nextInt(9)+6;
-					player.giveGold(gold);
-					currentRoom.removeCollectible(itemPosX, itemPosY);
-					messageBox.addMessage("You opened the chest and found "+gold+" gold!", 1);
-					break;
+			Chest c = (Chest) currentRoom.getTileAt(itemPosX, itemPosY);
+			if(player.giveItem(c.getLoot()))
+			{
+				player.giveGold(c.getGold());
+				currentRoom.removeCollectible(itemPosX, itemPosY);
+				messageBox.addMessage("You found a new item and some gold!", 1);
 			}
+			else messageBox.addMessage("Your inventory is full", 1);
 		}
 	}
 
@@ -316,15 +285,15 @@ public class GameLogic {
 				player.increaseHealth(5);
 				messageBox.addMessage("You drank a max potion and increased max health!", 1);
 			}
-			else if(item.getName() == "strength_potion") {
+			else if(item.getName() == "str_potion") {
 				player.increaseStrength(3);
 				messageBox.addMessage("You drank a strength potion and increased strength!", 1);
 			}
-			else if(item.getName() == "defence_potion") {
+			else if(item.getName() == "def_potion") {
 				player.increaseDefence(3);
 				messageBox.addMessage("You drank a strength potion and increased strength!", 1);
 			}
-			else if(item.getName() == "mysterious_potion") {
+			else if(item.getName() == "myst_potion") {
 				switch (randomizer.nextInt(7)) {
 					case 0:
 						player.heal(15);
@@ -355,17 +324,17 @@ public class GameLogic {
 						messageBox.addMessage("You drank a potion, but it was poisonous...", 1);
 				}
 			}
-			else if(item.getName() == "small_key") {
-				if(currentRoom.getTileAt(player.getPosX()+1, player.getPosY()).getName() == "locked_door") {
+			else if(item.getName() == "key") {
+				if(currentRoom.getTileAt(player.getPosX()+1, player.getPosY()).getName() == "door") {
 					currentRoom.openDoor(player.getPosX()+1, player.getPosY());
 				}
-				else if(currentRoom.getTileAt(player.getPosX()-1, player.getPosY()).getName() == "locked_door") {
+				else if(currentRoom.getTileAt(player.getPosX()-1, player.getPosY()).getName() == "door") {
 					currentRoom.openDoor(player.getPosX()-1, player.getPosY());
 				}
-				else if(currentRoom.getTileAt(player.getPosX(), player.getPosY()+1).getName() == "locked_door") {
+				else if(currentRoom.getTileAt(player.getPosX(), player.getPosY()+1).getName() == "door") {
 					currentRoom.openDoor(player.getPosX(), player.getPosY()+1);
 				}
-				else if(currentRoom.getTileAt(player.getPosX(), player.getPosY()-1).getName() == "locked_door") {
+				else if(currentRoom.getTileAt(player.getPosX(), player.getPosY()-1).getName() == "door") {
 					currentRoom.openDoor(player.getPosX(), player.getPosY()-1);
 				}
 				else {
