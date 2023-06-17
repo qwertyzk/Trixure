@@ -36,7 +36,7 @@ public class GameLoop implements ActionListener {
 			}
 
 			else if(Keyboard.isKeyDown(KeyEvent.VK_E)) {
-				GameLogic.handleInteration();
+				GameLogic.handleInteraction();
 			}
 			
 		} catch(Exception e) {
