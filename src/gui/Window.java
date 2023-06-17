@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 
 public class Window {
 
-	public static final int WIDTH = 1500;
+	public static final int WIDTH = 1000;
 	public static final int HEIGHT = 800;
 	
 	private static JFrame window;
@@ -13,7 +13,7 @@ public class Window {
 	/**Initializes a JFrame object<br>
 	 * Called at beginning of main*/
 	public static void create() {
-		window = new JFrame("Roguelike Game");
+		window = new JFrame("Trixure");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setBounds(20, 20, WIDTH, HEIGHT);
 		window.setResizable(false);

@@ -281,15 +281,18 @@ public class Renderer {
 
 
 	public void renderTitleScreen(Graphics graphics) {
-		graphics.setColor(Color.WHITE);
-		graphics.drawRoundRect(50, 50, Window.WIDTH-150, Window.HEIGHT-150, 10, 10);
-		graphics.setFont(new Font("Dialog", Font.PLAIN, 40));
-		graphics.drawString("slonskie erytrocyty", 100, 100);
-		graphics.setFont(new Font("Dialog", Font.PLAIN, 20));
-		graphics.drawString("upadek pierwszej", 100, 150);
-		graphics.drawString("rzeczypospolitej polskiej", 100, 180);
+		BufferedImage image = Textures.getSprite("trixure");
+		int x = (Window.WIDTH - image.getWidth()) / 2;
+		int y = (Window.HEIGHT - 2*image.getHeight()) / 2;
+		graphics.drawImage(image, x ,y, null);
 
-		graphics.drawString("wcisnij cos ale nie cokolwiek", 200, 350);
+		graphics.setColor(Color.WHITE);
+		graphics.setFont(new Font("Dialog", Font.PLAIN, 20));
+		String txt = "Press any button...";
+		int textPosX = (Window.WIDTH - graphics.getFontMetrics().stringWidth(txt)) / 2;
+		int textPosY = ((Window.HEIGHT - graphics.getFontMetrics().getHeight()) / 2) + 2*graphics.getFontMetrics().getAscent();
+		graphics.drawString(txt, textPosX, textPosY);
+
 	}
 
 }
