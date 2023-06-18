@@ -36,12 +36,12 @@ public class Layouts {
 					   {"##########",
 						"#TTmsd?pG#",
 						"/........#",
-						"#,.......#",
+						"#,.../..!#",
 						"#W..TT...#",
 						"#...TT...#",
 						"#...TT...#",
 						"#W..TT...#",
-						"##.####^##",
+						"#...##.^.#",
 						"##########"}, 2, 8),
 
 		layout1(new String[]
@@ -509,7 +509,7 @@ public class Layouts {
 					temp = final_layout;
 					break;
 			}
-			return new Room(temp.layout, temp.startingPosX, temp.startingPosY, randomizer);
+			return new Room(temp.layout, temp.startingPosX, temp.startingPosY, randomizer, difficulty);
 		}
 	}
 }
