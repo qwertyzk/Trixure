@@ -12,7 +12,7 @@ public class Main {
 			Window.create();
 			GameLogic.startGame();
 			Window.setVisible();
-			
+
 			System.out.println("[Main]: Started!");
 			
 		} catch(Exception e) {

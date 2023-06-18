@@ -317,15 +317,15 @@ public class GameLogic {
 				player.increaseHealth(5);
 				messageBox.addMessage("You drank a max potion and increased max health!", 1);
 			}
-			else if(item.getName() == "strength_potion") {
+			else if(item.getName() == "str_potion") {
 				player.increaseStrength(3);
 				messageBox.addMessage("You drank a strength potion and increased strength!", 1);
 			}
-			else if(item.getName() == "defence_potion") {
+			else if(item.getName() == "def_potion") {
 				player.increaseDefence(3);
 				messageBox.addMessage("You drank a strength potion and increased strength!", 1);
 			}
-			else if(item.getName() == "mysterious_potion") {
+			else if(item.getName() == "myst_potion") {
 				switch (randomizer.nextInt(7)) {
 					case 0:
 						player.heal(15);
