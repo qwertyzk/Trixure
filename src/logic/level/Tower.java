@@ -8,9 +8,9 @@ import resources.Layouts;
 
 public class Tower {
 
-	private final int EASY_LEVELS = 1;
-	private final int MEDIUM_LEVELS = 1;
-	private final int HARD_LEVELS = 1;
+	private final int EASY_LEVELS = 0;
+	private final int MEDIUM_LEVELS =0;
+	private final int HARD_LEVELS = 0;
 	private List<Room> rooms;
 	private int roomAt;
 

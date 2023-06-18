@@ -1,12 +1,6 @@
 package gui;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import logic.entities.Monster;
@@ -17,9 +11,12 @@ import logic.level.Shop;
 import logic.text.MessageBox;
 import resources.Textures;
 
+import javax.swing.*;
+import javax.swing.ImageIcon;
+
 public class Renderer {
 
-	private final int zoomLevel;
+	private final int zoomLevel; // konieczne?
 
 	public static final Rectangle shopSlot1 = new Rectangle(257, 310, 420, 60);
 	public static final Rectangle shopSlot2 = new Rectangle(257, 379, 420, 60);
@@ -38,7 +35,7 @@ public class Renderer {
 	public static final Rectangle armorSlot = new Rectangle(302, 292, 340, 60);
 
 	public static final Rectangle messageBox = new Rectangle(200, 600, 600, 50);
-	
+
 	public Renderer() {
 		this.zoomLevel = 2;
 	}
@@ -65,7 +62,6 @@ public class Renderer {
 	}
 
 	public void renderMonsters(Monster[] monsters, Player player, Graphics graphics) {
-		if(monsters == null) return; // na chuj to
 		
 		for(Monster monster : monsters) {
 			BufferedImage sprite = Textures.getSprite(monster.getName());
@@ -87,10 +83,10 @@ public class Renderer {
 
 	public void renderUI(Player player, Room roomData, Graphics2D graphics, Point mousePosition) {
 
-		graphics.setColor(Color.WHITE);
 		BufferedImage status = Textures.getSprite("status");
 		graphics.drawImage(status, 10, 10, status.getWidth(), status.getHeight(), null);
 
+		graphics.setColor(Color.WHITE);
 		graphics.setFont(new Font("Dialog", Font.PLAIN, 30));
 
 		graphics.setFont(new Font("Dialog", Font.PLAIN, 20));
@@ -207,16 +203,12 @@ public class Renderer {
 		
 		//Death screen
 		if(player.getHealth() <= 0) {
-			graphics.setColor(Color.BLACK);
 
+			BufferedImage sprite = Textures.getSprite("lose_status");
+			int x = (Window.WIDTH - sprite.getWidth()) / 2;
+			int y = (Window.HEIGHT - sprite.getHeight()) / 2;
+			graphics.drawImage(sprite, x , y , null);
 
-			graphics.setFont(new Font("Dialog", Font.PLAIN, 40));
-			graphics.drawString("You perished in the dungeon...", 200, 130);
-			
-			graphics.setFont(new Font("Dialog", Font.PLAIN, 30));
-			graphics.drawString("Floors cleared: "+player.getFloorsCleared(), 200, 200);
-			graphics.drawString("Gold obtained: "+player.getGold(), 200, 240);
-			graphics.drawString("Click to restart game", 200, 350);
 		}
 	}
 
@@ -272,6 +264,21 @@ public class Renderer {
 		int textPosX = (Window.WIDTH - graphics.getFontMetrics().stringWidth(txt)) / 2;
 		int textPosY = ((Window.HEIGHT - graphics.getFontMetrics().getHeight()) / 2) + 2*graphics.getFontMetrics().getAscent();
 		graphics.drawString(txt, textPosX, textPosY);
+
+		graphics.setColor(Color.GRAY);
+		graphics.setFont(new Font("Dialog", Font.PLAIN, 18));
+		graphics.drawString("Chosen language: ponglish", 15, 25);
+
+	}
+
+	public void renderWinScreen(Graphics graphics) {
+		Image icon = new ImageIcon("res/textures/cards.gif").getImage();
+		BufferedImage image = Textures.getSprite("win_status");
+
+		int x = (Window.WIDTH - image.getWidth()) / 2;
+		int y = (Window.HEIGHT - image.getHeight()) / 2;
+		graphics.drawImage(icon, 0, 60, 1000, 631, null);
+		graphics.drawImage(image, x,y, image.getWidth(), image.getHeight(), null);
 
 	}
 

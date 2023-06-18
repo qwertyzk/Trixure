@@ -15,7 +15,7 @@ public class MessageBox {
 	
 	public void addMessage(String text, int time) {
 		this.messageQueue.add(text);
-		this.times.add(time*1000);
+		this.times.add(time*500);
 	}
 	
 	public String getMessage() {

@@ -22,7 +22,7 @@ public class Monster extends Entity {
 		return chasePlayer;
 	}
 
-	public enum Type {
+	public enum Type { //dorób jeszcze 5 mobkow, dodatkowe teksturki sa oznaczone mob<n>.png, zmien nazwy na adekwatne
 		BAT("bat", 6, 3, 2, false),
 		RAT("rat", 5, 4, 3, false),
 		GHOST("ghost", 7, 2, 2, true),

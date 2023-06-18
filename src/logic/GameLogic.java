@@ -16,6 +16,7 @@ import logic.level.*;
 import logic.text.MessageBox;
 import resources.Items;
 import resources.Textures;
+import  gui.Window;
 
 
 public class GameLogic {
@@ -27,6 +28,7 @@ public class GameLogic {
 	private static Monster[] activeMonsters;
 	private static MessageBox messageBox;
 	private static boolean onTitleScreen;
+	private static boolean onWinScreen;
 
 	public static void startGame() {
 		Textures.init();
@@ -51,9 +53,12 @@ public class GameLogic {
 
 	public static void movePlayer(int dirX, int dirY) {
 		onTitleScreen = false;
-		
+		onWinScreen = false;
+
+
 		if(player.isInventoryOpen() || player.isShopOpen())
 			return;
+
 		
 		if(checkIfPlayerDied())
 			return;
@@ -225,20 +230,19 @@ public class GameLogic {
 		}
 
 		if(player.isShopOpen()) {
-			if(Renderer.shopSlot1.contains(mouseX, mouseY)) {
+			if (Renderer.shopSlot1.contains(mouseX, mouseY)) {
 				buyItem(player.getCurrentShop(), 0);
-			}
-			else if(Renderer.shopSlot2.contains(mouseX, mouseY)) {
+			} else if (Renderer.shopSlot2.contains(mouseX, mouseY)) {
 				buyItem(player.getCurrentShop(), 1);
-			}
-			else if(Renderer.shopSlot3.contains(mouseX, mouseY)) {
+			} else if (Renderer.shopSlot3.contains(mouseX, mouseY)) {
 				buyItem(player.getCurrentShop(), 2);
 			}
+		}
 		
 		if(player.getHealth() <= 0) {
 			init();
 		}
-	}
+
 	}
 
 	public static void buyItem(Shop sklep, int i)
@@ -512,5 +516,9 @@ public class GameLogic {
 	
 	public static boolean isOnTitleScreen() {
 		return onTitleScreen;
+	}
+
+	public static boolean isOnWinScreen() {
+		return onWinScreen;
 	}
 }

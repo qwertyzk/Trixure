@@ -1,6 +1,7 @@
 package gui;
 
-import javax.swing.JFrame;
+import javax.swing.*;
+
 
 public class Window {
 
@@ -9,11 +10,14 @@ public class Window {
 	
 	private static JFrame window;
 	private static Screen screen;
+
 	
 	/**Initializes a JFrame object<br>
 	 * Called at beginning of main*/
 	public static void create() {
+
 		window = new JFrame("Trixure");
+
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setBounds(20, 20, WIDTH, HEIGHT);
 		window.setResizable(false);
@@ -23,6 +27,8 @@ public class Window {
 		
 		System.out.println("[Gui][Window]: Created window");
 	}
+
+
 	
 	/**Calls JFrame#setVisible<br>
 	 * Called when initialization is done*/

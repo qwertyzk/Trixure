@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import logic.GameLogic;
 
@@ -37,7 +37,11 @@ public class Screen extends JPanel {
 	
 			if(GameLogic.isOnTitleScreen()) {
 				renderer.renderTitleScreen(graphics);
-			} else {
+			}
+			else if (GameLogic.isOnWinScreen()) {
+				renderer.renderWinScreen(graphics);
+			}
+			else {
 				renderer.renderLevel(GameLogic.getCurrentFloor(), GameLogic.getPlayer(), graphics);
 				renderer.renderPlayer(graphics);
 				renderer.renderMonsters(GameLogic.getMonsters(), GameLogic.getPlayer(), graphics);
