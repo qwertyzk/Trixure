@@ -35,7 +35,7 @@ public class Room
 					case '?' -> room[y][x] = new MapObject("myst_potion_tile", x, y, true);
 					case 'G' -> room[y][x] = new MapObject("gold_bag", x, y, true);
 					case '!' -> room[y][x] = new MapObject("key_tile", x, y, true);
-					case '/' -> room[y][x] = new MapObject("door", x, y, true);
+					case '/' -> room[y][x] = new MapObject("door", x, y, false);
 					case 'K' -> room[y][x] = new MapObject("princess", x, y, false);
 					case 'D' -> room[y][x] = new MapObject("dragon", x, y, false);
 					case 'T' -> room[y][x] = new Chest(x, y, randomizer);

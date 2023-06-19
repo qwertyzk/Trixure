@@ -7,7 +7,6 @@ public class Main
 	public static void main(String[] args)
 	{
 		try {
-			
 			System.out.println("[Main]: Starting...");
 			
 			Window.create();
@@ -15,7 +14,7 @@ public class Main
 			Window.setVisible();
 
 			System.out.println("[Main]: Started!");
-			
+
 		} catch(Exception e) {
 			System.err.println("\n[Main]: Uncaught exception in initialization!\n");
 			e.printStackTrace();
