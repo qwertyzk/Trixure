@@ -176,7 +176,7 @@ public class GameLogic
 			}
 			break;
 		case "gold_bag":
-			int g = randomizer.nextInt(5)+3;
+			int g = randomizer.nextInt(7) + 5;
 			player.giveGold(g);
 			currentRoom.removeCollectible(itemPosX, itemPosY);
 			messageBox.addMessage("You picked up a bag containing "+g+" gold!", 1);
@@ -470,7 +470,7 @@ public class GameLogic
 			
 			if(fight.getHealth() <= 0) { //Monster is dead
 				currentRoom.killMonster(fight.getPosX(), fight.getPosY());
-				int g = randomizer.nextInt(12)+8;
+				int g = randomizer.nextInt(8) + 7;
 				player.giveGold(g);
 				player.getWeapon().reduceDurability();
 				messageBox.addMessage("You killed a monster and it dropped "+g+" gold!", 1);

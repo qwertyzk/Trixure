@@ -39,7 +39,7 @@ public class Room
 					case 'K' -> room[y][x] = new MapObject("princess", x, y, false);
 					case 'D' -> room[y][x] = new MapObject("dragon", x, y, false);
 					case 'T' -> room[y][x] = new Chest(x, y, randomizer, difficulty);
-					case 'W' -> room[y][x] = new Shop(x, y,randomizer, 10, difficulty);
+					case 'W' -> room[y][x] = new Shop(x, y,randomizer, 50, difficulty);
 					case 'M' -> {
 						room[y][x] = new MapObject("floor", x, y, false);
 						this.monsters.add(Monster.Type.randomType(randomizer.nextInt(), x, y, difficulty));

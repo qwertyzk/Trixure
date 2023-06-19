@@ -47,7 +47,7 @@ public class Items
 
 	public enum Weapons
 	{
-		SHORT_SWORD("short_sword", "Short Sword", 4, 10,50),
+		SHORT_SWORD("short_sword", "Short Sword", 3, 10,50),
 		DAGGER("dagger", "Dagger", 8, 12,100),
 		LONG_SWORD("long_sword", "Long Sword", 12, 15,150),
 		AXE("axe", "Axe", 15, 20,200),
@@ -83,7 +83,7 @@ public class Items
 
 	public enum Armors
 	{
-		LIGHT_ARMOR("light_armor", "Light Armor", 4, 10, 50),
+		LIGHT_ARMOR("light_armor", "Light Armor", 3, 10, 50),
 		GLASS_ARMOR("glass_armor", "Glass Armor", 8, 12,100),
 		HEAVY_ARMOR("heavy_armor", "Heavy Armor", 12, 15,150),
 		PLATED_ARMOR("plated_armor", "Plated Armor", 15, 20,200),

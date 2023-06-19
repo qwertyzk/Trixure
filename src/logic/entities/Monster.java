@@ -19,16 +19,16 @@ public class Monster extends Entity
 
 	public enum Type
 	{
-		BAT("bat", 7, 4, 2, false),
-		SCORPION("scorpion", 8, 3, 3, false),
-		GHOST("ghost", 6, 2, 2, true),
+		BAT("bat", 10, 5, 3, false),
+		SCORPION("scorpion", 9, 3, 4, false),
+		GHOST("ghost", 8, 3, 2, true),
 		HARPY("harpy", 10, 3, 4, false),
 		MERMAID("mermaid" , 12, 6, 6, false),
 		APPARITION("apparition", 10, 7, 4, true),
 		GRYPHON("gryphon", 20, 6, 8, false),
-		SPARTAN("spartan", 15, 15, 15, false),
-		SKELETON_DRAKE("skeleton_drake", 25, 12, 12, false),
-		CTHULHU_EYE("cthulhu_eye", 13, 10, 8, true);
+		SPARTAN("spartan", 15, 12, 12, false),
+		SKELETON_DRAKE("skeleton_drake", 25, 10, 10, false),
+		CTHULHU_EYE("cthulhu_eye", 13, 11, 8, true);
 		
 		private final String name;
 		private final int hp;
