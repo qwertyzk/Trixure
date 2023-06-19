@@ -8,12 +8,12 @@ public class Chest extends MapObject
 {
     private Item loot;
     private final int gold;
-    public Chest(int posX, int posY, Random randomizer)
+    public Chest(int posX, int posY, Random randomizer, int difficulty)
     {
         super("chest", posX, posY, true);
         switch (randomizer.nextInt(3)) {
-            case 0 -> loot = Items.Weapons.randomWeapon(randomizer.nextInt());
-            case 1 -> loot = Items.Armors.randomArmor(randomizer.nextInt());
+            case 0 -> loot = Items.Weapons.randomWeapon(randomizer.nextInt(), difficulty);
+            case 1 -> loot = Items.Armors.randomArmor(randomizer.nextInt(), difficulty);
             case 2 -> loot = Items.Consumable.randomItem(randomizer.nextInt());
         }
         gold = randomizer.nextInt(10)+5;

@@ -26,8 +26,8 @@ public class Player extends Entity
 		this.shopOpen = false;
 		this.weaponEquipped = Items.Weapons.SHORT_SWORD.toWeapon();
 		this.armorEquipped = Items.Armors.LIGHT_ARMOR.toArmor();
-		this.strength = 1;
-		this.defence = 0;
+		this.strength = 3;
+		this.defence = 3;
 		this.gold = 0;
 		this.floors = 0;
 		this.currentShop = null;

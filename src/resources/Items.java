@@ -7,8 +7,8 @@ import logic.items.Weapon;
 public class Items
 {
 	private static final int NUMBER_OF_CONSUMABLES = 6;
-	private static final int NUMBER_OF_WEAPONS = 5;
-	private static final int NUMBER_OF_ARMORS = 5;
+	private static final int NUMBER_OF_WEAPONS_AT_TIME = 3;
+	private static final int NUMBER_OF_ARMORS_AT_TIME = 3;
 
 	public enum Consumable
 	{
@@ -68,10 +68,10 @@ public class Items
 			this.price = price;
 		}
 
-		public static Item randomWeapon(int i)
+		public static Item randomWeapon(int i, int difficulty)
 		{
 			Weapons[] weapons = values();
-			Weapons temporary = weapons[Math.abs(i) % NUMBER_OF_WEAPONS];
+			Weapons temporary = weapons[Math.abs(i) % NUMBER_OF_WEAPONS_AT_TIME + difficulty - 1];
 			return new Weapon(temporary.name, temporary.displayName, temporary.damage, temporary.durability, temporary.price);
 		}
 
@@ -83,7 +83,7 @@ public class Items
 
 	public enum Armors
 	{
-		LIGHT_ARMOR("light_armor", "Light Armor", 5, 10, 50),
+		LIGHT_ARMOR("light_armor", "Light Armor", 4, 10, 50),
 		GLASS_ARMOR("glass_armor", "Glass Armor", 8, 12,100),
 		HEAVY_ARMOR("heavy_armor", "Heavy Armor", 12, 15,150),
 		PLATED_ARMOR("plated_armor", "Plated Armor", 15, 20,200),
@@ -104,10 +104,10 @@ public class Items
 			this.price = price;
 		}
 
-		public static Item randomArmor(int i)
+		public static Item randomArmor(int i, int difficulty)
 		{
 			Armors[] armors = values();
-			Armors temporary = armors[Math.abs(i) % NUMBER_OF_ARMORS];
+			Armors temporary = armors[Math.abs(i) % NUMBER_OF_ARMORS_AT_TIME + difficulty - 1];
 			return new Armor(temporary.name, temporary.displayName, temporary.defence, temporary.durability, temporary.price);
 		}
 
