@@ -98,12 +98,12 @@ public class Renderer {
 		
 		for(int y = 0; y< roomData.getSizeY(); y++) {
 			for(int x = 0; x< roomData.getSizeX(); x++) {
-				if(roomData.getTileAt(x, y).isCollectible() || roomData.getTileAt(x, y).getName() == "wiesniak") {
+				if(roomData.getTileAt(x, y).isCollectible() || roomData.getTileAt(x, y).getName() == "villager") {
 					int drawPosX = roomData.getTileAt(x, y).getPosX()*32*zoomLevel + ((Window.WIDTH/2)-player.getPosX()*32*zoomLevel-(32/2)*zoomLevel);
 					int drawPosY = roomData.getTileAt(x, y).getPosY()*32*zoomLevel + ((Window.HEIGHT/2)-player.getPosY()*32*zoomLevel-(32/2)*zoomLevel);
 					
 					if((player.getPosX() == x-1 && player.getPosY() == y) || (player.getPosX() == x+1 && player.getPosY() == y) || (player.getPosX() == x && player.getPosY() == y-1) || (player.getPosX() == x && player.getPosY() == y+1)) {
-						String letter =  (roomData.getTileAt(x, y).getName() == "wiesniak") ? "T" : "E";
+						String letter =  (roomData.getTileAt(x, y).getName() == "villager") ? "T" : "E";
 						BufferedImage sprite = Textures.getSprite(letter);
 						graphics.drawImage(sprite, drawPosX+8*zoomLevel, drawPosY-8*zoomLevel, sprite.getWidth()*zoomLevel, sprite.getHeight()*zoomLevel, null);
 					}

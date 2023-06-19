@@ -3,19 +3,14 @@ package logic.level;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import logic.entities.Monster;
 
-import javax.management.monitor.MonitorSettingException;
-
-public class Room {
-
-	private MapObject[][] room;
-	
-	private int startPosX;
-	private int startPosY;
-	
-	private List<Monster> monsters;
+public class Room
+{
+	private final MapObject[][] room;
+	private final int startPosX;
+	private final int startPosY;
+	private final List<Monster> monsters;
 
 	public Room(String[] levelData, int startPosX, int startPosY, Random randomizer, int difficulty) {
 		room = new MapObject[levelData.length][];
@@ -24,68 +19,34 @@ public class Room {
 		this.startPosX = startPosX;
 		this.startPosY = startPosY;
 		
-		for(int y=0;y<levelData.length;y++) {
+		for(int y = 0; y < levelData.length; y++) {
 			room[y] = new MapObject[levelData[y].length()];
 
-			for(int x=0;x<levelData[y].length();x++) {
-				switch(levelData[y].charAt(x)) {
-				case '#':
-					room[y][x] = new MapObject("wall", x, y);
-					break;
-				case '.':
-					room[y][x] = new MapObject("floor", x, y);
-					break;
-				case '^':
-					room[y][x] = new MapObject("stairs", x, y);
-					break;
-				case ',':
-					room[y][x] = new MapObject("trap", x, y);
-					break;
-				case 'p':
-					room[y][x] = new MapObject("hp_potion_tile", x, y);
-					break;
-				case 'm':
-					room[y][x] = new MapObject("max_potion_tile", x, y);
-					break;
-				case 's':
-					room[y][x] = new MapObject("str_potion_tile", x, y);
-					break;
-				case 'd':
-					room[y][x] = new MapObject("def_potion_tile", x, y);
-					break;
-				case '?':
-					room[y][x] = new MapObject("myst_potion_tile", x, y);
-					break;
-				case 'G':
-					room[y][x] = new MapObject("gold_bag", x, y);
-					break;
-				case '!':
-					room[y][x] = new MapObject("key_tile", x, y);
-					break;
-				case '/':
-					room[y][x] = new MapObject("door", x, y);
-					break;
-				case 'M':
-					room[y][x] = new MapObject("floor", x, y);
-					this.monsters.add(Monster.Type.randomType(randomizer.nextInt(), x, y, difficulty));
-					break;
-				case 'T':
-					room[y][x] = new Chest("chest", x, y, randomizer);
-					break;
-				case 'W':
-					room[y][x] = new Shop("wiesniak", x, y, 10); // tu max napiwek
-					break;
-				case 'K':
-					room[y][x] = new MapObject("princess", x, y);
-					break;
-				case 'D':
-					room[y][x] = new MapObject("dragon", x, y);
-					break;
+			for(int x = 0; x < levelData[y].length(); x++) {
+				switch (levelData[y].charAt(x)) {
+					case '#' -> room[y][x] = new MapObject("wall", x, y, false);
+					case '.' -> room[y][x] = new MapObject("floor", x, y, false);
+					case '^' -> room[y][x] = new MapObject("stairs", x, y, false);
+					case ',' -> room[y][x] = new MapObject("trap", x, y, false);
+					case 'p' -> room[y][x] = new MapObject("hp_potion_tile", x, y, true);
+					case 'm' -> room[y][x] = new MapObject("max_potion_tile", x, y, true);
+					case 's' -> room[y][x] = new MapObject("str_potion_tile", x, y, true);
+					case 'd' -> room[y][x] = new MapObject("def_potion_tile", x, y, true);
+					case '?' -> room[y][x] = new MapObject("myst_potion_tile", x, y, true);
+					case 'G' -> room[y][x] = new MapObject("gold_bag", x, y, true);
+					case '!' -> room[y][x] = new MapObject("key_tile", x, y, true);
+					case '/' -> room[y][x] = new MapObject("door", x, y, true);
+					case 'K' -> room[y][x] = new MapObject("princess", x, y, false);
+					case 'D' -> room[y][x] = new MapObject("dragon", x, y, false);
+					case 'T' -> room[y][x] = new Chest(x, y, randomizer);
+					case 'W' -> room[y][x] = new Shop(x, y,randomizer, 10);
+					case 'M' -> {
+						room[y][x] = new MapObject("floor", x, y, false);
+						this.monsters.add(Monster.Type.randomType(randomizer.nextInt(), x, y, difficulty));
+					}
 				}
 			}
 		}
-
-
 	}
 	
 	public int getSizeX() {
@@ -108,15 +69,17 @@ public class Room {
 		return startPosY;
 	}
 	
-	public Monster[] getMonsters() {
+	public Monster[] getMonsters()
+	{
 		Monster[] other = new Monster[monsters.size()];
 		other = monsters.toArray(other);
 		return other;
 	}
 
-	
-	public Monster getMonsterAt(int x, int y) {
-		for(Monster monster : monsters) {
+	public Monster getMonsterAt(int x, int y)
+	{
+		for(Monster monster : monsters)
+		{
 			if(monster == null)
 				return null;
 			
@@ -126,55 +89,51 @@ public class Room {
 		return null;
 	}
 
-	public boolean disarmTrap(int x, int y) {
-		if(room[y][x].getName() == "trap") {
-			room[y][x] = new MapObject("floor", x, y);
-			return true;
+	public void removeCollectible(int x, int y)
+	{
+		switch (room[y][x].getName())
+		{
+			case "hp_potion_tile", "max_potion_tile", "myst_potion_tile", "def_potion_tile", "str_potion_tile",
+					"key_tile", "gold_bag" -> room[y][x] = new MapObject("floor", x, y, false);
+			case "chest" -> room[y][x] = new MapObject("open_chest", x, y, false);
 		}
-		return false;
 	}
 
-	public boolean removeCollectible(int x, int y) {
-		switch(room[y][x].getName()) {
-		case "hp_potion_tile":
-		case "max_potion_tile":
-		case "myst_potion_tile":
-		case "def_potion_tile":
-		case "str_potion_tile":
-		case "key_tile":
-		case "gold_bag":
-			room[y][x] = new MapObject("floor", x, y);
-			return true;
-		case "chest":
-			room[y][x] = new MapObject("open_chest", x, y);
-			return true;
+	public void disarmTrap(int x, int y)
+	{
+		if (room[y][x].getName().equals("trap"))
+		{
+			room[y][x] = new MapObject("floor", x, y, false);
 		}
-		return false;
 	}
 
-	public boolean openDoor(int x, int y) {
-		if(room[y][x].getName() == "door") {
-			room[y][x] = new MapObject("floor", x, y);
-			return true;
+	public void openDoor(int x, int y)
+	{
+		if(room[y][x].getName().equals("door"))
+		{
+			room[y][x] = new MapObject("floor", x, y, false);
 		}
-		return false;
 	}
 
-	public boolean killMonster(int x, int y) {
-		for(int i=0;i<monsters.size();i++) {
-			if(monsters.get(i).getPosX() == x && monsters.get(i).getPosY() == y) {
+	public void killMonster(int x, int y)
+	{
+		for(int i = 0; i < monsters.size(); i++)
+		{
+			if(monsters.get(i).getPosX() == x && monsters.get(i).getPosY() == y)
+			{
 				monsters.remove(i);
-				room[y][x] = new MapObject("blood", x, y);
+				room[y][x] = new MapObject("blood", x, y, false);
 				System.out.println("[GameLogic][Room]: Monster killed");
-				return true;
+				return;
 			}
 		}
-		return false;
 	}
-	
-	public boolean thereIsMonsterHere(int x, int y) {
-		for(int i=0;i<monsters.size();i++) {
-			if(monsters.get(i).getPosX() == x && monsters.get(i).getPosY() == y)
+
+	public boolean thereIsMonsterHere(int x, int y)
+	{
+		for (Monster monster : monsters)
+		{
+			if (monster.getPosX() == x && monster.getPosY() == y)
 				return true;
 		}
 		return false;

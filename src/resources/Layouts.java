@@ -1,12 +1,10 @@
 package resources;
 
-import logic.entities.Monster;
 import logic.level.Room;
-
 import java.util.Random;
-import java.util.Stack;
 
-public class Layouts {
+public class Layouts
+{
 
 	public static final int NUMBER_OF_EASY_LAYOUTS = 10;
 	public static final int NUMBER_OF_MEDIUM_LAYOUTS = 8;
@@ -34,14 +32,14 @@ public class Layouts {
 	{
 		layout0(new String[]
 					   {"##########",
-						"#TTmsd?pG#",
-						"/........#",
-						"#,.../..!#",
-						"#W..TT...#",
-						"#...TT...#",
-						"#...TT...#",
-						"#W..TT...#",
-						"#...##.^.#",
+						"#........#",
+						"#........#",
+						"#........#",
+						"#...##...#",
+						"#...##...#",
+						"#...##...#",
+						"#...##...#",
+						"##.####^##",
 						"##########"}, 2, 8),
 
 		layout1(new String[]
@@ -134,7 +132,7 @@ public class Layouts {
 						"#........#################",
 						"#G..............M...,...T#",
 						"#GGG............M...,...T#",
-						"##########################"}, 14, 10),
+						"##########################"}, 14, 9),
 
 		layout5(new String[]
 				       {"############",
@@ -148,7 +146,7 @@ public class Layouts {
 						"#G.M....G###",
 						"##.......^##",
 						"###G.M...###",
-						"############"}, 3, 3),
+						"############"}, 2, 2),
 
 		layout6(new String[]
 				 	   {"############",
@@ -276,7 +274,7 @@ public class Layouts {
 						"##.......#..d#",
 						"##^....M./...#",
 					    "####.....#..W#",
-						"##############"}, 4, 1),
+						"##############"}, 2, 2),
 
 		layout15(new String[]
 					   {"##############",
@@ -407,7 +405,7 @@ public class Layouts {
 						"#M......#####.#",
 						"#..M....#W.#..#",
 						"#T.....^#../.p#",
-						"###############"}, 1, 5),
+						"###############"}, 13, 2),
 
 		layout24(new String[]
 					   {"############",

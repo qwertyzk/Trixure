@@ -6,33 +6,33 @@ import logic.items.Item;
 
 import java.util.Random;
 
-public class Shop extends MapObject {
-
+public class Shop extends MapObject
+{
     public static final int SHOP_SIZE = 3;
-    int napiwek;
-    private Item[] shopItems;
+    int tip;
+    private final Item[] shopItems;
 
-
-    private static Random randomizer;
-    public Shop(String name, int posX, int posY, int napiwek)
+    public Shop(int posX, int posY, Random randomizer, int tip)
     {
-
-        super(name, posX, posY);
-        randomizer = new Random();
-        this.napiwek = Math.abs(randomizer.nextInt()) % napiwek;
-
+        super("villager", posX, posY, false);
+        this.tip = Math.abs(randomizer.nextInt()) % tip;
         this.shopItems = new Item[SHOP_SIZE];
 
-        for(int i=0;i<SHOP_SIZE;i++)
+        Item item = null;
+        for(int i = 0 ; i < SHOP_SIZE; i++)
         {
-            Item item = Items.Consumable.randomItem(randomizer.nextInt());
-            item.setPrice(item.getPrice() + this.napiwek);
+            switch (randomizer.nextInt(3)) {
+                case 0 -> item = Items.Weapons.randomWeapon(randomizer.nextInt());
+                case 1 -> item = Items.Armors.randomArmor(randomizer.nextInt());
+                case 2 -> item = Items.Consumable.randomItem(randomizer.nextInt());
+            }
+            item.setPrice(item.getPrice() + this.tip);
             this.shopItems[i] = item;
-
         }
     }
 
-    public Item getShopItem(int index) {
+    public Item getShopItem(int index)
+    {
         try {
             return shopItems[index];
         } catch(ArrayIndexOutOfBoundsException e) {
@@ -40,14 +40,12 @@ public class Shop extends MapObject {
         }
     }
 
-    public void removeItem(int index) {
+    public void removeItem(int index)
+    {
         try {
             this.shopItems[index] = null;
         } catch(ArrayIndexOutOfBoundsException e) {
-            return;
+            System.out.println("\n[Shop]: ArrayIndexOutOfBoundsException\n");
         }
     }
-
-
-
 }

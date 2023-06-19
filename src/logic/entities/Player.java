@@ -6,22 +6,20 @@ import logic.items.Weapon;
 import logic.level.Shop;
 import resources.Items;
 
-public class Player extends Entity {
-
+public class Player extends Entity
+{
 	public static final int INVENTORY_SIZE = 3;
-	
-	private Item[] inventory;
+	private final Item[] inventory;
 	private boolean inventoryOpen;
 	private boolean shopOpen;
 	private Shop currentShop;
-
 	private Weapon weaponEquipped;
 	private Armor armorEquipped;
-
 	private int gold;
 	private int floors;
 	
-	public Player(int posX, int posY) {
+	public Player(int posX, int posY)
+	{
 		super("player", posX, posY, 20);
 		this.inventory = new Item[INVENTORY_SIZE];
 		this.inventoryOpen = false;
@@ -35,29 +33,30 @@ public class Player extends Entity {
 		this.currentShop = null;
 	}
 
-	//bierze item do inv
-	public boolean giveItem(Item item) {
-		for(int i=0;i<INVENTORY_SIZE;i++) {
-			if(this.inventory[i] == null) {
+	public boolean giveItem(Item item)
+	{
+		for(int i = 0; i < INVENTORY_SIZE; i++)
+		{
+			if(this.inventory[i] == null)
+			{
 				this.inventory[i] = item;
 				return true;
 			}
 		}
 		return false;
 	}
-	
-	/**Removes an item from the player's inventory
-	 * @param index - Inventory slot
-	 */
-	public void removeItem(int index) {
+
+	public void removeItem(int index)
+	{
 		try {
 			this.inventory[index] = null;
 		} catch(ArrayIndexOutOfBoundsException e) {
-			return;
+			System.out.println("\n[Player]: ArrayIndexOutOfBoundsException\n");
 		}
 	}
 	
-	public Item getInventoryItem(int index) {
+	public Item getInventoryItem(int index)
+	{
 		try {
 			return inventory[index];
 		} catch(ArrayIndexOutOfBoundsException e) {
@@ -85,6 +84,7 @@ public class Player extends Entity {
 	{
 		this.currentShop = shop;
 	}
+
 	public boolean isShopOpen() {
 		return shopOpen;
 	}
@@ -122,22 +122,22 @@ public class Player extends Entity {
 		this.defence += amount;
 	}
 
-	
-	@Override
-	public int getStrength() {
+	public int getStrength()
+	{
 		int str = super.getStrength();
 		if(this.weaponEquipped != null) str += this.weaponEquipped.getDamage();
 		return str;
 	}
-	
-	@Override
-	public int getDefence() {
+
+	public int getDefence()
+	{
 		int def = super.getDefence();
 		if(this.armorEquipped != null) def += this.armorEquipped.getDefence();
 		return def;
 	}
 	
-	public void equipWeapon(Weapon weapon) {
+	public void equipWeapon(Weapon weapon)
+	{
 		this.weaponEquipped = new Weapon(weapon.getName(), weapon.getDisplayName(), weapon.getDamage(), weapon.getDurability(), weapon.getPrice());
 	}
 	
@@ -153,5 +153,4 @@ public class Player extends Entity {
 	public Armor getArmor() {
 		return this.armorEquipped;
 	}
-
 }

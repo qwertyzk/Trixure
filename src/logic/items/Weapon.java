@@ -2,7 +2,7 @@ package logic.items;
 
 public class Weapon extends Equipment
 {
-	private int damage;
+	private final int damage;
 
 	public Weapon(String name, String displayName, int damage, int durability, int price)
 	{
@@ -25,4 +25,3 @@ public class Weapon extends Equipment
 		return 0;
 	}
 }
-

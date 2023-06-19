@@ -11,7 +11,7 @@ public abstract class Entity extends MapObject
 	
 	public Entity(String name, int posX, int posY, int health)
 	{
-		super(name, posX, posY);
+		super(name, posX, posY, false);
 		this.maxHealth = health;
 		this.health = health;
 	}
@@ -49,5 +49,4 @@ public abstract class Entity extends MapObject
 	public int getDefence() {
 		return defence;
 	}
-
 }

@@ -2,9 +2,10 @@
 import gui.Window;
 import logic.GameLogic;
 
-public class Main {
-
-	public static void main(String[] args) {
+public class Main
+{
+	public static void main(String[] args)
+	{
 		try {
 			
 			System.out.println("[Main]: Starting...");

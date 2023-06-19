@@ -1,6 +1,5 @@
 package logic;
 
-import java.awt.*;
 import java.util.Random;
 
 import javax.swing.Timer;
@@ -16,14 +15,14 @@ import logic.level.*;
 import logic.text.MessageBox;
 import resources.Items;
 import resources.Textures;
-import  gui.Window;
 
 
-public class GameLogic {
+public class GameLogic
+{
 	private static Timer timer;
 	private static Random randomizer;
 	private static Player player;
-	private static Tower tower;
+	private static Dungeon tower;
 	private static Room currentRoom;
 	private static Monster[] activeMonsters;
 	private static MessageBox messageBox;
@@ -41,8 +40,7 @@ public class GameLogic {
 	
 	private static void init() {
 		randomizer = new Random();
-
-		tower = new Tower(randomizer);
+		tower = new Dungeon(randomizer);
 		currentRoom = tower.getRoom(0);
 		player = new Player( 2, 8);
 		activeMonsters = currentRoom.getMonsters();
@@ -91,7 +89,6 @@ public class GameLogic {
 			break;
 		}
 		moveMonsters();
-		
 		checkIfPlayerDied();
 	}
 
@@ -113,7 +110,7 @@ public class GameLogic {
 			for(int i=0; i<4; ++i)
 			{
 				MapObject obiekt = currentRoom.getTileAt(player.getPosX()+dx[i], player.getPosY()+dy[i]);
-				if(currentRoom.getTileAt(player.getPosX()+dx[i], player.getPosY()+dy[i]).getName() =="wiesniak" ) {
+				if(currentRoom.getTileAt(player.getPosX()+dx[i], player.getPosY()+dy[i]).getName() == "villager" ) {
 					player.setShopOpen(!player.isShopOpen());
 					player.chooseShop((Shop) obiekt);
 				}

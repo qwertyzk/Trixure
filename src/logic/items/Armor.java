@@ -2,7 +2,7 @@ package logic.items;
 
 public class Armor extends Equipment
 {
-	private int defence;
+	private final int defence;
 
 	public Armor(String name, String displayName, int defence, int durability, int price)
 	{

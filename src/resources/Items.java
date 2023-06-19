@@ -3,29 +3,26 @@ package resources;
 import logic.items.Armor;
 import logic.items.Item;
 import logic.items.Weapon;
-import logic.level.Room;
 
-import java.util.Random;
-
-public class Items {
-
+public class Items
+{
 	private static final int NUMBER_OF_CONSUMABLES = 6;
 	private static final int NUMBER_OF_WEAPONS = 5;
 	private static final int NUMBER_OF_ARMORS = 5;
 
 	public enum Consumable
 	{
-		HP_POTION("hp_potion", "Health potion", "Restores 10 HP", 10),
-		MAX_POTION("max_potion", "Max Potion", "Increases max HP by 5", 10),
-		STRENGTH_POTION("str_potion", "Strength Potion", "Increases Strength by 3", 10 ),
-		DEFENCE_POTION("def_potion", "Defence Potion", "Increases Defence by 3", 10),
-		MYSTERIOUS_POTION("myst_potion", "Mysterious Potion", "The effect remains unknown...", 10),
-		KEY("key", "Key", "Can be used once to open a locked door", 10);
+		HP_POTION("hp_potion", "Health potion", "Restores 10 HP", 100),
+		MAX_POTION("max_potion", "Max Potion", "Increases max HP by 5", 200),
+		STRENGTH_POTION("str_potion", "Strength Potion", "Increases Strength by 3", 150),
+		DEFENCE_POTION("def_potion", "Defence Potion", "Increases Defence by 3", 150),
+		MYSTERIOUS_POTION("myst_potion", "Mysterious Potion", "The effect remains unknown...", 100),
+		KEY("key", "Key", "Can be used to open a locked door", 150);
 
-		private String name;
-		private String displayName;
-		private String description;
-		private int price;
+		private final String name;
+		private final String displayName;
+		private final String description;
+		private final int price;
 
 		Consumable(String name, String displayName, String description, int price)
 		{
@@ -44,22 +41,23 @@ public class Items {
 
 		public Item toItem()
 		{
-			return new Item(name, displayName, description,price);
+			return new Item(name, displayName, description, price);
 		}
 	}
 
 	public enum Weapons
 	{
-		SHORT_SWORD("short_sword", "Short Sword", 5, 10,3),
-		LONG_SWORD("long_sword", "Long Sword", 7, 20,3),
-		SCYTHE("scythe", "Scythe", 10, 10,3),
-		CHAKRAM("chakram", "Chakram", 8, 12,3),
-		AXE("axe", "Axe", 12, 8,3);
-		private String name;
-		private String displayName;
-		private int damage;
-		private int durability;
-		private int price;
+		SHORT_SWORD("short_sword", "Short Sword", 4, 10,50),
+		DAGGER("dagger", "Dagger", 8, 12,100),
+		LONG_SWORD("long_sword", "Long Sword", 12, 15,150),
+		AXE("axe", "Axe", 15, 20,200),
+		DIAMOND_SWORD("diamond_sword", "Diamond Sword", 20, 30,250);
+
+		private final String name;
+		private final String displayName;
+		private final int damage;
+		private final int durability;
+		private final int price;
 
 		Weapons(String name, String displayName, int damage, int durability, int price)
 		{
@@ -79,22 +77,23 @@ public class Items {
 
 		public Weapon toWeapon()
 		{
-			return new Weapon(name, displayName, damage, durability,price);
+			return new Weapon(name, displayName, damage, durability, price);
 		}
 	}
 
 	public enum Armors
 	{
-		LIGHT_ARMOR("light_armor", "Light Armor", 4, 10, 3),
-		HEAVY_ARMOR("heavy_armor", "Heavy Armor", 7, 20,3),
-		THORNMAIL("thornmail", "Thornmail", 10, 10,3),
-		PLATED_ARMOR("plated_armor", "Plated Armor", 8, 15,3),
-		GLASS_ARMOR("glass_armor", "Glass Armor", 12, 7,3);
-		private String name;
-		private String displayName;
-		private int defence;
-		private int durability;
-		private int price;
+		LIGHT_ARMOR("light_armor", "Light Armor", 5, 10, 50),
+		GLASS_ARMOR("glass_armor", "Glass Armor", 8, 12,100),
+		HEAVY_ARMOR("heavy_armor", "Heavy Armor", 12, 15,150),
+		PLATED_ARMOR("plated_armor", "Plated Armor", 15, 20,200),
+		DIAMOND_ARMOR("diamond_armor", "Diamond Armor", 20, 30,250);
+
+		private final String name;
+		private final String displayName;
+		private final int defence;
+		private final int durability;
+		private final int price;
 
 		Armors(String name, String displayName, int defence, int durability, int price)
 		{
@@ -114,7 +113,7 @@ public class Items {
 
 		public Armor toArmor()
 		{
-			return new Armor(name, displayName, defence, durability,price);
+			return new Armor(name, displayName, defence, durability, price);
 		}
 	}
 }

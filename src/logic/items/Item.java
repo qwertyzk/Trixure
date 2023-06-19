@@ -38,4 +38,3 @@ public class Item
 		this.price = price;
 	}
 }
-
