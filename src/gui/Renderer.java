@@ -2,6 +2,11 @@ package gui;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Timer;
+import java.util.concurrent.TimeUnit;
 
 import logic.entities.Monster;
 import logic.entities.Player;
@@ -34,7 +39,7 @@ public class Renderer {
 	public static final Rectangle weaponSlot = new Rectangle(302, 224, 340, 60);
 	public static final Rectangle armorSlot = new Rectangle(302, 292, 340, 60);
 
-	public static final Rectangle messageBox = new Rectangle(200, 600, 600, 50);
+	public static final Rectangle messageBox = new Rectangle(0, Window.HEIGHT-150, 1000, 150);
 
 	public Renderer() {
 		this.zoomLevel = 2;
@@ -230,24 +235,20 @@ public class Renderer {
 	}
 
 
+
+
 	public void renderMessageBox(MessageBox message, Graphics graphics) {
-		if(message.getMessage() == null || message.getTime() <= 0)
-			return;
-		
-		graphics.setColor(Color.BLACK);
-		graphics.fillRoundRect(messageBox.x, messageBox.y, messageBox.width, messageBox.height, 10, 10);
-		graphics.setColor(Color.WHITE);
-		graphics.drawRoundRect(messageBox.x, messageBox.y, messageBox.width, messageBox.height, 10, 10);
+
+		List<String> list = message.getMessage();
+		if (list == null) return;
 
 		graphics.setFont(new Font("Dialog", Font.PLAIN, 20));
-		
-		//Center text
-		try {
-			int textPosX = messageBox.x + (messageBox.width - graphics.getFontMetrics().stringWidth(message.getMessage())) / 2;
-			int textPosY = messageBox.y + ((messageBox.height - graphics.getFontMetrics().getHeight()) / 2) + graphics.getFontMetrics().getAscent();		
-			graphics.drawString(message.getMessage(), textPosX, textPosY);
-		} catch(NullPointerException e) {
-			return;
+
+		for(int i=0; i<MessageBox.LIST_SIZE; ++i)
+		{
+			if(i< list.size())
+
+				graphics.drawString(list.get(i), 7, 700+20*i);
 		}
 	}
 

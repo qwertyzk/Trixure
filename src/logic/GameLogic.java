@@ -47,18 +47,18 @@ public class GameLogic
 		messageBox = new MessageBox();
 		
 		onTitleScreen = true;
+		onWinScreen = false;
 	}
 
 	public static void movePlayer(int dirX, int dirY) {
 		onTitleScreen = false;
-		onWinScreen = false;
 
 
 		if(player.isInventoryOpen() || player.isShopOpen())
 			return;
 
 		
-		if(checkIfPlayerDied())
+		if(checkIfPlayerDied() || onWinScreen == true)
 			return;
 		
 		if(detectMonsterToFight(dirX, dirY)) {
@@ -75,17 +75,20 @@ public class GameLogic
 			currentRoom = tower.getNextRoom();
 			player.setPosition(currentRoom.getStartPosX(), currentRoom.getStartPosY());
 			activeMonsters = currentRoom.getMonsters();
-			messageBox.addMessage("You went into a new floor!", 1);
+			messageBox.addMessage("You went into a new floor!");
 			player.addFloorCleared();
 			break;
 		case "trap":
 			player.damage(randomizer.nextInt(2)+1);
 			player.setPosition(player.getPosX()+dirX, player.getPosY()+dirY);
 			currentRoom.disarmTrap(player.getPosX(), player.getPosY());
-			messageBox.addMessage("You ran into a trap and you took damage!", 1);
+			messageBox.addMessage("You ran into a trap and you took damage!");
 			break;
 		case "locked_door":
-			messageBox.addMessage("You need a key to open this door...", 1);
+			messageBox.addMessage("You need a key to open this door...");
+			break;
+		case "dragon":
+			onWinScreen = true;
 			break;
 		}
 		moveMonsters();
@@ -133,61 +136,61 @@ public class GameLogic
 		case "hp_potion_tile":
 			if(player.giveItem(Items.Consumable.HP_POTION.toItem())) {
 				currentRoom.removeCollectible(itemPosX, itemPosY);
-				messageBox.addMessage("You picked up a health potion!", 1);
+				messageBox.addMessage("You picked up a health potion!");
 			}
 			else {
-				messageBox.addMessage("Your inventory is full!", 1);
+				messageBox.addMessage("Your inventory is full!");
 			}
 			break;
 		case "max_potion_tile":
 			if(player.giveItem(Items.Consumable.MAX_POTION.toItem())) {
 				currentRoom.removeCollectible(itemPosX, itemPosY);
-				messageBox.addMessage("You picked up a max potion!", 1);
+				messageBox.addMessage("You picked up a max potion!");
 			}
 			else {
-				messageBox.addMessage("Your inventory is full!", 1);
+				messageBox.addMessage("Your inventory is full!");
 			}
 			break;
 		case "str_potion_tile":
 			if(player.giveItem(Items.Consumable.STRENGTH_POTION.toItem())) {
 				currentRoom.removeCollectible(itemPosX, itemPosY);
-				messageBox.addMessage("You picked up a strength potion!", 1);
+				messageBox.addMessage("You picked up a strength potion!");
 			}
 			else {
-				messageBox.addMessage("Your inventory is full!", 1);
+				messageBox.addMessage("Your inventory is full!");
 			}
 			break;
 		case "def_potion_tile":
 			if(player.giveItem(Items.Consumable.DEFENCE_POTION.toItem())) {
 				currentRoom.removeCollectible(itemPosX, itemPosY);
-				messageBox.addMessage("You picked up a defence potion!", 1);
+				messageBox.addMessage("You picked up a defence potion!");
 			}
 			else {
-				messageBox.addMessage("Your inventory is full!", 1);
+				messageBox.addMessage("Your inventory is full!");
 			}
 			break;
 		case "myst_potion_tile":
 			if(player.giveItem(Items.Consumable.MYSTERIOUS_POTION.toItem())) {
 				currentRoom.removeCollectible(itemPosX, itemPosY);
-				messageBox.addMessage("You picked up a mysterious potion!", 1);
+				messageBox.addMessage("You picked up a mysterious potion!");
 			}
 			else {
-				messageBox.addMessage("Your inventory is full!", 1);
+				messageBox.addMessage("Your inventory is full!");
 			}
 			break;
 		case "gold_bag":
 			int g = randomizer.nextInt(7) + 5;
 			player.giveGold(g);
 			currentRoom.removeCollectible(itemPosX, itemPosY);
-			messageBox.addMessage("You picked up a bag containing "+g+" gold!", 1);
+			messageBox.addMessage("You picked up a bag containing "+g+" gold!");
 			break;
 		case "key_tile":
 			if(player.giveItem(Items.Consumable.KEY.toItem())) {
 				currentRoom.removeCollectible(itemPosX, itemPosY);
-				messageBox.addMessage("You picked up a key!", 1);
+				messageBox.addMessage("You picked up a key!");
 			}
 			else {
-				messageBox.addMessage("Your inventory is full!", 1);
+				messageBox.addMessage("Your inventory is full!");
 			}
 			break;
 		case "chest":
@@ -196,9 +199,9 @@ public class GameLogic
 			{
 				player.giveGold(c.getGold());
 				currentRoom.removeCollectible(itemPosX, itemPosY);
-				messageBox.addMessage("You found a new item and some gold!", 1);
+				messageBox.addMessage("You found a new item and some gold!");
 			}
-			else messageBox.addMessage("Your inventory is full", 1);
+			else messageBox.addMessage("Your inventory is full");
 		}
 	}
 
@@ -236,7 +239,7 @@ public class GameLogic
 			}
 		}
 		
-		if(player.getHealth() <= 0) {
+		if(player.getHealth() <= 0 || onWinScreen == true) {
 			init();
 		}
 
@@ -252,15 +255,15 @@ public class GameLogic
 			{
 				player.takeGold( item.getPrice());
 				sklep.removeItem(i);
-				messageBox.addMessage("You bought new item!", 1);
+				messageBox.addMessage("You bought new item!");
 			}
 			else
 			{
-				messageBox.addMessage("Your inventory is full!", 1);
+				messageBox.addMessage("Your inventory is full!");
 			}
 		}
 		else {
-			messageBox.addMessage("You don't have enough money.", 1);
+			messageBox.addMessage("You don't have enough money.");
 		}
 
 	}
@@ -281,49 +284,49 @@ public class GameLogic
 
 			if(item.getName() == "hp_potion") {
 				player.heal(10);
-				messageBox.addMessage("You drank a red potion and you recovered health!", 1);
+				messageBox.addMessage("You drank a red potion and you recovered health!");
 			}
 			else if(item.getName() == "max_potion") {
 				player.increaseHealth(5);
-				messageBox.addMessage("You drank a max potion and increased max health!", 1);
+				messageBox.addMessage("You drank a max potion and increased max health!");
 			}
 			else if(item.getName() == "str_potion") {
 				player.increaseStrength(3);
-				messageBox.addMessage("You drank a strength potion and increased strength!", 1);
+				messageBox.addMessage("You drank a strength potion and increased strength!");
 			}
 			else if(item.getName() == "def_potion") {
 				player.increaseDefence(3);
-				messageBox.addMessage("You drank a strength potion and increased strength!", 1);
+				messageBox.addMessage("You drank a strength potion and increased strength!");
 			}
 			else if(item.getName() == "myst_potion") {
 				switch (randomizer.nextInt(7)) {
 					case 0:
 						player.heal(15);
-						messageBox.addMessage("You drank a potion and you recovered health!", 1);
+						messageBox.addMessage("You drank a potion and you recovered health!");
 						break;
 					case 1:
 						player.increaseHealth(7);
-						messageBox.addMessage("You drank a potion and increased max health!", 1);
+						messageBox.addMessage("You drank a potion and increased max health!");
 						break;
 					case 2:
 						player.increaseStrength(4);
-						messageBox.addMessage("You drank a potion and increased strength!", 1);
+						messageBox.addMessage("You drank a potion and increased strength!");
 						break;
 					case 3:
 						player.increaseDefence(4);
-						messageBox.addMessage("You drank a potion and increased strength!", 1);
+						messageBox.addMessage("You drank a potion and increased strength!");
 						break;
 					case 4:
 						player.damage(5);
-						messageBox.addMessage("You drank a potion, but it was stale...", 1);
+						messageBox.addMessage("You drank a potion, but it was stale...");
 						break;
 					case 5:
 						player.damage(10);
-						messageBox.addMessage("You drank a potion, but it didn't taste well...", 1);
+						messageBox.addMessage("You drank a potion, but it didn't taste well...");
 						break;
 					case 6:
 						player.damage(15);
-						messageBox.addMessage("You drank a potion, but it was poisonous...", 1);
+						messageBox.addMessage("You drank a potion, but it was poisonous...");
 				}
 			}
 			else if(item.getName() == "key") {
@@ -340,10 +343,10 @@ public class GameLogic
 					currentRoom.openDoor(player.getPosX(), player.getPosY()-1);
 				}
 				else {
-					messageBox.addMessage("You can't use this item this way...", 1);
+					messageBox.addMessage("You can't use this item this way...");
 					return;
 				}
-				messageBox.addMessage("You used the key to open the door!", 1);
+				messageBox.addMessage("You used the key to open the door!");
 			}
 		}
 		player.removeItem(index);
@@ -361,7 +364,7 @@ public class GameLogic
 						return;
 					}
 					else if(monster.getPosX()+1 == player.getPosX() && monster.getPosY() == player.getPosY()) {
-						messageBox.addMessage("A monster attacked you!", 1);
+						messageBox.addMessage("A monster attacked you!");
 						player.getArmor().reduceDurability();
 						player.damage(monster.getStrength() - player.getDefence()/3);
 						break;
@@ -375,7 +378,7 @@ public class GameLogic
 						return;
 					}
 					else if(monster.getPosX()-1 == player.getPosX() && monster.getPosY() == player.getPosY()) {
-						messageBox.addMessage("A monster attacked you!", 1);
+						messageBox.addMessage("A monster attacked you!");
 						player.getArmor().reduceDurability();
 						player.damage(monster.getStrength() - player.getDefence()/3);
 						break;
@@ -389,7 +392,7 @@ public class GameLogic
 						return;
 					}
 					else if(monster.getPosX() == player.getPosX() && monster.getPosY()+1 == player.getPosY()) {
-						messageBox.addMessage("A monster attacked you!", 1);
+						messageBox.addMessage("A monster attacked you!");
 						player.getArmor().reduceDurability();
 						player.damage(monster.getStrength() - player.getDefence()/3);
 						break;
@@ -403,7 +406,7 @@ public class GameLogic
 						return;
 					}
 					else if(monster.getPosX() == player.getPosX() && monster.getPosY()-1 == player.getPosY()) {
-						messageBox.addMessage("A monster attacked you!", 1);
+						messageBox.addMessage("A monster attacked you!");
 						player.getArmor().reduceDurability();
 						player.damage(monster.getStrength() - player.getDefence()/3);
 						break;
@@ -418,7 +421,7 @@ public class GameLogic
 				
 				if(angCoeff>-1 && angCoeff<1 && player.getPosX()>monster.getPosX()) {
 					if(monster.getPosX()+1 == player.getPosX() && monster.getPosY() == player.getPosY()) {
-						messageBox.addMessage("A monster attacked you!", 1);
+						messageBox.addMessage("A monster attacked you!");
 						player.getArmor().reduceDurability();
 						player.damage(monster.getStrength() - player.getDefence()/3);
 					}
@@ -428,7 +431,7 @@ public class GameLogic
 				}
 				else if(angCoeff>-1 && angCoeff<1 && player.getPosX()<monster.getPosX()) {
 					if(monster.getPosX()-1 == player.getPosX() && monster.getPosY() == player.getPosY()) {
-						messageBox.addMessage("A monster attacked you!", 1);
+						messageBox.addMessage("A monster attacked you!");
 						player.getArmor().reduceDurability();
 						player.damage(monster.getStrength() - player.getDefence()/3);
 					}
@@ -438,7 +441,7 @@ public class GameLogic
 				}
 				else if((angCoeff>1 || angCoeff<-1) && player.getPosY()>monster.getPosY()) {
 					if(monster.getPosX() == player.getPosX() && monster.getPosY()+1 == player.getPosY()) {
-						messageBox.addMessage("A monster attacked you!", 1);
+						messageBox.addMessage("A monster attacked you!");
 						player.getArmor().reduceDurability();
 						player.damage(monster.getStrength() - player.getDefence()/3);
 					}
@@ -448,7 +451,7 @@ public class GameLogic
 				}
 				else if((angCoeff>1 || angCoeff<-1) && player.getPosY()<monster.getPosY()) {
 					if(monster.getPosX() == player.getPosX() && monster.getPosY()-1 == player.getPosY()) {
-						messageBox.addMessage("A monster attacked you!", 1);
+						messageBox.addMessage("A monster attacked you!");
 						player.getArmor().reduceDurability();
 						player.damage(monster.getStrength() - player.getDefence()/3);
 
@@ -473,10 +476,10 @@ public class GameLogic
 				int g = randomizer.nextInt(8) + 7;
 				player.giveGold(g);
 				player.getWeapon().reduceDurability();
-				messageBox.addMessage("You killed a monster and it dropped "+g+" gold!", 1);
+				messageBox.addMessage("You killed a monster and it dropped "+g+" gold!");
 			}
 			else { //Monster is still alive after attack
-				messageBox.addMessage("You attacked the monster and he attacked you back!", 1);
+				messageBox.addMessage("You attacked the monster and he attacked you back!");
 				player.getArmor().reduceDurability();
 				player.getWeapon().reduceDurability();
 				player.damage(fight.getStrength() - player.getDefence()/3);
@@ -489,7 +492,7 @@ public class GameLogic
 	
 	private static boolean checkIfPlayerDied() {
 		if(player.getHealth() <= 0) {
-			messageBox.addMessage("You perished in the dungeon!", 6);
+			messageBox.addMessage("You perished in the dungeon!");
 			return true;
 		}
 		return false;

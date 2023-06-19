@@ -153,4 +153,33 @@ public class Player extends Entity
 	public Armor getArmor() {
 		return this.armorEquipped;
 	}
+
+
+	public boolean damageArmor() {
+		if(this.armorEquipped == null) {
+			return false;
+		}
+		else {
+			this.armorEquipped.reduceDurability();
+		}
+		if(this.armorEquipped.getDurability() <= 0) {
+			this.armorEquipped = null;
+			return true;
+		}
+		return false;
+	}
+
+	public boolean damageWeapon() {
+		if(this.weaponEquipped == null) {
+			return false;
+		}
+		else {
+			this.weaponEquipped.reduceDurability();
+		}
+		if(this.weaponEquipped.getDurability() <= 0) {
+			this.weaponEquipped = null;
+			return true;
+		}
+		return false;
+	}
 }
