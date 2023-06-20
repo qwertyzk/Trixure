@@ -8,9 +8,9 @@ import resources.Layouts;
 
 public class Dungeon
 {
-	private final static int EASY_LEVELS = 0;
-	private final static int MEDIUM_LEVELS = 0;
-	private final static int HARD_LEVELS = 0;
+	private final static int EASY_LEVELS = 5;
+	private final static int MEDIUM_LEVELS = 4;
+	private final static int HARD_LEVELS = 4;
 	private final List<Room> rooms;
 	private int roomAt;
 

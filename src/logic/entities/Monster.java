@@ -22,13 +22,13 @@ public class Monster extends Entity
 		BAT("bat", 10, 5, 3, false),
 		SCORPION("scorpion", 9, 3, 4, false),
 		GHOST("ghost", 8, 3, 2, true),
-		HARPY("harpy", 10, 3, 4, false),
-		MERMAID("mermaid" , 12, 6, 6, false),
-		APPARITION("apparition", 10, 7, 4, true),
-		GRYPHON("gryphon", 20, 6, 8, false),
-		SPARTAN("spartan", 15, 12, 12, false),
-		SKELETON_DRAKE("skeleton_drake", 25, 10, 10, false),
-		CTHULHU_EYE("cthulhu_eye", 13, 11, 8, true);
+		HARPY("harpy", 10, 4, 4, false),
+		MERMAID("mermaid" , 12, 10, 10, false),
+		APPARITION("apparition", 10, 12, 7, true),
+		GRYPHON("gryphon", 21, 9, 13, false),
+		SPARTAN("spartan", 25, 15, 25, false),
+		SKELETON_DRAKE("skeleton_drake", 40, 15, 15, false),
+		CTHULHU_EYE("cthulhu_eye", 21, 18, 12, true);
 		
 		private final String name;
 		private final int hp;

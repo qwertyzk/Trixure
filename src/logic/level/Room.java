@@ -11,6 +11,7 @@ public class Room
 	private final int startPosX;
 	private final int startPosY;
 	private final List<Monster> monsters;
+	private final int difficulty;
 
 	public Room(String[] levelData, int startPosX, int startPosY, Random randomizer, int difficulty) {
 		room = new MapObject[levelData.length][];
@@ -18,6 +19,7 @@ public class Room
 
 		this.startPosX = startPosX;
 		this.startPosY = startPosY;
+		this.difficulty = difficulty;
 		
 		for(int y = 0; y < levelData.length; y++) {
 			room[y] = new MapObject[levelData[y].length()];
@@ -137,5 +139,9 @@ public class Room
 				return true;
 		}
 		return false;
+	}
+
+	public int getDifficulty() {
+		return difficulty;
 	}
 }

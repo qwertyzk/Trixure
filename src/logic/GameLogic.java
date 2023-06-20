@@ -79,7 +79,11 @@ public class GameLogic
 			player.addFloorCleared();
 			break;
 		case "trap":
-			player.damage(randomizer.nextInt(2)+1);
+			switch (currentRoom.getDifficulty()){
+				case 1 -> player.damage(randomizer.nextInt(3)+2);
+				case 2 -> player.damage(randomizer.nextInt(8)+5);
+				case 3 -> player.damage(randomizer.nextInt(17)+8);
+			}
 			player.setPosition(player.getPosX()+dirX, player.getPosY()+dirY);
 			currentRoom.disarmTrap(player.getPosX(), player.getPosY());
 			messageBox.addMessage("You ran into a trap and you took damage!");
@@ -299,7 +303,7 @@ public class GameLogic
 				messageBox.addMessage("You drank a strength potion and increased strength!");
 			}
 			else if(item.getName() == "myst_potion") {
-				switch (randomizer.nextInt(7)) {
+				switch (randomizer.nextInt(8)) {
 					case 0:
 						player.heal(15);
 						messageBox.addMessage("You drank a potion and you recovered health!");
@@ -317,16 +321,19 @@ public class GameLogic
 						messageBox.addMessage("You drank a potion and increased strength!");
 						break;
 					case 4:
-						player.damage(5);
-						messageBox.addMessage("You drank a potion, but it was stale...");
+						player.damage(10);
+						messageBox.addMessage("You drank a potion, but it hurt you...");
 						break;
 					case 5:
-						player.damage(10);
-						messageBox.addMessage("You drank a potion, but it didn't taste well...");
+						player.increaseHealth(-5);
+						messageBox.addMessage("You drank a potion, but decreased max health...");
 						break;
 					case 6:
-						player.damage(15);
-						messageBox.addMessage("You drank a potion, but it was poisonous...");
+						player.increaseStrength(-3);
+						messageBox.addMessage("You drank a potion, but decreased strength...");
+					case 7:
+						player.increaseDefence(-3);
+						messageBox.addMessage("You drank a potion, but decreased defence...");
 				}
 			}
 			else if(item.getName() == "key") {
