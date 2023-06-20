@@ -17,6 +17,7 @@ public class Player extends Entity
 	private Armor armorEquipped;
 	private int gold;
 	private int floors;
+	private int monsters_killed;
 	
 	public Player(int posX, int posY)
 	{
@@ -152,6 +153,11 @@ public class Player extends Entity
 
 	public Armor getArmor() {
 		return this.armorEquipped;
+	}
+
+	public void kill_count()
+	{
+		this.monsters_killed++;
 	}
 
 

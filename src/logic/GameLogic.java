@@ -331,9 +331,11 @@ public class GameLogic
 					case 6:
 						player.increaseStrength(-3);
 						messageBox.addMessage("You drank a potion, but decreased strength...");
+						break;
 					case 7:
 						player.increaseDefence(-3);
 						messageBox.addMessage("You drank a potion, but decreased defence...");
+						break;
 				}
 			}
 			else if(item.getName() == "key") {
@@ -375,8 +377,9 @@ public class GameLogic
 						player.getArmor().reduceDurability();
 						player.damage(monster.getStrength() - player.getDefence()/3);
 						break;
-					}	
-					if(getTileInFrontOfEntity(monster, 1, 0).getName() == "floor") {
+					}
+					if(getTileInFrontOfEntity(monster, 1, 0).getName() == "floor" ||
+							getTileInFrontOfEntity(monster, 1, 0).getName() == "blood") {
 						monster.setPosition(monster.getPosX()+1, monster.getPosY());
 						break;
 					}
@@ -390,7 +393,8 @@ public class GameLogic
 						player.damage(monster.getStrength() - player.getDefence()/3);
 						break;
 					}	
-					if(getTileInFrontOfEntity(monster, -1, 0).getName() == "floor") {
+					if(getTileInFrontOfEntity(monster, -1, 0).getName() == "floor" ||
+							getTileInFrontOfEntity(monster, -1, 0).getName() == "blood") {
 						monster.setPosition(monster.getPosX()-1, monster.getPosY());
 						break;
 					}
@@ -404,7 +408,8 @@ public class GameLogic
 						player.damage(monster.getStrength() - player.getDefence()/3);
 						break;
 					}	
-					if(getTileInFrontOfEntity(monster, 0, 1).getName() == "floor") {
+					if(getTileInFrontOfEntity(monster, 0, 1).getName() == "floor" ||
+							getTileInFrontOfEntity(monster, 0, 1).getName() == "blood") {
 						monster.setPosition(monster.getPosX(), monster.getPosY()+1);
 						break;
 					}
@@ -418,7 +423,8 @@ public class GameLogic
 						player.damage(monster.getStrength() - player.getDefence()/3);
 						break;
 					}	
-					if(getTileInFrontOfEntity(monster, 0, -1).getName() == "floor") {
+					if(getTileInFrontOfEntity(monster, 0, -1).getName() == "floor" ||
+							getTileInFrontOfEntity(monster, 0, -1).getName() == "blood") {
 						monster.setPosition(monster.getPosX(), monster.getPosY()-1);
 						break;
 					}
@@ -432,7 +438,8 @@ public class GameLogic
 						player.getArmor().reduceDurability();
 						player.damage(monster.getStrength() - player.getDefence()/3);
 					}
-					else if(getTileInFrontOfEntity(monster, 1, 0).getName() == "floor") {
+					else if(getTileInFrontOfEntity(monster, 1, 0).getName() == "floor" ||
+							getTileInFrontOfEntity(monster, 1, 0).getName() == "blood") {
 						monster.setPosition(monster.getPosX()+1, monster.getPosY());
 					}
 				}
@@ -442,7 +449,8 @@ public class GameLogic
 						player.getArmor().reduceDurability();
 						player.damage(monster.getStrength() - player.getDefence()/3);
 					}
-					else if(getTileInFrontOfEntity(monster, -1, 0).getName() == "floor") {
+					else if(getTileInFrontOfEntity(monster, -1, 0).getName() == "floor" ||
+							getTileInFrontOfEntity(monster, -1, 0).getName() == "blood") {
 						monster.setPosition(monster.getPosX()-1, monster.getPosY());
 					}
 				}
@@ -452,7 +460,8 @@ public class GameLogic
 						player.getArmor().reduceDurability();
 						player.damage(monster.getStrength() - player.getDefence()/3);
 					}
-					else if(getTileInFrontOfEntity(monster, 0, 1).getName() == "floor") {
+					else if(getTileInFrontOfEntity(monster, 0, 1).getName() == "floor" ||
+							getTileInFrontOfEntity(monster, 0, 1).getName() == "blood") {
 						monster.setPosition(monster.getPosX(), monster.getPosY()+1);
 					}
 				}
@@ -463,7 +472,8 @@ public class GameLogic
 						player.damage(monster.getStrength() - player.getDefence()/3);
 
 					}
-					else if(getTileInFrontOfEntity(monster, 0, -1).getName() == "floor") {
+					else if(getTileInFrontOfEntity(monster, 0, -1).getName() == "floor" ||
+							getTileInFrontOfEntity(monster, 0, -1).getName() == "blood") {
 						monster.setPosition(monster.getPosX(), monster.getPosY()-1);
 					}
 				}
@@ -483,6 +493,7 @@ public class GameLogic
 				int g = randomizer.nextInt(8) + 7;
 				player.giveGold(g);
 				player.getWeapon().reduceDurability();
+				player.kill_count();
 				messageBox.addMessage("You killed a monster and it dropped "+g+" gold!");
 			}
 			else { //Monster is still alive after attack
