@@ -11,9 +11,6 @@ public class Window {
 	private static JFrame window;
 	private static Screen screen;
 
-	
-	/**Initializes a JFrame object<br>
-	 * Called at beginning of main*/
 	public static void create() {
 
 		window = new JFrame("Trixure");
@@ -29,10 +26,8 @@ public class Window {
 	}
 
 
-	
-	/**Calls JFrame#setVisible<br>
-	 * Called when initialization is done*/
-	public static void setVisible() {
+	public static void setVisible()
+	{
 		if(window!=null) window.setVisible(true);
 		System.out.println("[Gui][Window]: Window set to visible");
 	}

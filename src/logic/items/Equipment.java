@@ -14,6 +14,12 @@ public abstract class Equipment extends Item
 
     public abstract void reduceDurability();
 
+    public int getTotalDurability() {
+        return totalDurability;
+    }
+
+    public abstract void repair();
+
     public int getDurability() {
         return durability;
     }

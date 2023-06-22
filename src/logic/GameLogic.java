@@ -52,7 +52,7 @@ public class GameLogic
 		onTitleScreen = false;
 
 
-		if(player.isInventoryOpen() || player.isShopOpen())
+		if(player.isInventoryOpen() || player.isShopOpen() || player.isBlacksmithOpen())
 			return;
 
 		
@@ -102,14 +102,14 @@ public class GameLogic
 	}
 	
 	public static void openPlayerInventory() {
-		if(player.isShopOpen())
+		if(player.isShopOpen() || player.isBlacksmithOpen())
 			return;
 
 		if(player.getHealth() > 0)
 			player.setInventoryOpen(!player.isInventoryOpen());
 	}
 
-	public static void openShop() {
+	public static void openNPC() {
 		if(player.isInventoryOpen())
 			return;
 
@@ -125,9 +125,12 @@ public class GameLogic
 					player.setShopOpen(!player.isShopOpen());
 					player.chooseShop((Shop) obiekt);
 				}
+
+				else if(currentRoom.getTileAt(player.getPosX()+dx[i], player.getPosY()+dy[i]).getName() == "blacksmith" ) {
+					player.setBlacksmithOpen(!player.isBlacksmithOpen());
+					player.chooseBlacksmith((NPC) obiekt);
+				}
 			}
-
-
 		}
 	}
 
@@ -246,9 +249,57 @@ public class GameLogic
 				buyItem(player.getCurrentShop(), 2);
 			}
 		}
+
+		if(player.isBlacksmithOpen()) {
+			if (Renderer.blacksmithSlot1.contains(mouseX, mouseY)) {
+				repairItem(player.getCurrentBlacksmith(), 0);
+			} else if (Renderer.blacksmithSlot2.contains(mouseX, mouseY)) {
+				repairItem(player.getCurrentBlacksmith(), 1);
+			}
+		}
 		
 		if(player.getHealth() <= 0 || onWinScreen == true) {
 			init();
+		}
+
+	}
+
+	public static void repairItem(NPC blacksmith, int i)
+	{
+		int durabilityDiff;
+		int price;
+		switch (i) {
+			case 0 -> {
+				durabilityDiff = player.getWeapon().getTotalDurability() - player.getWeapon().getDurability();
+				if (durabilityDiff > 0) {
+
+					if (player.getRepairPriceWeapon() <= player.getGold()) {
+						player.getWeapon().repair();
+						player.giveGold(-player.getRepairPriceWeapon());
+						messageBox.addMessage("You had your weapon repaired!");
+					} else {
+						messageBox.addMessage("You don't have enough money...");
+					}
+
+				} else {
+					messageBox.addMessage("Your weapon is not broken...");
+				}
+			}
+			case 1 -> {
+				durabilityDiff = player.getArmor().getTotalDurability() - player.getArmor().getDurability();
+				if (player.getArmor().getTotalDurability() - player.getArmor().getDurability() > 0) {
+					if (player.getRepairPriceArmor() <= player.getGold()) {
+						player.getArmor().repair();
+						player.giveGold(-player.getRepairPriceArmor());
+						messageBox.addMessage("You had your armor repaired!");
+					} else {
+						messageBox.addMessage("You don't have enough money...");
+					}
+
+				} else {
+					messageBox.addMessage("Your armor is not broken...");
+				}
+			}
 		}
 
 	}
@@ -261,7 +312,7 @@ public class GameLogic
 		{
 			if(player.giveItem(item))
 			{
-				player.takeGold( item.getPrice());
+				player.giveGold( -item.getPrice());
 				sklep.removeItem(i);
 				messageBox.addMessage("You bought new item!");
 			}
@@ -271,7 +322,7 @@ public class GameLogic
 			}
 		}
 		else {
-			messageBox.addMessage("You don't have enough money.");
+			messageBox.addMessage("You don't have enough money...");
 		}
 
 	}

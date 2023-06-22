@@ -19,6 +19,13 @@ public class Weapon extends Equipment
 		}
 	}
 
+	public void repair()
+	{
+		this.durability = this.totalDurability;
+		this.description = "Damage: "+damage+" Durability: "+durability+"/"+totalDurability;
+
+	}
+
 	public int getDamage()
 	{
 		if (durability > 0) return damage;

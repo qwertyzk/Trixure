@@ -1,45 +1,53 @@
 package gui;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.List;
-
-import logic.map_objects.Monster;
-import logic.map_objects.Player;
+import logic.items.Equipment;
 import logic.level.Room;
 import logic.map_objects.MapObject;
+import logic.map_objects.Monster;
+import logic.map_objects.Player;
 import logic.map_objects.Shop;
 import logic.text.MessageBox;
 import resources.Textures;
 
-import javax.swing.ImageIcon;
+import java.util.List;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Renderer {
 
 	private final int zoomLevel;
+
+	//Shop slots
 	public static final Rectangle shopSlot1 = new Rectangle(257, 310, 420, 60);
 	public static final Rectangle shopSlot2 = new Rectangle(257, 379, 420, 60);
 	public static final Rectangle shopSlot3 = new Rectangle(257, 447, 420, 60);
 
+	//Blacksmith slots
+	public static final Rectangle blacksmithSlot1 = new Rectangle(257, 345, 420, 60);
+	public static final Rectangle blacksmithSlot2 = new Rectangle(257, 412, 420, 60);
 
+
+	//Inventory slots
 	public static final Rectangle inventorySlot1 = new Rectangle(302, 382, 340, 60);
 	public static final Rectangle inventorySlot2 = new Rectangle(302, 450, 340, 60);
 	public static final Rectangle inventorySlot3 = new Rectangle(302, 519, 340, 60);
 
+	//Inventory bins
 	public static final Rectangle inventoryBin1 = new Rectangle(650, 382, 60, 60);
 	public static final Rectangle inventoryBin2 = new Rectangle(650, 450, 60, 60);
 	public static final Rectangle inventoryBin3 = new Rectangle(650, 519, 60, 60);
 
+	//Equipment
 	public static final Rectangle weaponSlot = new Rectangle(302, 224, 340, 60);
 	public static final Rectangle armorSlot = new Rectangle(302, 292, 340, 60);
-
-	public static final Rectangle messageBox = new Rectangle(0, Window.HEIGHT-150, 1000, 150);
 
 	public Renderer() {
 		this.zoomLevel = 2;
 	}
 
-	public void renderPlayer(Graphics graphics) {
+	public void renderPlayer(Graphics graphics)
+	{
 		BufferedImage sprite = Textures.getSprite("player");
 		
 		int drawPosX = (Window.WIDTH/2)-(sprite.getWidth()/2)*zoomLevel;
@@ -47,9 +55,12 @@ public class Renderer {
 		graphics.drawImage(sprite, drawPosX, drawPosY, sprite.getWidth()*zoomLevel, sprite.getHeight()*zoomLevel, null);
 	}
 
-	public void renderLevel(Room roomData, Player player, Graphics graphics) {
-		for(int y = 0; y< roomData.getSizeY(); y++) {
-			for(int x = 0; x< roomData.getSizeX(); x++) {
+	public void renderLevel(Room roomData, Player player, Graphics graphics)
+	{
+		for(int y = 0; y < roomData.getSizeY(); y++)
+		{
+			for(int x = 0; x < roomData.getSizeX(); x++)
+			{
 				BufferedImage sprite = Textures.getSprite(roomData.getTileAt(x, y).getName());
 
 				int drawPosX = calculateOffsetX(sprite, roomData.getTileAt(x, y), player);
@@ -60,10 +71,12 @@ public class Renderer {
 		}
 	}
 
-	public void renderMonsters(Monster[] monsters, Player player, Graphics graphics) {
-		
-		for(Monster monster : monsters) {
+	public void renderMonsters(Monster[] monsters, Player player, Graphics graphics)
+	{
+		for(Monster monster : monsters)
+		{
 			BufferedImage sprite = Textures.getSprite(monster.getName());
+
 			int drawPosX = calculateOffsetX(sprite, monster, player);
 			int drawPosY = calculateOffsetY(sprite, monster, player) ;
 
@@ -82,13 +95,12 @@ public class Renderer {
 
 	public void renderStatus(Player player, Graphics2D graphics)
 	{
-		BufferedImage status = Textures.getSprite("status");
-		graphics.drawImage(status, 10, 10, status.getWidth(), status.getHeight(), null);
+		BufferedImage sprite = Textures.getSprite("status");
+		graphics.drawImage(sprite, 10, 10, sprite.getWidth(), sprite.getHeight(), null);
 
 		graphics.setColor(Color.WHITE);
-		graphics.setFont(new Font("Dialog", Font.PLAIN, 30));
-
 		graphics.setFont(new Font("Dialog", Font.PLAIN, 18));
+
 		graphics.drawString("HP: "+player.getHealth()+"/"+player.getMaxHealth(), 30, 90);
 		graphics.drawString("STR: "+player.getStrength(), 30, 120);
 		graphics.drawString("DEF: "+player.getDefence(), 30, 150);
@@ -97,115 +109,84 @@ public class Renderer {
 		graphics.drawString("Kills: "+player.getMonsters_killed(), 30, 240);
 	}
 
-	public void renderUI(Player player, Room roomData, Graphics2D graphics, Point mousePosition) {
-
+	public void renderUI(Player player, Room roomData, Graphics2D graphics, Point mousePosition)
+	{
 		renderStatus(player, graphics);
 
-		for(int y = 0; y< roomData.getSizeY(); y++) {
-			for(int x = 0; x< roomData.getSizeX(); x++) {
-				if(roomData.getTileAt(x, y).isCollectible() || roomData.getTileAt(x, y).getName() == "villager") {
-					int drawPosX = roomData.getTileAt(x, y).getPosX()*32*zoomLevel + ((Window.WIDTH/2)-player.getPosX()*32*zoomLevel-(32/2)*zoomLevel);
-					int drawPosY = roomData.getTileAt(x, y).getPosY()*32*zoomLevel + ((Window.HEIGHT/2)-player.getPosY()*32*zoomLevel-(32/2)*zoomLevel);
-					
-					if((player.getPosX() == x-1 && player.getPosY() == y) || (player.getPosX() == x+1 && player.getPosY() == y) || (player.getPosX() == x && player.getPosY() == y-1) || (player.getPosX() == x && player.getPosY() == y+1)) {
-						String letter =  (roomData.getTileAt(x, y).getName() == "villager") ? "T" : "E";
+		for (int y = 0; y < roomData.getSizeY(); y++)
+		{
+			for (int x = 0; x < roomData.getSizeX(); x++)
+			{
+				if (roomData.getTileAt(x, y).isCollectible()
+						|| roomData.getTileAt(x, y).getName() == "villager"
+						|| roomData.getTileAt(x, y).getName() == "blacksmith")
+				{
+
+					int drawPosX = roomData.getTileAt(x, y).getPosX() * 32 * zoomLevel + ((Window.WIDTH / 2) - player.getPosX() * 32 * zoomLevel - (32 / 2) * zoomLevel);
+					int drawPosY = roomData.getTileAt(x, y).getPosY() * 32 * zoomLevel + ((Window.HEIGHT / 2) - player.getPosY() * 32 * zoomLevel - (32 / 2) * zoomLevel);
+
+					if ((player.getPosX() == x - 1 && player.getPosY() == y)
+							|| (player.getPosX() == x + 1 && player.getPosY() == y)
+							|| (player.getPosX() == x && player.getPosY() == y - 1)
+							|| (player.getPosX() == x && player.getPosY() == y + 1))
+					{
+						String letter = (roomData.getTileAt(x, y).getName() == "villager" || roomData.getTileAt(x, y).getName() == "blacksmith") ? "T" : "E";
 						BufferedImage sprite = Textures.getSprite(letter);
-						graphics.drawImage(sprite, drawPosX+8*zoomLevel, drawPosY-8*zoomLevel, sprite.getWidth()*zoomLevel, sprite.getHeight()*zoomLevel, null);
+						graphics.drawImage(sprite, drawPosX + 8 * zoomLevel, drawPosY - 8 * zoomLevel, sprite.getWidth() * zoomLevel, sprite.getHeight() * zoomLevel, null);
 					}
 				}
 			}
 		}
-		if(player.isShopOpen()) {
-			//Inventory
-			BufferedImage shop = Textures.getSprite("shop");
-			int x = (Window.WIDTH - shop.getWidth()) / 2;
-			int y = (Window.HEIGHT - shop.getHeight()) / 2;
-			graphics.drawImage(shop, x, y,  null);
 
-			if(shopSlot1.contains(mousePosition)) {
-				graphics.setStroke(new BasicStroke(3));
-			graphics.drawRoundRect(shopSlot1.x, shopSlot1.y, shopSlot1.width, shopSlot1.height, 10, 10);
-			graphics.drawRoundRect(shopSlot1.x, shopSlot1.y, 60, shopSlot1.height, 10, 10);
-			}
+		//Render Shop
+		if (player.isShopOpen())
+			renderShop(graphics, mousePosition, player);
 
 
-			if(shopSlot2.contains(mousePosition)){
-				graphics.setStroke(new BasicStroke(3));
-			graphics.drawRoundRect(shopSlot2.x, shopSlot2.y, shopSlot2.width, shopSlot2.height, 10, 10);
-			graphics.drawRoundRect(shopSlot2.x, shopSlot2.y, 60, shopSlot2.height, 10, 10);}
+		// Render inventory
+		if (player.isInventoryOpen())
+			renderInventory(graphics, mousePosition, player);
+
+		//Blacksmith
+		if (player.isBlacksmithOpen()) {
+
+			BufferedImage blacksmith = Textures.getSprite("blacksmith_screen");
+			int x = (Window.WIDTH - blacksmith.getWidth()) / 2;
+			int y = (Window.HEIGHT - blacksmith.getHeight()) / 2;
+			graphics.drawImage(blacksmith, x, y, null);
+
+			BufferedImage sprite = Textures.getSprite(player.getWeapon().getName());
+			graphics.drawImage(sprite, blacksmithSlot1.x + 6, 350, sprite.getWidth() * 3, sprite.getHeight() * 3, null);
+
+			sprite = Textures.getSprite(player.getArmor().getName());
+			graphics.drawImage(sprite, blacksmithSlot2.x + 6, 418, sprite.getWidth() * 3, sprite.getHeight() * 3, null);
 
 
-			if(shopSlot3.contains(mousePosition)){
-				graphics.setStroke(new BasicStroke(3));
-			graphics.drawRoundRect(shopSlot3.x, shopSlot3.y, shopSlot3.width, shopSlot3.height, 10, 10);
-			graphics.drawRoundRect(shopSlot3.x, shopSlot3.y, 60, shopSlot3.height, 10, 10);}
+			graphics.drawString("Repair weapon", blacksmithSlot1.x + 75, blacksmithSlot1.y+20);
+			graphics.drawString("Repair armor", blacksmithSlot2.x + 75, blacksmithSlot2.y+20);
 
-			//Shop items
-			for(int i=0;i< Shop.SHOP_SIZE;i++) {
-				if(player.getCurrentShop().getShopItem(i) != null) {
-					BufferedImage sprite = Textures.getSprite(player.getCurrentShop().getShopItem(i).getName());
-					graphics.drawImage(sprite, shopSlot1.x+6, 315+i*68, sprite.getWidth()*3, sprite.getHeight()*3, null);
 
-					graphics.setFont(new Font("Dialog", Font.PLAIN, 20));
-					graphics.drawString(player.getCurrentShop().getShopItem(i).getDisplayName(), shopSlot1.x+70, 335+i*68);
-					graphics.setFont(new Font("Dialog", Font.PLAIN, 15));
-					graphics.drawString(player.getCurrentShop().getShopItem(i).getDescription(), shopSlot1.x+70, 360+i*68);
-					graphics.setFont(new Font("Dialog", Font.PLAIN, 20));
-					graphics.drawString(String.valueOf(player.getCurrentShop().getShopItem(i).getPrice()), shopSlot1.x+438, 348+i*68);
-				}
-			}
+			graphics.setFont(new Font("Dialog", Font.PLAIN, 15));
+			graphics.drawString(player.getWeapon().getDescription() , blacksmithSlot1.x + 75, blacksmithSlot1.y+45);
+			graphics.drawString(player.getArmor().getDescription() , blacksmithSlot2.x + 75, blacksmithSlot2.y+45);
+
+			graphics.setFont(new Font("Dialog", Font.PLAIN, 20));
+			if(player.getRepairPriceWeapon() == 0)
+				graphics.drawString("---", blacksmithSlot1.x + 447, blacksmithSlot1.y+36);
+			else
+			graphics.drawString(String.valueOf(player.getRepairPriceWeapon()), blacksmithSlot1.x + 438, blacksmithSlot1.y+36);
+
+			if(player.getRepairPriceArmor() == 0)
+				graphics.drawString("---", blacksmithSlot2.x + 447, blacksmithSlot2.y+36);
+			else
+			graphics.drawString(String.valueOf(player.getRepairPriceArmor()), blacksmithSlot2.x + 438, blacksmithSlot2.y+36);
+
+			drawSlot(graphics, mousePosition, blacksmithSlot1);
+			drawSlot(graphics, mousePosition, blacksmithSlot2);
 
 		}
-		
-		if(player.isInventoryOpen()) {
-			//Inventory
-			BufferedImage binSprite = Textures.getSprite("bin");
 
-			BufferedImage inv = Textures.getSprite("inventory");
-			int x = (Window.WIDTH - inv.getWidth()) / 2;
-			int y = (Window.HEIGHT - inv.getHeight()) / 2;
-			graphics.drawImage(inv, x, y,  null);
-			//Inventory slots
-			drawSlot(graphics, mousePosition, binSprite, inventorySlot1, inventoryBin1);
 
-			drawSlot(graphics, mousePosition, binSprite, inventorySlot2, inventoryBin2);
-
-			drawSlot(graphics, mousePosition, binSprite, inventorySlot3, inventoryBin3);
-
-			
-			if(player.getWeapon() != null) {
-				BufferedImage sprite = Textures.getSprite(player.getWeapon().getName());
-				graphics.drawImage(sprite, weaponSlot.x+7, weaponSlot.y+7, sprite.getWidth()*3, sprite.getHeight()*3, null);
-				graphics.setFont(new Font("Dialog", Font.PLAIN, 20));
-				graphics.drawString(player.getWeapon().getDisplayName(), weaponSlot.x+70, weaponSlot.y+22);
-				graphics.setFont(new Font("Dialog", Font.PLAIN, 15));
-				graphics.drawString(player.getWeapon().getDescription(), weaponSlot.x+70, weaponSlot.y+47);
-			}
-
-			
-			if(player.getArmor() != null) {
-				BufferedImage sprite = Textures.getSprite(player.getArmor().getName());
-				graphics.drawImage(sprite, armorSlot.x+7, armorSlot.y+7, sprite.getWidth()*3, sprite.getHeight()*3, null);
-				graphics.setFont(new Font("Dialog", Font.PLAIN, 20));
-				graphics.drawString(player.getArmor().getDisplayName(), armorSlot.x+70, armorSlot.y+22);
-				graphics.setFont(new Font("Dialog", Font.PLAIN, 15));
-				graphics.drawString(player.getArmor().getDescription(), armorSlot.x+70, armorSlot.y+47);
-			}
-			
-			//Inventory items
-			for(int i=0;i<Player.INVENTORY_SIZE;i++) {
-				if(player.getInventoryItem(i) != null) {
-					BufferedImage sprite = Textures.getSprite(player.getInventoryItem(i).getName());
-					graphics.drawImage(sprite, inventorySlot1.x+6, 387+i*68, sprite.getWidth()*3, sprite.getHeight()*3, null);
-					
-					graphics.setFont(new Font("Dialog", Font.PLAIN, 20));
-					graphics.drawString(player.getInventoryItem(i).getDisplayName(), inventorySlot1.x+70, 405+i*68);
-					graphics.setFont(new Font("Dialog", Font.PLAIN, 15));
-					graphics.drawString(player.getInventoryItem(i).getDescription(), inventorySlot1.x+70, 430+i*68);
-				}
-			}
-		}
-		
 		//Death screen
 		if(player.getHealth() <= 0) {
 
@@ -215,23 +196,127 @@ public class Renderer {
 			graphics.drawImage(sprite, x , y , null);
 
 		}
+
 	}
 
-	private void drawSlot(Graphics2D graphics, Point mousePosition, BufferedImage binSprite, Rectangle inventorySlot1, Rectangle inventoryBin1) {
-		if(inventorySlot1.contains(mousePosition)) {
+	private void renderShop(Graphics2D graphics, Point mousePosition, Player player)
+	{
+		BufferedImage sprite = Textures.getSprite("shop");
+
+		int x = (Window.WIDTH - sprite.getWidth()) / 2;
+		int y = (Window.HEIGHT - sprite.getHeight()) / 2;
+
+		graphics.drawImage(sprite, x, y, null);
+
+		drawSlot(graphics, mousePosition, shopSlot1);
+		drawSlot(graphics, mousePosition, shopSlot2);
+		drawSlot(graphics, mousePosition, shopSlot3);
+
+
+		//Shop items
+		drawShopItems(graphics, player);
+
+	}
+	private void renderInventory(Graphics2D graphics, Point mousePosition, Player player)
+	{
+		BufferedImage sprite = Textures.getSprite("inventory");
+
+		int x = (Window.WIDTH - sprite.getWidth()) / 2;
+		int y = (Window.HEIGHT - sprite.getHeight()) / 2;
+
+		graphics.drawImage(sprite, x, y, null);
+
+		//Inventory slots
+		drawSlot(graphics, mousePosition, inventorySlot1);
+		drawSlot(graphics, mousePosition, inventorySlot2);
+		drawSlot(graphics, mousePosition, inventorySlot3);
+
+		//Bin slots
+		drawBin(graphics, mousePosition, inventoryBin1);
+		drawBin(graphics, mousePosition, inventoryBin2);
+		drawBin(graphics, mousePosition, inventoryBin3);
+
+		//Equipment
+		drawEq(graphics, player.getWeapon(), weaponSlot);
+		drawEq(graphics, player.getArmor(), armorSlot);
+
+		//Inventory items
+		drawInventoryItems(graphics, player);
+	}
+
+	private void drawBin(Graphics2D graphics, Point mousePosition, Rectangle slot)
+	{
+		if(slot.contains(mousePosition))
+		{
 			graphics.setStroke(new BasicStroke(3));
-			graphics.drawRoundRect(inventorySlot1.x, inventorySlot1.y, inventorySlot1.width, inventorySlot1.height, 10, 10);
-			graphics.drawRoundRect(inventorySlot1.x, inventorySlot1.y, 60, inventorySlot1.height, 10, 10);
+			graphics.drawRoundRect(slot.x, slot.y, slot.width, slot.height, 10, 10);
 		}
 
+		BufferedImage sprite = Textures.getSprite("bin");
+		graphics.drawImage(sprite, slot.x + 7, slot.y+7, sprite.getWidth()*3, sprite.getHeight()*3, null);
+	}
 
-		if(inventoryBin1.contains(mousePosition)) {
+	private void drawSlot(Graphics2D graphics, Point mousePosition, Rectangle slot)
+	{
+		if(slot.contains(mousePosition))
+		{
 			graphics.setStroke(new BasicStroke(3));
-			graphics.drawRoundRect(inventoryBin1.x, inventoryBin1.y, inventoryBin1.width, inventoryBin1.height, 10, 10);
+			graphics.drawRoundRect(slot.x, slot.y, slot.width, slot.height, 10, 10);
+			graphics.drawRoundRect(slot.x, slot.y, 60, slot.height, 10, 10);
 		}
+	}
 
-		graphics.drawImage(binSprite, inventoryBin1.x + 7, inventoryBin1.y+7, binSprite.getWidth()*3, binSprite.getHeight()*3, null);
+	private void drawEq(Graphics2D graphics, Equipment eq, Rectangle slot)
+	{
+		BufferedImage sprite = Textures.getSprite(eq.getName());
 
+		graphics.drawImage(sprite, slot.x + 7, slot.y + 7, sprite.getWidth() * 3, sprite.getHeight() * 3, null);
+
+		graphics.setFont(new Font("Dialog", Font.PLAIN, 20));
+		graphics.drawString(eq.getDisplayName(), slot.x + 70, slot.y + 22);
+
+		graphics.setFont(new Font("Dialog", Font.PLAIN, 15));
+		graphics.drawString(eq.getDescription(), slot.x + 70, slot.y + 47);
+	}
+
+	private void drawInventoryItems(Graphics2D graphics, Player player)
+	{
+		for (int i = 0; i < Player.INVENTORY_SIZE; i++)
+		{
+			if (player.getInventoryItem(i) != null)
+			{
+				BufferedImage sprite = Textures.getSprite(player.getInventoryItem(i).getName());
+
+				graphics.drawImage(sprite, inventorySlot1.x + 6, 387 + i * 68, sprite.getWidth() * 3, sprite.getHeight() * 3, null);
+
+				graphics.setFont(new Font("Dialog", Font.PLAIN, 20));
+				graphics.drawString(player.getInventoryItem(i).getDisplayName(), inventorySlot1.x + 70, 405 + i * 68);
+
+				graphics.setFont(new Font("Dialog", Font.PLAIN, 15));
+				graphics.drawString(player.getInventoryItem(i).getDescription(), inventorySlot1.x + 70, 430 + i * 68);
+			}
+		}
+	}
+
+	private void drawShopItems(Graphics2D graphics, Player player)
+	{
+		for (int i = 0; i < Shop.SHOP_SIZE; i++) {
+			if (player.getCurrentShop().getShopItem(i) != null)
+			{
+				BufferedImage sprite = Textures.getSprite(player.getCurrentShop().getShopItem(i).getName());
+
+				graphics.drawImage(sprite, shopSlot1.x + 6, 315 + i * 68, sprite.getWidth() * 3, sprite.getHeight() * 3, null);
+
+				graphics.setFont(new Font("Dialog", Font.PLAIN, 20));
+				graphics.drawString(player.getCurrentShop().getShopItem(i).getDisplayName(), shopSlot1.x + 70, 335 + i * 68);
+
+				graphics.setFont(new Font("Dialog", Font.PLAIN, 15));
+				graphics.drawString(player.getCurrentShop().getShopItem(i).getDescription(), shopSlot1.x + 70, 360 + i * 68);
+
+				graphics.setFont(new Font("Dialog", Font.PLAIN, 20));
+				graphics.drawString(String.valueOf(player.getCurrentShop().getShopItem(i).getPrice()), shopSlot1.x + 438, 348 + i * 68);
+			}
+		}
 	}
 
 
