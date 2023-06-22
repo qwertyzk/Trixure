@@ -39,7 +39,7 @@ public class Screen extends JPanel {
 				renderer.renderTitleScreen(graphics);
 			}
 			else if (GameLogic.isOnWinScreen()) {
-				renderer.renderWinScreen(graphics);
+				renderer.renderWinScreen(GameLogic.getPlayer(), graphics);
 			}
 			else {
 				renderer.renderLevel(GameLogic.getCurrentFloor(), GameLogic.getPlayer(), graphics);

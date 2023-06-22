@@ -21,8 +21,7 @@ import javax.swing.ImageIcon;
 
 public class Renderer {
 
-	private final int zoomLevel; // konieczne?
-
+	private final int zoomLevel;
 	public static final Rectangle shopSlot1 = new Rectangle(257, 310, 420, 60);
 	public static final Rectangle shopSlot2 = new Rectangle(257, 379, 420, 60);
 	public static final Rectangle shopSlot3 = new Rectangle(257, 447, 420, 60);
@@ -86,21 +85,27 @@ public class Renderer {
 		return mapObject.getPosY()*sprite.getHeight()*zoomLevel + ((Window.HEIGHT/2)-player.getPosY()*sprite.getHeight()*zoomLevel-(sprite.getHeight()/2)*zoomLevel);
 	}
 
-	public void renderUI(Player player, Room roomData, Graphics2D graphics, Point mousePosition) {
-
+	public void renderStatus(Player player, Graphics2D graphics)
+	{
 		BufferedImage status = Textures.getSprite("status");
 		graphics.drawImage(status, 10, 10, status.getWidth(), status.getHeight(), null);
 
 		graphics.setColor(Color.WHITE);
 		graphics.setFont(new Font("Dialog", Font.PLAIN, 30));
 
-		graphics.setFont(new Font("Dialog", Font.PLAIN, 20));
+		graphics.setFont(new Font("Dialog", Font.PLAIN, 18));
 		graphics.drawString("HP: "+player.getHealth()+"/"+player.getMaxHealth(), 30, 90);
 		graphics.drawString("STR: "+player.getStrength(), 30, 120);
 		graphics.drawString("DEF: "+player.getDefence(), 30, 150);
 		graphics.drawString("Gold: "+player.getGold(), 30, 180);
 		graphics.drawString("Floors: "+player.getFloorsCleared(), 30, 210);
-		
+		graphics.drawString("Kills: "+player.getMonsters_killed(), 30, 240);
+	}
+
+	public void renderUI(Player player, Room roomData, Graphics2D graphics, Point mousePosition) {
+
+		renderStatus(player, graphics);
+
 		for(int y = 0; y< roomData.getSizeY(); y++) {
 			for(int x = 0; x< roomData.getSizeX(); x++) {
 				if(roomData.getTileAt(x, y).isCollectible() || roomData.getTileAt(x, y).getName() == "villager") {
@@ -151,7 +156,7 @@ public class Renderer {
 					graphics.setFont(new Font("Dialog", Font.PLAIN, 15));
 					graphics.drawString(player.getCurrentShop().getShopItem(i).getDescription(), shopSlot1.x+70, 360+i*68);
 					graphics.setFont(new Font("Dialog", Font.PLAIN, 20));
-					graphics.drawString(String.valueOf(player.getCurrentShop().getShopItem(i).getPrice()), shopSlot1.x+444, 348+i*68);
+					graphics.drawString(String.valueOf(player.getCurrentShop().getShopItem(i).getPrice()), shopSlot1.x+438, 348+i*68);
 				}
 			}
 
@@ -256,30 +261,37 @@ public class Renderer {
 	public void renderTitleScreen(Graphics graphics) {
 		BufferedImage image = Textures.getSprite("trixure");
 		int x = (Window.WIDTH - image.getWidth()) / 2;
-		int y = (Window.HEIGHT - 2*image.getHeight()) / 2;
-		graphics.drawImage(image, x ,y, null);
+
+		graphics.drawImage(image, x ,220, null);
 
 		graphics.setColor(Color.WHITE);
-		graphics.setFont(new Font("Dialog", Font.PLAIN, 20));
+		graphics.setFont(new Font("Dialog", Font.BOLD, 26));
 		String txt = "Wciśnij coś, ale nie cokolwiek...";
 		int textPosX = (Window.WIDTH - graphics.getFontMetrics().stringWidth(txt)) / 2;
-		int textPosY = ((Window.HEIGHT - graphics.getFontMetrics().getHeight()) / 2) + 2*graphics.getFontMetrics().getAscent();
-		graphics.drawString(txt, textPosX, textPosY);
+		graphics.drawString(txt, textPosX, 700);
 
 		graphics.setColor(Color.GRAY);
 		graphics.setFont(new Font("Dialog", Font.PLAIN, 18));
-		graphics.drawString("Chosen language: ponglish", 15, 25);
+		graphics.drawString("Language: Ponglish", 15, 25);
+
+		String autoren = "Autoren: Zuzanna \"Trivium\" Kurnicka , Dominik \"Fraxure\" Biernacki";
+		int autorenPosX = (Window.WIDTH - graphics.getFontMetrics().stringWidth(autoren)) / 2;
+
+		graphics.drawString(autoren, autorenPosX, 750);
 
 	}
 
-	public void renderWinScreen(Graphics graphics) {
+	public void renderWinScreen(Player player, Graphics graphics) {
 		Image icon = new ImageIcon("res/textures/cards.gif").getImage();
 		BufferedImage image = Textures.getSprite("win_status");
+
+
 
 		int x = (Window.WIDTH - image.getWidth()) / 2;
 		int y = (Window.HEIGHT - image.getHeight()) / 2;
 		graphics.drawImage(icon, 0, 60, 1000, 631, null);
 		graphics.drawImage(image, x,y, image.getWidth(), image.getHeight(), null);
+		renderStatus(player, (Graphics2D) graphics);
 
 	}
 

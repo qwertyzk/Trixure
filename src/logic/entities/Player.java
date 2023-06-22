@@ -161,6 +161,10 @@ public class Player extends Entity
 	}
 
 
+	public int getMonsters_killed() {
+		return monsters_killed;
+	}
+
 	public boolean damageArmor() {
 		if(this.armorEquipped == null) {
 			return false;

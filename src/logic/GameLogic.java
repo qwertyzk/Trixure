@@ -22,7 +22,7 @@ public class GameLogic
 	private static Timer timer;
 	private static Random randomizer;
 	private static Player player;
-	private static Dungeon tower;
+	private static Dungeon dungeon;
 	private static Room currentRoom;
 	private static Monster[] activeMonsters;
 	private static MessageBox messageBox;
@@ -40,8 +40,8 @@ public class GameLogic
 	
 	private static void init() {
 		randomizer = new Random();
-		tower = new Dungeon(randomizer);
-		currentRoom = tower.getRoom(0);
+		dungeon = new Dungeon(randomizer);
+		currentRoom = dungeon.getRoom(0);
 		player = new Player( 2, 8);
 		activeMonsters = currentRoom.getMonsters();
 		messageBox = new MessageBox();
@@ -72,7 +72,7 @@ public class GameLogic
 			player.setPosition(player.getPosX()+dirX, player.getPosY()+dirY);
 			break;
 		case "stairs":
-			currentRoom = tower.getNextRoom();
+			currentRoom = dungeon.getNextRoom();
 			player.setPosition(currentRoom.getStartPosX(), currentRoom.getStartPosY());
 			activeMonsters = currentRoom.getMonsters();
 			messageBox.addMessage("You went into a new floor!");
@@ -104,11 +104,17 @@ public class GameLogic
 	}
 	
 	public static void openPlayerInventory() {
+		if(player.isShopOpen())
+			return;
+
 		if(player.getHealth() > 0)
 			player.setInventoryOpen(!player.isInventoryOpen());
 	}
 
 	public static void openShop() {
+		if(player.isInventoryOpen())
+			return;
+
 		if(player.getHealth() > 0)
 		{
 			int[] dx = {1,-1,0,0};
@@ -360,7 +366,8 @@ public class GameLogic
 		}
 		player.removeItem(index);
 	}
-	
+
+	// wrzucic trap obok floor i blood
 	private static void moveMonsters() {
 		for(Monster monster : activeMonsters) {
 			if(monster.getHealth() <= 0)

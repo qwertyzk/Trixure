@@ -1,4 +1,3 @@
-
 import gui.Window;
 import logic.GameLogic;
 

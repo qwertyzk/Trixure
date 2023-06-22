@@ -27,7 +27,7 @@ public class GameLoop implements ActionListener
 			{
 				GameLogic.movePlayer(1, 0);
 			}
-			else if(Keyboard.isKeyDown(KeyEvent.VK_I))
+			else if(Keyboard.isKeyDown(KeyEvent.VK_Q))
 			{
 				GameLogic.openPlayerInventory();
 			}
