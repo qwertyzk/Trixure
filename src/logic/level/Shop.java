@@ -6,16 +6,14 @@ import logic.items.Item;
 
 import java.util.Random;
 
-public class Shop extends MapObject
+public class Shop extends NPC
 {
     public static final int SHOP_SIZE = 3;
-    int tip;
     private final Item[] shopItems;
 
-    public Shop(int posX, int posY, Random randomizer, int tip, int difficulty)
+    public Shop(int posX, int posY, Random randomizer, int difficulty)
     {
-        super("villager", posX, posY, false);
-        this.tip = Math.abs(randomizer.nextInt()) % tip;
+        super("villager", posX, posY, 50, randomizer);
         this.shopItems = new Item[SHOP_SIZE];
 
         Item item = null;
