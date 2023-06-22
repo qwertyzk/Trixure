@@ -31,7 +31,7 @@ public class Layouts
 
 	public enum Layouts2
 	{
-		layout0(new String[]
+		initial_layout(new String[]
 					   {"##########",
 						"##!####^##",
 						"#...##...#",
@@ -43,7 +43,7 @@ public class Layouts
 						"##.####p##",
 						"##########"}, 2, 8),
 
-		layout1(new String[]
+		easy_layout1(new String[]
 					   {"##########################",
 						"#...#....M...........#p.G#",
 						"#.................M......#",
@@ -66,7 +66,7 @@ public class Layouts
 						"#!GG#..M.............#..^#",
 						"##########################"}, 2, 2),
 
-		layout2(new String[]
+		easy_layout2(new String[]
 					   {"##########################",
 						"#................M.......#",
 						"#####.######.###########.#",
@@ -89,7 +89,7 @@ public class Layouts
 						"#........T#G............^#",
 						"##########################"}, 1, 1),
 
-		layout3(new String[]
+		easy_layout3(new String[]
 					   {"##########################",
 						"#p....GG##......##...M..m#",
 						"#.M.....#....M...#.......#",
@@ -112,7 +112,7 @@ public class Layouts
 						"#.#???#.##.....M##......G#",
 						"##########################"}, 4, 8),
 
-		layout4(new String[]
+		easy_layout4(new String[]
 					   {"##########################",
 						"#.^.#..................#s#",
 						"#.,.#...M.....M........#/#",
@@ -135,7 +135,7 @@ public class Layouts
 						"#GGG............M...,...T#",
 						"##########################"}, 14, 9),
 
-		layout5(new String[]
+		easy_layout5(new String[]
 				       {"############",
 						"###....GG###",
 						"##.....M..##",
@@ -149,7 +149,7 @@ public class Layouts
 						"###G.M...###",
 						"############"}, 2, 2),
 
-		layout6(new String[]
+		easy_layout6(new String[]
 				 	   {"############",
 						"#.#...G#p#s#",
 						"#.#.#MG#M#M#",
@@ -163,7 +163,7 @@ public class Layouts
 						"#...#^.....#",
 						"############"}, 1, 1),
 
-		layout7(new String[]
+		easy_layout7(new String[]
 					   {"############",
 						"#...#.GG...#",
 						"#.../.....W#",
@@ -177,7 +177,7 @@ public class Layouts
 						"#T.,......^#",
 						"############"}, 2, 2),
 
-		layout8(new String[]
+		easy_layout8(new String[]
 					   {"############",
 						"#.........p#",
 						"#...M...,..#",
@@ -188,10 +188,10 @@ public class Layouts
 						"#..#......M#",
 						"#.,#..#,..!#",
 						"#.....#..###",
-						"#GG..M#B..^#",
+						"#GG..M#...^#",
 						"############"}, 1, 1),
 
-		layout9(new String[]
+		easy_layout9(new String[]
 				 	   {"############",
 						"#...#.!#.GG#",
 						"#...#,##...#",
@@ -202,10 +202,10 @@ public class Layouts
 						"#..........#",
 						"#..........#",
 						"#...##/#...#",
-						"#p..#T.#..^#",
+						"#B.p#T.#..^#",
 						"############"}, 1, 1),
 
-		layout10(new String[]
+		easy_layout10(new String[]
 					   {"############",
 						"####GG.p####",
 						"##!......!##",
@@ -219,7 +219,7 @@ public class Layouts
 						"#W/.#??#./m#",
 						"############"}, 1, 4),
 
-		layout11(new String[]
+		medium_layout1(new String[]
 					   {"##############",
 						"#......./...W#",
 						"######..######",
@@ -233,7 +233,7 @@ public class Layouts
 						"#T.p#.....,.!#",
 						"##############"}, 1, 1),
 
-		layout12(new String[]
+		medium_layout2(new String[]
 				 	   {"##############",
 						"#...#mT...GG!#",
 						"#...#......GG#",
@@ -247,7 +247,7 @@ public class Layouts
 						"#.M...M.....^#",
 						"##############"}, 2, 2),
 
-		layout13(new String[]
+		medium_layout3(new String[]
 					   {"##############",
 						"#...M...M...^#",
 						"#.############",
@@ -262,7 +262,7 @@ public class Layouts
 						"#...M....M..!#",
 						"##############"}, 1, 6),
 
-		layout14(new String[]
+		medium_layout4(new String[]
 					   {"##############",
 						"####.....#.GG#",
 						"##....M../..G#",
@@ -277,7 +277,7 @@ public class Layouts
 					    "####.....#..W#",
 						"##############"}, 2, 2),
 
-		layout15(new String[]
+		medium_layout5(new String[]
 					   {"##############",
 						"#.#GG.^#M...!#",
 						"#.#G...#...M.#",
@@ -292,7 +292,7 @@ public class Layouts
 					    "#W#????#....m#",
 						"##############"}, 1, 1),
 
-		layout16(new String[]
+		medium_layout6(new String[]
 					   {"######################",
 						"#.....p#....M.......?#",
 						"#......#.M....#......#",
@@ -307,7 +307,7 @@ public class Layouts
 						"#^.....#........M..GG#",
 						"######################"}, 1, 1),
 
-		layout17(new String[]
+		medium_layout7(new String[]
 					   {"######################",
 						"##p........M.....GG###",
 						"#....M.............T##",
@@ -322,7 +322,7 @@ public class Layouts
 						"###.....M........GG###",
 						"######################"}, 1, 2),
 
-		layout18(new String[]
+		medium_layout8(new String[]
 					   {"########################",
 						"#......................#",
 		 		 	    "#..M.......######/######",
@@ -342,7 +342,7 @@ public class Layouts
 					    "#G........M.........GGG#",
 					    "########################"}, 22, 1),
 
-		layout19(new String[]
+		medium_layout9(new String[]
 					   {"########################",
 						"#...#.....M......M.#.GG#",
 						"#...........M.........G#",
@@ -351,12 +351,12 @@ public class Layouts
 						"#.....#.......#!,......#",
 						"#.#...#...M...#,,.M....#",
 						"#.#.M.#.......#........#",
-						"#.#.......#........##.##",
-						"#.#,,M..###...M..,,#...#",
-						"#^#d,.../m#......,s#.B.#",
+						"#.#.......#........##/##",
+						"#.#,,M..###...M..,,#G..#",
+						"#^#d,.../m#......,s#GBG#",
 						"########################"}, 2, 2),
 
-		layout20(new String[]
+		medium_layout10(new String[]
 					   {"######################",
 						"#...#p..M........#T.s#",
 						"#.../........M.../..m#",
@@ -371,7 +371,7 @@ public class Layouts
 						"#p.......GG#..M......#",
 						"######################"}, 2, 2),
 
-		layout21(new String[]
+		hard_layout1(new String[]
 					   {"######################",
 						"#.MM...T#GG..........#",
 						"#.##############.###.#",
@@ -386,7 +386,7 @@ public class Layouts
 						"#....M..........M....#",
 						"######################"}, 11, 5),
 
-		layout22(new String[]
+		hard_layout2(new String[]
 					   {"############",
 						"#.....,...p#",
 						"#.,....M.,.#",
@@ -400,7 +400,7 @@ public class Layouts
 						"#!...,....^#",
 						"############"}, 1, 1),
 
-		layout23(new String[]
+		hard_layout3(new String[]
 					   {"###############",
 						"#d,,,.....G#G.#",
 						"#####...#..#..#",
@@ -414,7 +414,7 @@ public class Layouts
 						"#T.....^#../.p#",
 						"###############"}, 13, 2),
 
-		layout24(new String[]
+		hard_layout4(new String[]
 					   {"############",
 						"#...../.M?T#",
 						"#...########",
@@ -428,7 +428,7 @@ public class Layouts
 						"#!#m..M.#^.#",
 						"############"}, 1, 1),
 
-		layout25(new String[]
+		hard_layout5(new String[]
 					   {"###############",
 						"#.#M#M#...#...#",
 						"#.#.#.#.#.#.#.#",
@@ -447,7 +447,7 @@ public class Layouts
 					    "#p#...#...#p#^#",
 						"###############"}, 1, 1),
 
-		layout26(new String[]
+		hard_layout6(new String[]
 					   {"##########################",
 					    "#...##^##..,....M....#..p#",
 					    "#...#.........,..........#",
@@ -469,7 +469,7 @@ public class Layouts
 					    "#pG.#...#s..#...#.GG#....#",
 					    "##########################"}, 2, 2),
 
-		layout27(new String[]
+		hard_layout7(new String[]
 					   {"##############",
 						"#.#......../s#",
 						"#.#..M.....###",
@@ -483,7 +483,7 @@ public class Layouts
 						"#^#......../d#",
 						"##############"}, 1, 1),
 
-		layout28(new String[]
+		hard_layout8(new String[]
 					   {"############",
 						"#......##^##",
 						"#####..#.M.#",
@@ -497,7 +497,7 @@ public class Layouts
 						"#???#.GG./T#",
 						"############"}, 1, 1),
 
-		layout29(new String[]
+		hard_layout9(new String[]
 					   {"#############",
 						"#M......M...#",
 					    "#..###/###..#",
@@ -512,7 +512,7 @@ public class Layouts
 					    "#...M.......#",
 					    "#############"}, 6, 6),
 
-		layout30(new String[]
+		hard_layout10(new String[]
 					   {"#############",
 						"#...........#",
 						"#######.###.#",
@@ -525,7 +525,7 @@ public class Layouts
 						"#.#m#....M#^#",
 						"#M#..M#.#...#",
 						"#.#####.#####",
-						"#...d#.M...T#",
+						"#...d#BM...T#",
 						"#############"}, 1, 1),
 
 		final_layout(new String[]
@@ -556,7 +556,7 @@ public class Layouts
 		public static Room randomType(Random randomizer, int difficulty)
 		{
 			Layouts2[] layouts = values();
-			Layouts2 temp = layout0;
+			Layouts2 temp = initial_layout;
 			switch (difficulty) {
 				case 0:
 					break;
