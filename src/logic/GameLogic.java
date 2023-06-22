@@ -5,9 +5,7 @@ import java.util.Random;
 import javax.swing.Timer;
 
 import gui.Renderer;
-import logic.entities.Entity;
-import logic.entities.Monster;
-import logic.entities.Player;
+import logic.map_objects.*;
 import logic.items.Armor;
 import logic.items.Item;
 import logic.items.Weapon;

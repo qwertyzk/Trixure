@@ -2,21 +2,16 @@ package gui;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Timer;
-import java.util.concurrent.TimeUnit;
 
-import logic.entities.Monster;
-import logic.entities.Player;
+import logic.map_objects.Monster;
+import logic.map_objects.Player;
 import logic.level.Room;
-import logic.level.MapObject;
-import logic.level.Shop;
+import logic.map_objects.MapObject;
+import logic.map_objects.Shop;
 import logic.text.MessageBox;
 import resources.Textures;
 
-import javax.swing.*;
 import javax.swing.ImageIcon;
 
 public class Renderer {

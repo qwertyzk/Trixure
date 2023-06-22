@@ -3,7 +3,8 @@ package logic.level;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import logic.entities.Monster;
+
+import logic.map_objects.*;
 
 public class Room
 {

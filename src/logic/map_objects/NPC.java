@@ -1,4 +1,4 @@
-package logic.level;
+package logic.map_objects;
 
 import java.util.Random;
 
