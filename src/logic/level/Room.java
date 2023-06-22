@@ -95,11 +95,13 @@ public class Room
 
 	public void removeCollectible(int x, int y)
 	{
-		switch (room[y][x].getName())
+		if(room[y][x].getName().equals("chest"))
 		{
-			case "hp_potion_tile", "max_potion_tile", "myst_potion_tile", "def_potion_tile", "str_potion_tile",
-					"key_tile", "gold_bag" -> room[y][x] = new MapObject("floor", x, y, false);
-			case "chest" -> room[y][x] = new MapObject("open_chest", x, y, false);
+			room[y][x] = new MapObject("open_chest", x, y, false);
+		}
+		else
+		{
+			room[y][x] = new MapObject("floor", x, y, false);
 		}
 	}
 

@@ -125,14 +125,14 @@ public class Player extends Entity
 	public int getStrength()
 	{
 		int str = super.getStrength();
-		if(this.weaponEquipped != null) str += this.weaponEquipped.getDamage();
+		str += this.weaponEquipped.getDamage();
 		return str;
 	}
 
 	public int getDefence()
 	{
 		int def = super.getDefence();
-		if(this.armorEquipped != null) def += this.armorEquipped.getDefence();
+		def += this.armorEquipped.getDefence();
 		return def;
 	}
 	

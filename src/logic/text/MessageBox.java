@@ -5,12 +5,11 @@ import java.util.List;
 
 public class MessageBox {
 
-	public static int LIST_SIZE;
-	private List<String> messageQueue;
-	private List<Integer> times;
+	public static int LIST_SIZE = 3;
+	private final List<String> messageQueue;
+	private final List<Integer> times;
 
 	public MessageBox() {
-		LIST_SIZE = 3;
 		this.messageQueue = new ArrayList<>();
 		this.times = new ArrayList<>();
 	}
