@@ -95,4 +95,4 @@ Klasy tworzące nowy obiekt reprezentujący okno gry.
 
 ## Renderer:
 
-Klasa renderująca całe gui. Nic ciekawego się w niej nie dzieje co by było warte uwagi.
+Klasa renderująca całe gui. Wyświetla m.in. gracza, moby i level. Posiada też dwie charakerystyczne metody centerPlayerX i centerPlayerY, które służą do przesuwania mapy względem gracza (tym samym sprawiają efekt wycentrowanej kamery). Ponadto wyświetlany jest cały interfejs użytkownika, w tym status, inventory, sklep i kowal. Renderer zajmuje się też wyświetlaniem komunikatów oraz ekranu początkowego i końcowego.

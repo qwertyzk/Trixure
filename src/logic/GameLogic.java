@@ -252,22 +252,20 @@ public class GameLogic
 
 		if(player.isBlacksmithOpen()) {
 			if (Renderer.blacksmithSlot1.contains(mouseX, mouseY)) {
-				repairItem(player.getCurrentBlacksmith(), 0);
+				repairItem(0);
 			} else if (Renderer.blacksmithSlot2.contains(mouseX, mouseY)) {
-				repairItem(player.getCurrentBlacksmith(), 1);
+				repairItem(1);
 			}
 		}
 		
 		if(player.getHealth() <= 0 || onWinScreen == true) {
 			init();
 		}
-
 	}
 
-	public static void repairItem(NPC blacksmith, int i)
+	public static void repairItem(int i)
 	{
 		int durabilityDiff;
-		int price;
 		switch (i) {
 			case 0 -> {
 				durabilityDiff = player.getWeapon().getTotalDurability() - player.getWeapon().getDurability();
@@ -287,7 +285,7 @@ public class GameLogic
 			}
 			case 1 -> {
 				durabilityDiff = player.getArmor().getTotalDurability() - player.getArmor().getDurability();
-				if (player.getArmor().getTotalDurability() - player.getArmor().getDurability() > 0) {
+				if (durabilityDiff > 0) {
 					if (player.getRepairPriceArmor() <= player.getGold()) {
 						player.getArmor().repair();
 						player.giveGold(-player.getRepairPriceArmor());
