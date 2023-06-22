@@ -11,13 +11,15 @@ public class Player extends Entity
 	private final Item[] inventory;
 	private boolean inventoryOpen;
 	private boolean shopOpen;
+	private boolean blacksmithOpen;
 	private Shop currentShop;
 	private Weapon weaponEquipped;
 	private Armor armorEquipped;
 	private int gold;
 	private int floors;
 	private int monsters_killed;
-	
+	private NPC currentBlacksmith;
+
 	public Player(int posX, int posY)
 	{
 		super("player", posX, posY, 20);
@@ -44,6 +46,24 @@ public class Player extends Entity
 			}
 		}
 		return false;
+	}
+
+	public int getRepairPriceArmor()
+	{
+		int durabilityDiff = armorEquipped.getTotalDurability() - armorEquipped.getDurability();
+		if (durabilityDiff > 0)
+			return 10 * durabilityDiff + currentBlacksmith.getTip();
+
+		return 0;
+	}
+
+	public int getRepairPriceWeapon()
+	{
+		int durabilityDiff = weaponEquipped.getTotalDurability() - weaponEquipped.getDurability();
+		if (durabilityDiff > 0)
+			return 10 * durabilityDiff + currentBlacksmith.getTip();
+
+		return 0;
 	}
 
 	public void removeItem(int index)
@@ -76,6 +96,18 @@ public class Player extends Entity
 		this.shopOpen = shopOpen;
 	}
 
+	public boolean isBlacksmithOpen() {
+		return blacksmithOpen;
+	}
+
+	public NPC getCurrentBlacksmith() {
+		return currentBlacksmith;
+	}
+
+	public void setBlacksmithOpen(boolean blacksmithOpen) {
+		this.blacksmithOpen = blacksmithOpen;
+	}
+
 	public Shop getCurrentShop() {
 		return currentShop;
 	}
@@ -84,6 +116,8 @@ public class Player extends Entity
 	{
 		this.currentShop = shop;
 	}
+
+	public void chooseBlacksmith(NPC blacksmith) {this.currentBlacksmith = blacksmith;}
 
 	public boolean isShopOpen() {
 		return shopOpen;
@@ -97,9 +131,6 @@ public class Player extends Entity
 		return gold;
 	}
 
-	public void takeGold(int gold) {
-		this.gold -= gold;
-	}
 
 	public void addFloorCleared() {
 		this.floors++;
@@ -125,14 +156,14 @@ public class Player extends Entity
 	public int getStrength()
 	{
 		int str = super.getStrength();
-		if(this.weaponEquipped != null) str += this.weaponEquipped.getDamage();
+		str += this.weaponEquipped.getDamage();
 		return str;
 	}
 
 	public int getDefence()
 	{
 		int def = super.getDefence();
-		if(this.armorEquipped != null) def += this.armorEquipped.getDefence();
+		def += this.armorEquipped.getDefence();
 		return def;
 	}
 	
@@ -164,31 +195,5 @@ public class Player extends Entity
 		return monsters_killed;
 	}
 
-	public boolean damageArmor() {
-		if(this.armorEquipped == null) {
-			return false;
-		}
-		else {
-			this.armorEquipped.reduceDurability();
-		}
-		if(this.armorEquipped.getDurability() <= 0) {
-			this.armorEquipped = null;
-			return true;
-		}
-		return false;
-	}
 
-	public boolean damageWeapon() {
-		if(this.weaponEquipped == null) {
-			return false;
-		}
-		else {
-			this.weaponEquipped.reduceDurability();
-		}
-		if(this.weaponEquipped.getDurability() <= 0) {
-			this.weaponEquipped = null;
-			return true;
-		}
-		return false;
-	}
 }

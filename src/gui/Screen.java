@@ -9,15 +9,14 @@ import javax.swing.*;
 
 import logic.GameLogic;
 
-public class Screen extends JPanel {
-
+public class Screen extends JPanel
+{
 	private Renderer renderer;
-	
-	/**Creates a new GameScreen object<br>
-	 * Extension of JPanel*/
-	public Screen() {
-		super(); //wazne
-		this.setFocusable(true); //wazne
+
+	public Screen()
+	{
+		super();
+		this.setFocusable(true);
 		this.addKeyListener(new Keyboard());
 		this.addMouseListener(new Mouse());
 		
@@ -25,20 +24,21 @@ public class Screen extends JPanel {
 		
 		System.out.println("[Gui][GameScreen]: Created GameScreen");
 	}
-	
-	@Override
-	protected void paintComponent(Graphics graphics) {
+
+	protected void paintComponent(Graphics graphics)
+	{
 		super.paintComponent(graphics);
-		
-		try {
-			
+		try
+		{
 			graphics.setColor(Color.BLACK);
 			graphics.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
 	
-			if(GameLogic.isOnTitleScreen()) {
+			if(GameLogic.isOnTitleScreen())
+			{
 				renderer.renderTitleScreen(graphics);
 			}
-			else if (GameLogic.isOnWinScreen()) {
+			else if (GameLogic.isOnWinScreen())
+			{
 				renderer.renderWinScreen(GameLogic.getPlayer(), graphics);
 			}
 			else {
@@ -57,7 +57,8 @@ public class Screen extends JPanel {
 		repaint();
 	}
 	
-	public Point getMouseLocation() {
+	public Point getMouseLocation()
+	{
 		Point d =  this.getMousePosition();
 
 		if(d != null)

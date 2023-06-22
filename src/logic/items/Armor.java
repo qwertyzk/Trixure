@@ -9,6 +9,12 @@ public class Armor extends Equipment
 		super(name, displayName, "Defence: "+defence+"   Durability: "+durability+"/"+durability, durability, price);
 		this.defence = defence;
 	}
+	public void repair()
+	{
+		this.durability = this.totalDurability;
+		this.description = "Damage: "+defence+" Durability: "+durability+"/"+totalDurability;
+
+	}
 
 	public void reduceDurability()
 	{

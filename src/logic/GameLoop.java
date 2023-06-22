@@ -33,7 +33,7 @@ public class GameLoop implements ActionListener
 			}
 			else if(Keyboard.isKeyDown(KeyEvent.VK_T))
 			{
-				GameLogic.openShop();
+				GameLogic.openNPC();
 			}
 			else if(Keyboard.isKeyDown(KeyEvent.VK_E))
 			{
