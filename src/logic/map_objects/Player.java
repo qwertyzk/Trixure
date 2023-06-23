@@ -84,31 +84,33 @@ public class Player extends Entity
 		}
 	}
 	
-	public void setInventoryOpen(boolean inventoryOpen) {
+	public void setInventoryOpen(boolean inventoryOpen)
+	{
 		this.inventoryOpen = inventoryOpen;
 	}
 	
-	public boolean isInventoryOpen() {
+	public boolean isInventoryOpen()
+	{
 		return inventoryOpen;
 	}
 
-	public void setShopOpen(boolean shopOpen) {
+	public void setShopOpen(boolean shopOpen)
+	{
 		this.shopOpen = shopOpen;
 	}
 
-	public boolean isBlacksmithOpen() {
+	public boolean isBlacksmithOpen()
+	{
 		return blacksmithOpen;
 	}
 
-	public NPC getCurrentBlacksmith() {
-		return currentBlacksmith;
-	}
-
-	public void setBlacksmithOpen(boolean blacksmithOpen) {
+	public void setBlacksmithOpen(boolean blacksmithOpen)
+	{
 		this.blacksmithOpen = blacksmithOpen;
 	}
 
-	public Shop getCurrentShop() {
+	public Shop getCurrentShop()
+	{
 		return currentShop;
 	}
 
@@ -117,39 +119,49 @@ public class Player extends Entity
 		this.currentShop = shop;
 	}
 
-	public void chooseBlacksmith(NPC blacksmith) {this.currentBlacksmith = blacksmith;}
+	public void chooseBlacksmith(NPC blacksmith)
+	{
+		this.currentBlacksmith = blacksmith;
+	}
 
-	public boolean isShopOpen() {
+	public boolean isShopOpen()
+	{
 		return shopOpen;
 	}
 	
-	public void giveGold(int amount) {
+	public void giveGold(int amount)
+	{
 		this.gold += amount;
 	}
 	
-	public int getGold() {
+	public int getGold()
+	{
 		return gold;
 	}
 
-
-	public void addFloorCleared() {
+	public void addFloorCleared()
+	{
 		this.floors++;
 	}
 	
-	public int getFloorsCleared() {
+	public int getFloorsCleared()
+	{
 		return floors;
 	}
 	
-	public void increaseHealth(int amount) {
+	public void increaseHealth(int amount)
+	{
 		this.maxHealth += amount;
 		this.health += amount;
 	}
 
-	public void increaseStrength(int amount) {
+	public void increaseStrength(int amount)
+	{
 		this.strength += amount;
 	}
 
-	public void increaseDefence(int amount) {
+	public void increaseDefence(int amount)
+	{
 		this.defence += amount;
 	}
 
@@ -190,10 +202,7 @@ public class Player extends Entity
 		this.monsters_killed++;
 	}
 
-
 	public int getMonsters_killed() {
 		return monsters_killed;
 	}
-
-
 }
