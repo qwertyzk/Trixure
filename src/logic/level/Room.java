@@ -135,7 +135,7 @@ public class Room
 		}
 	}
 
-	public boolean thereIsMonsterHere(int x, int y)
+	public boolean IsMonsterHere(int x, int y)
 	{
 		for (Monster monster : monsters)
 		{
