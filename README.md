@@ -10,6 +10,10 @@ Podczas eksploracji pokoi gracz natknie się na różnorodnych przeciwników, kt
 
 Czy uda ci się przejść przez labirynt, pokonać bossa i odnaleźć legendarny skarb? Tylko najodważniejsi i najlepsi gracze mogą się tego dowiedzieć.
 
+# Jak zainstalować i uruchomić?
+
+???
+
 # Jak grać?
 
 Nic prostszego! Gdy zobaczysz ekran startowy wciścij pewien przycisk aby rozpocząć (jednym z nich jest A). 
