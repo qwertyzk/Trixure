@@ -10,9 +10,9 @@ Podczas eksploracji pokoi gracz natknie się na różnorodnych przeciwników, kt
 
 Czy uda ci się przejść przez labirynt, pokonać bossa i odnaleźć legendarny skarb? Tylko najodważniejsi i najlepsi gracze mogą się tego dowiedzieć.
 
-# Jak zainstalować i uruchomić?
+# Jak uruchomić?
 
-???
+Np. w VSCode uruchomić z poziomu folderu głównego (Trixure) za pomocą Run Java z Extension Pack for Java.
 
 # Jak grać?
 
