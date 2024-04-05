@@ -9,3 +9,13 @@ Gracz zaczyna grę jako poszukiwacz z podstawowymi umiejętnościami. W trakcie 
 Podczas eksploracji pokoi gracz natknie się na różnorodnych przeciwników, którzy będą go atakować. W tym momencie rozpoczyna się walka, w której gracz musi wykorzystać swoje umiejętności, aby pokonać wrogów. Sukces w walce nagradzany jest złotem, które można przeznaczyć na rozwijanie postaci.
 
 Czy uda ci się przejść przez labirynt, pokonać bossa i odnaleźć legendarny skarb? Tylko najodważniejsi i najlepsi gracze mogą się tego dowiedzieć.
+
+# Jak grać?
+
+Nic prostszego! Gdy zobaczysz ekran startowy wciścij pewien przycisk aby rozpocząć (jednym z nich jest A). 
+
+Sterowanie:
+- poruszanie postacią (WASD)
+- otwarcie/zamknięcie ekwipunku (Q)
+- zebranie przedmiotu z podłogi/otwarcie skrzyni (E)
+- handel z sklepikarzem/kowalem (T)
