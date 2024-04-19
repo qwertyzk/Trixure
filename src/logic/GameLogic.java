@@ -297,8 +297,8 @@ public class GameLogic
 				{
 					if (player.getRepairPriceArmor() <= player.getGold())
 					{
-						player.getArmor().repair();
 						player.giveGold(-player.getRepairPriceArmor());
+						player.getArmor().repair();
 						messageBox.addMessage("You had your armor repaired!");
 					} else {
 						messageBox.addMessage("You don't have enough money...");
@@ -425,7 +425,10 @@ public class GameLogic
 	{
 		messageBox.addMessage("A monster attacked you!");
 		player.getArmor().reduceDurability();
-		player.damage(monster.getStrength() - player.getDefence()/3);
+		if(monster.shouldChasePlayer())
+			player.damage(monster.getStrength() - player.getDefence());
+		else
+			player.damage(monster.getStrength() - player.getDefence()/3);
 	}
 
 	private static void moveMonsters()
