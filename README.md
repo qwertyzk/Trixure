@@ -1,25 +1,37 @@
 # Trixure
 
-"Trixure" to prosta gra typu roguelike, w której gracz wciela się w nieustraszonego poszukiwacza przygód. Przemierza on tajemniczy dungeon, pełen niebezpieczeństw i niezliczonych pokoi, odkrywając tajemnice i skarby.
+"Trixure" is a simple roguelike game where the player takes on the role of a fearless adventurer. They traverse a mysterious dungeon full of dangers and countless rooms, uncovering secrets and treasures.
 
-Mapa składa się z serii losowo generowanych pokoi, co oznacza, że każde przejście przez labirynt jest unikatowe. Celem gracza jest dotarcie do głębokości lochu, gdzie czeka potężny boss, który jest kluczem do sukcesu. Jednak droga do osiągnięcia tego celu jest pełna niebezpieczeństw.
+The map consists of a series of randomly generated rooms, meaning each journey through the labyrinth is unique. The player's goal is to reach the depths of the dungeon, where a powerful boss awaits, holding the key to success. However, the path to achieving this goal is fraught with peril.
 
-Gracz zaczyna grę jako poszukiwacz z podstawowymi umiejętnościami. W trakcie eksploracji pokoi, będzie natrafiał na różnorodne przedmioty i ekwipunek, które mogą zwiększyć jego siłę lub dostarczyć nowe umiejętności. Może to obejmować bronie, pancerze, mikstury czy eliksiry, które dają dodatkowe bonusy lub umiejętności specjalne. Gracz musi strategicznie wybierać, które przedmioty zbierać, ponieważ mają one bezpośredni wpływ na statystyki i zdolności bojowe postaci.
+The player starts the game as an adventurer with basic abilities. During the exploration of rooms, they will come across various items and equipment that can enhance their strength or provide new skills. This may include weapons, armor or potions, offering additional bonuses or special abilities. The player must strategically choose which items to collect, as they directly impact the character's statistics and combat abilities.
 
-Podczas eksploracji pokoi gracz natknie się na różnorodnych przeciwników, którzy będą go atakować. W tym momencie rozpoczyna się walka, w której gracz musi wykorzystać swoje umiejętności, aby pokonać wrogów. Sukces w walce nagradzany jest złotem, które można przeznaczyć na rozwijanie postaci.
+While exploring rooms, the player will encounter various enemies who will attack them. This initiates combat, where the player must use their skills to defeat the enemies. Success in combat is rewarded with gold, which can be used to develop the character.
 
-Czy uda ci się przejść przez labirynt, pokonać bossa i odnaleźć legendarny skarb? Tylko najodważniejsi i najlepsi gracze mogą się tego dowiedzieć.
+Will you be able to navigate the labyrinth, defeat the boss, and find the legendary treasure? Only the bravest and most skilled players can find out.
 
-# Jak uruchomić?
+# How to run?
 
-Np. w VSCode uruchomić z poziomu folderu głównego (Trixure) za pomocą Run Java z Extension Pack for Java.
+For example, in VSCode, run from the main folder (Trixure) using Run Java from the Extension Pack for Java.
 
-# Jak grać?
+# How to play?
 
-Nic prostszego! Gdy zobaczysz ekran startowy wciścij pewien przycisk aby rozpocząć (jednym z nich jest A). 
+It's simple! When you see the start screen, press a button to begin (one of them is A).
 
-Sterowanie:
-- poruszanie postacią (WASD)
-- otwarcie/zamknięcie ekwipunku (Q)
-- zebranie przedmiotu z podłogi/otwarcie skrzyni (E)
-- handel z sklepikarzem/kowalem (T)
+Controls:
+
+- Movement (WASD)
+- Open/close inventory (Q)
+- Pick up item from the floor/open chest (E)
+- Trade with the shopkeeper/blacksmith (T)
+
+# Screenshots
+![](screenshots/img1.jpg)
+![](screenshots/img3.jpg)
+![](screenshots/img9.png)
+![](screenshots/img10.png)
+![](screenshots/img7.jpg)
+![](screenshots/img5.jpg)
+![](screenshots/img2.jpg)
+![](screenshots/img4.jpg)
+![](screenshots/img8.jpg)
