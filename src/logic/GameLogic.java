@@ -29,7 +29,7 @@ public class GameLogic
 		
 		init();
 
-		Timer timer = new Timer(20, new GameLoop());
+		Timer timer = new Timer(30, new GameLoop());
 		timer.start();
 	}
 	
