@@ -280,8 +280,8 @@ public class GameLogic
 
 					if (player.getRepairPriceWeapon() <= player.getGold())
 					{
-						player.getWeapon().repair();
 						player.giveGold(-player.getRepairPriceWeapon());
+						player.getWeapon().repair();
 						messageBox.addMessage("You had your weapon repaired!");
 					} else {
 						messageBox.addMessage("You don't have enough money...");
